@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "569484613588",
+    "firebase_url": "https://brandy-9aa6a-default-rtdb.firebaseio.com",
+    "project_id": "brandy-9aa6a",
+    "storage_bucket": "brandy-9aa6a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569484613588:android:25b02d6f38d7bac06da841",
+        "android_client_info": {
+          "package_name": "com.linkdevelopment.brandy_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUOyZYP4PyeMDP7zvZ4WmkFg7UKVcid6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

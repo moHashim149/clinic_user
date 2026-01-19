@@ -1,0 +1,91 @@
+import 'dart:async';
+import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../../../core/util/routing/routes.dart';
+import '../../../../../../core/widgets/custom_toast.dart';
+import '../../../data/models/user_model.dart';
+import '../../../data/params/check_otp_param.dart';
+import '../../../data/params/send_code_param.dart';
+import '../../../data/repository/auth_repository.dart';
+part 'pin_code_state.dart';
+
+@injectable
+class PinCodeCubit extends Cubit<PinCodeState> {
+  final AuthRepository repository;
+
+  PinCodeCubit(this.repository) : super(PinCodeInitial());
+
+  final pinCtrl = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  // void sendCode({
+  //   required VoidCallback timer,
+  //   required SendCodeParam param,
+  // }) async {
+  //   emit(ResendCodeLoading());
+  //   var result = await repository.sendCode(param: param);
+  //   result.fold(
+  //     (failure) {
+  //       showToast(text: failure.message, state: ToastStates.error);
+  //       emit(PinCodeFailure());
+  //     },
+  //     (message) {
+  //       timer();
+  //       emit(PinCodeSuccess());
+  //     },
+  //   );
+  // }
+  //
+  // void checkOtp({
+  //   required BuildContext context,
+  //   required CheckOtpParam param,
+  // }) async {
+  //   emit(PinCodeLoading());
+  //   var result = await repository.checkOtp(param: param);
+  //   result.fold(
+  //     (failure) {
+  //       showToast(text: failure.message, state: ToastStates.error);
+  //       emit(PinCodeFailure());
+  //     },
+  //     (tokenLoginModel) {
+  //       saveDataUser(
+  //         user: tokenLoginModel.user!,
+  //         token: tokenLoginModel.token!,
+  //         context: context,
+  //       );
+  //       emit(PinCodeSuccess());
+  //     },
+  //   );
+  // }
+  //
+  // void saveDataUser({
+  //   required UserModel user,
+  //   required String token,
+  //   required BuildContext context,
+  // }) {
+  //   emit(PinCodeLoading());
+  //   var result = repository.saveUserData(user: user, token: token);
+  //   result.fold(
+  //     (failure) {
+  //       showToast(text: failure.message, state: ToastStates.error);
+  //       emit(SaveDataFailure());
+  //     },
+  //     (r) {
+  //       if(user.location == null) {
+  //         context.pushAndRemoveUntilWithNamed(Routes.locationPermissionView);
+  //       }else{
+  //         context.pushAndRemoveUntilWithNamed(Routes.bottomNavView);
+  //       }
+  //       emit(PinCodeSuccess());
+  //     },
+  //   );
+  // }
+
+  @override
+  Future<void> close() {
+    pinCtrl.dispose();
+    return super.close();
+  }
+}

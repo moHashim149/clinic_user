@@ -1,0 +1,50 @@
+import 'dart:async';
+import 'package:bloc/bloc.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'brandy_app.dart';
+import 'core/di/di.dart';
+import 'core/framework/bloc_observer.dart';
+import 'core/framework/device_info.dart' as di;
+import 'core/util/routing/app_router.dart';
+
+/// Easy Localization
+/// dart run easy_localization:generate -S assets/translations
+/// dart run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
+
+/// Di (InjectableInit)
+/// dart run build_runner build --delete-conflicting-outputs
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  await configureDependencies();
+  await Future.wait([
+    getIt<di.DeviceInfo>().init(),
+    ScreenUtil.ensureScreenSize(),
+    EasyLocalization.ensureInitialized(),
+  ]);
+  Bloc.observer = MyBlocObserver();
+
+
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => EasyLocalization(
+        useOnlyLangCode: true,
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        startLocale: const Locale('ar'),
+        child: BrandyApp(appRouter: AppRouter()),
+      ),
+    ),
+  );
+}
