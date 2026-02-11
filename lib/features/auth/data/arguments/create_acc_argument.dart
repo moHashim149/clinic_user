@@ -1,6 +1,6 @@
 class CreateAccArgument {
-  final String credential ;
+  final String phone ;
 
 
-  CreateAccArgument({required this.credential});
+  CreateAccArgument({required this.phone});
 }

@@ -8,8 +8,9 @@ import '../../../../core/framework/spaces.dart';
 
 class CustomCartSummaryItemWidget extends StatelessWidget {
   final String title;
-  final num? price;
-  const CustomCartSummaryItemWidget({super.key, required this.title, this.price});
+  final String value;
+  final bool isPrice;
+  const CustomCartSummaryItemWidget({super.key, required this.title, required this.value, this.isPrice = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +23,23 @@ class CustomCartSummaryItemWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        if(price!= null)
         Row(
           children: [
             Text(
-              "${price!}",
+              value,
               style: AppTextStyles.textStyle10.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            widthSpace(6.w),
-            SvgPicture.asset(
-              AppAssets.currency,
-              width: 9.w,
-              height: 10.h,
-            ),
+           if(isPrice)
+           ...[
+             widthSpace(6.w),
+             SvgPicture.asset(
+               AppAssets.currency,
+               width: 9.w,
+               height: 10.h,
+             ),
+           ]
           ],
         ),
       ],

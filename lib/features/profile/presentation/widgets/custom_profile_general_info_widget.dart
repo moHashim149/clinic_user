@@ -1,5 +1,7 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,15 +21,12 @@ class CustomProfileGeneralInfoWidget extends StatelessWidget {
         color: AppColors.secondary4Color,
         borderRadius: BorderRadius.circular(16.r),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 14.w,
-        vertical: 20.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
       child: Column(
         children: [
           CustomProfileItemWidget(
             icon: AppAssets.profile,
-            title: "بيانات الملف الشخصي",
+            title: LocaleKeys.profileData.tr(),
             onTap: () {
               context.pushWithNamed(Routes.editProfileView);
             },
@@ -35,7 +34,7 @@ class CustomProfileGeneralInfoWidget extends StatelessWidget {
           heightSpace(24.h),
           CustomProfileItemWidget(
             icon: AppAssets.wallet,
-            title: "محفظتي",
+            title: LocaleKeys.myWallet.tr(),
             onTap: () {
               context.pushWithNamed(Routes.walletView);
             },

@@ -5,9 +5,11 @@ import '../../../../../../core/framework/app_firebase.dart';
 import '../../../../../../core/helpers/custom_phone_controller.dart';
 import '../../../../../../core/util/routing/routes.dart';
 import '../../../../../../core/widgets/custom_toast.dart';
+import '../../../../../core/util/extensions/navigation.dart';
 import '../../../data/arguments/create_acc_argument.dart';
 import '../../../data/arguments/pin_code_argument.dart';
 import '../../../data/models/user_model.dart';
+import '../../../data/params/send_code_param.dart';
 import '../../../data/params/sign_in_param.dart';
 import '../../../data/repository/auth_repository.dart';
 
@@ -21,80 +23,43 @@ class SignInCubit extends Cubit<SignInState> {
   SignInCubit(this.repository, this.appFirebase) : super(SignInInitial());
 
   PhoneFieldController phoneCtrl = PhoneFieldController();
-  TextEditingController emailCtrl = TextEditingController();
-  bool isEmail = true;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void toggleCredentialType() {
-    isEmail = !isEmail;
-    emit(SignInSuccess());
+
+  void checkPone({required BuildContext context}) async {
+    emit(CheckPhoneLoading());
+    var result = await repository.sendCode(
+      param: SendCodeParam(phone: phoneCtrl.controller.text,type: 1),
+    );
+    result.fold(
+      (failure) {
+        showToast(text: failure.message, state: ToastStates.error);
+        emit(CheckPhoneFailure());
+      },
+      (checkPhoneModel) {
+        emit(CheckPhoneSuccess());
+        if (checkPhoneModel.exists) {
+          context.pushWithNamed(
+            Routes.pinCodeView,
+            arguments: PinCodeArgument(phone: phoneCtrl.controller.text),
+          );
+        } else {
+          context.pushWithNamed(
+            Routes.createAccountView,
+            arguments: CreateAccArgument(
+              phone: phoneCtrl.controller.text,
+            ),
+          );
+        }
+      },
+    );
   }
 
-  // void signIn({required BuildContext context}) async {
-  //   emit(SignInLoading());
-  //   var phone = phoneCtrl.controller.text.startsWith("0")
-  //       ? phoneCtrl.controller.text.substring(1)
-  //       : phoneCtrl.controller.text;
-  //
-  //   var result = await repository.signIn(
-  //     param: SignInParam(
-  //       phone: phone,
-  //       deviceKey: await appFirebase.getFirebaseToken() ?? "fcm token",
-  //     ),
-  //   );
-  //   result.fold(
-  //     (failure) {
-  //       showToast(text: failure.message, state: ToastStates.error);
-  //       emit(SignInFailure());
-  //     },
-  //     (signInModel) {
-  //       emit(SignInSuccess());
-  //       if (signInModel.isAvailable) {
-  //         if (signInModel.isActive) {
-  //           saveDataUser(
-  //             user: signInModel.user!,
-  //             token: signInModel.token!,
-  //             context: context,
-  //           );
-  //         } else {
-  //           context.pushWithNamed(
-  //             Routes.pinCodeView,
-  //             arguments: PinCodeArgument(phone: phone),
-  //           );
-  //         }
-  //       } else {
-  //         context.pushWithNamed(
-  //           Routes.createAccView,
-  //           arguments: CreateAccArgument(phone: phone),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
 
-  // void saveDataUser({
-  //   required UserModel user,
-  //   required String token,
-  //   required BuildContext context,
-  // }) {
-  //   emit(SignInLoading());
-  //   var result = repository.saveUserData(user: user, token: token);
-  //   result.fold(
-  //     (failure) {
-  //       showToast(text: failure.message, state: ToastStates.error);
-  //       emit(SignInFailure());
-  //     },
-  //     (r) {
-  //       context.pushAndRemoveUntilWithNamed(Routes.bottomNavView);
-  //       emit(SignInSuccess());
-  //     },
-  //   );
-  // }
 
   @override
   Future<void> close() {
     phoneCtrl.dispose();
-    emailCtrl.dispose();
+
     return super.close();
   }
 }

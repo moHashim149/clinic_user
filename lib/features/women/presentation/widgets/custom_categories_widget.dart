@@ -1,4 +1,5 @@
 import 'package:brandy_user/core/constants/app_assets.dart';
+import 'package:brandy_user/features/women/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/framework/spaces.dart';
@@ -6,9 +7,9 @@ import '../cubit/women_cubit.dart';
 import 'custom_categories_item_widget.dart';
 
 class CustomCategoriesWidget extends StatelessWidget {
-  final WomenCubit cubit;
+  final List<CategoryModel> categories;
 
-  const CustomCategoriesWidget({super.key, required this.cubit});
+  const CustomCategoriesWidget({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +21,15 @@ class CustomCategoriesWidget extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return CustomCategoriesItemWidget(
-            categoryImage: AppAssets.testImage,
-            categoryName: "فساتين",
+            categoryImage: categories[index].image,
+            categoryName: categories[index].name,
             onTap: () {},
           );
         },
         separatorBuilder: (context, index) {
           return widthSpace(16.w);
         },
-        itemCount: 10,
+        itemCount: categories.length,
       ),
     );
   }

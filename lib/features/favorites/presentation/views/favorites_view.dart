@@ -1,6 +1,8 @@
 import 'package:brandy_user/core/widgets/custom_app_bar.dart';
 import 'package:brandy_user/core/widgets/custom_empty_data_widget.dart';
 import 'package:brandy_user/features/favorites/presentation/widgets/custom_favorites_list_widget.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +18,7 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "المتاجر المفضلة"),
+      appBar: CustomAppBar(title: LocaleKeys.favorites.tr()),
       body: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           final cubit = context.read<FavoritesCubit>();
@@ -26,14 +28,19 @@ class FavoritesView extends StatelessWidget {
             return CustomError(
               error: state.error,
               retry: () {
-                // cubit.fetchHome();
+                cubit.fetchFavorites();
               },
             );
           } else {
-            return 0 == 0
-                ? CustomFavoritesListWidget()
+            return cubit.favStores.isNotEmpty
+                ? CustomFavoritesListWidget(
+                    stores: cubit.favStores,
+                    onFavTap: (index) {
+                      cubit.favStore(cubit.favStores[index]);
+                    },
+                  )
                 : CustomEmptyDataWidget(
-                    text: "لاتوجد لديكِ صالونات في قائمة المفضلة",
+                    text: LocaleKeys.emptyFavorites.tr(),
                     image: AppAssets.emptyFav,
                   );
           }

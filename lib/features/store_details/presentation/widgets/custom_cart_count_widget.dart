@@ -1,5 +1,7 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +13,9 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/widgets/custom_button.dart';
 
 class CustomCartCountWidget extends StatelessWidget {
-  const CustomCartCountWidget({super.key});
+  final int count;
+  final num totalPrice;
+  const CustomCartCountWidget({super.key, required this.count, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class CustomCartCountWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "5",
+                    "$count",
                     style: AppTextStyles.textStyle16.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryColor,
@@ -49,7 +53,7 @@ class CustomCartCountWidget extends StatelessWidget {
               ),
               widthSpace(17.w),
               Text(
-                "500.00",
+                "${totalPrice}",
                 style: AppTextStyles.textStyle16.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.whiteColor,
@@ -64,7 +68,7 @@ class CustomCartCountWidget extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "عرض السلة",
+                LocaleKeys.viewCart.tr(),
                 style: AppTextStyles.textStyle14.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.whiteColor,

@@ -21,7 +21,7 @@ class CustomPolicyBodyWidget extends StatelessWidget {
           return CustomError(
             error: state.error,
             retry: () {
-              // cubit.fetchPolicy();
+               cubit.fetchPolicy();
             },
           );
         } else {

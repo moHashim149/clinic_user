@@ -1,3 +1,6 @@
+import 'package:brandy_user/features/women/data/models/store_model.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +16,13 @@ import 'custom_rounded_icon_widget.dart';
 import 'custom_store_details_item_widget.dart';
 
 class CustomStoreHeaderWidget extends StatelessWidget {
-  const CustomStoreHeaderWidget({super.key});
+  final StoreModel storeModel;
+  final VoidCallback onFavTap;
+  const CustomStoreHeaderWidget({
+    super.key,
+    required this.storeModel,
+    required this.onFavTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +30,10 @@ class CustomStoreHeaderWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         CustomImageNetwork(
-          image: AppAssets.testImage,
+          image: storeModel.cover ?? "",
           widthImage: context.width,
           heightImage: 134.h,
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(24.r),
-          ),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(24.r)),
         ),
         PositionedDirectional(
           start: 24.w,
@@ -45,8 +52,8 @@ class CustomStoreHeaderWidget extends StatelessWidget {
           top: 8.h,
           child: SafeArea(
             child: CustomRoundedIconWidget(
-              onTap: () {},
-              icon: AppAssets.heartFilled,
+              onTap: onFavTap,
+              icon: storeModel.isFav! ? AppAssets.heartFilled : AppAssets.heart,
             ),
           ),
         ),
@@ -74,12 +81,10 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                     DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.r),
-                        border: Border.all(
-                          color: AppColors.grayNinthColor,
-                        ),
+                        border: Border.all(color: AppColors.grayNinthColor),
                       ),
                       child: CustomImageNetwork(
-                        image: AppAssets.testImage,
+                        image: storeModel.logo ?? "",
                         radiusValue: 16.r,
                         heightImage: 56.h,
                         widthImage: 62.w,
@@ -88,16 +93,14 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                     widthSpace(5.w),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
                               Expanded(
                                 child: Text(
-                                  "زارا",
-                                  style: AppTextStyles.textStyle14
-                                      .copyWith(
+                                  storeModel.name,
+                                  style: AppTextStyles.textStyle14.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -109,9 +112,8 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                               ),
                               widthSpace(2.w),
                               Text(
-                                "4.5",
-                                style: AppTextStyles.textStyle10
-                                    .copyWith(
+                                "${storeModel.rating}",
+                                style: AppTextStyles.textStyle10.copyWith(
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -119,12 +121,10 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                           ),
                           heightSpace(4.h),
                           Text(
-                            "ملابس نسائي",
-                            style: AppTextStyles.textStyle8
-                                .copyWith(
+                            storeModel.storeTypes ?? "",
+                            style: AppTextStyles.textStyle8.copyWith(
                               fontWeight: FontWeight.w500,
-                              color:
-                              AppColors.blackTextNinthColor,
+                              color: AppColors.blackTextNinthColor,
                             ),
                           ),
                         ],
@@ -136,31 +136,25 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 18.w),
                   child: Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomStoreDetailsItemWidget(
                         icon: AppAssets.timer,
-                        title: "وقت التوصيل",
-                        body: "1 - 2 أيام",
+                        title: LocaleKeys.deliveryTime.tr(),
+                        body: storeModel.deliveryTime ?? "",
                       ),
-                      VerticalDivider(
-                        color: AppColors.greyColor,
-                        width: 1,
-                      ),
+                      VerticalDivider(color: AppColors.greyColor, width: 1),
                       CustomStoreDetailsItemWidget(
                         icon: AppAssets.time,
-                        title: "مواعيد العمل",
-                        body: "09:00 ص - 11:00 م",
+                        title: LocaleKeys.workingHours.tr(),
+                        body: storeModel.workingHours ?? "",
                       ),
-                      VerticalDivider(
-                        color: AppColors.greyColor,
-                        width: 1,
-                      ),
+                      VerticalDivider(color: AppColors.greyColor, width: 1),
                       CustomStoreDetailsItemWidget(
                         icon: AppAssets.location,
-                        title: "مسافة",
-                        body: "12.2 كم",
+                        title: LocaleKeys.distance.tr(),
+                        body:
+                            "${storeModel.distance ?? 0} ${LocaleKeys.km.tr()}",
                       ),
                     ],
                   ),

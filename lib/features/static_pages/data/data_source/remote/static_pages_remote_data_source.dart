@@ -2,9 +2,9 @@
 
 
 abstract class StaticPagesRemoteDataSource {
-  // Future<String> fetchTerms();
-  //
-  //
-  // Future<String> fetchAboutUs();
+  Future<String> fetchTerms();
+
+
+  Future<String> fetchPolicy();
 
 }

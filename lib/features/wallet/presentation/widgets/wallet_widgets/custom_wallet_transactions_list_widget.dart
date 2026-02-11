@@ -1,3 +1,5 @@
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_colors.dart';
@@ -19,23 +21,23 @@ class CustomWalletTransactionsListWidget extends StatelessWidget {
     return Expanded(
       child: transactions.isEmpty
           ? Center(
-            child: Text(
-                "لاتوجد معاملات لديك!",
+              child: Text(
+                LocaleKeys.emptyTransactions.tr(),
                 style: AppTextStyles.textStyle16.copyWith(
                   color: AppColors.blackTextEighthColor,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
-          )
+            )
           : ListView.separated(
               padding: EdgeInsets.symmetric(vertical: 20.h),
               itemBuilder: (context, index) =>
                   CustomWalletTransactionItemWidget(
-                    title: transactions[index].title,
-                    balance: 500,
-                    date: transactions[index].date,
-                   isSuccess: true,
+                    title: transactions[index].description,
+                    balance: transactions[index].amount,
+                    date: transactions[index].createdAt,
+                    isSuccess: true,
                   ),
               separatorBuilder: (context, index) => heightSpace(48.h),
               itemCount: transactions.length,

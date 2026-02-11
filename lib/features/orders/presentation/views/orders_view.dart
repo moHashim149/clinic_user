@@ -11,7 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
 import '../../../../../core/widgets/custom_error.dart';
+import '../../../../core/widgets/custom_empty_data_widget.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../cubit/orders_cubit.dart';
 import '../widgets/custom_order_item_widget.dart';
@@ -25,35 +28,57 @@ class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<OrdersCubit>(),
+      create: (context) => getIt<OrdersCubit>()..fetchOrders(),
       child: Scaffold(
         body: BlocBuilder<OrdersCubit, OrdersState>(
           builder: (context, state) {
             final cubit = context.read<OrdersCubit>();
-            if (state is OrdersLoading) {
-              return CustomLoading();
-            } else if (state is OrdersFailure) {
-              return CustomError(
-                error: state.error,
-                retry: () {
-                  // cubit.fetchHome();
-                },
-              );
-            } else {
-              return SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    heightSpace(24.h),
-                    CustomOrdersHeaderWidget(),
-                    heightSpace(32.h),
-                    CustomOrdersTabWidget(),
-                    heightSpace(28.h),
-                    CustomOrdersListWidget(),
-                  ],
-                ),
-              );
-            }
+
+            return SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  heightSpace(24.h),
+                  CustomOrdersHeaderWidget(),
+                  heightSpace(32.h),
+                  CustomOrdersTabWidget(
+                    onTap: (index) {
+                      cubit.fetchOrders(status: OrderStatus.values[index].id);
+                    },
+                  ),
+                  heightSpace(28.h),
+                  Expanded(
+                    child: state is OrdersLoading
+                        ? CustomLoading()
+                        : state is OrdersFailure
+                        ? CustomError(
+                            error: state.error,
+                            retry: () {
+                              cubit.fetchOrders();
+                            },
+                          )
+                        : cubit.orders.isNotEmpty
+                        ? CustomOrdersListWidget(
+                            orders: cubit.orders,
+                            refreshController: cubit.refreshController,
+                            onRefresh: () {
+                              cubit.refreshOrders();
+                            },
+                            onLoading: () {
+                              cubit.paginateOrders();
+                            },
+                            reorder: (index) {
+                              cubit.reOrder(cubit.orders[index].id,context);
+                            },
+                            reOrderLoading: state is ReOrderLoading,
+                          )
+                        : CustomEmptyDataWidget(
+                            text: LocaleKeys.emptyOrders.tr(),
+                          ),
+                  ),
+                ],
+              ),
+            );
           },
         ),
       ),

@@ -50,16 +50,15 @@
                 		<key>NSLocationWhenInUseUsageDescription</key>
                 		<string>This app requires access to your current location to get nearby stores</string>
                 		<key>NSPhotoLibraryUsageDescription</key>
-                		<string>This app requires access to the gallery to upload images of the store commercial Image, logo store , profile user and attach other designs as needed</string>
+                		<string>This app requires access to the gallery to upload image to update profile image</string>
                 		<key>NSCameraUsageDescription</key>
-                		<string>This app requires access to the gallery to upload images of the store commercial Image, logo store , profile user and attach other designs as needed</string>
+                		<string>This app requires access to the gallery to upload image to update profile image</string>
 
             		<key>CFBundleLocalizations</key>
             		<array>
             			<string>ar</string>
             			<string>en</string>
             		</array>
-                    <key>NSMicrophoneUsageDescription</key>
-                    <string>app need permission for record video to upload store offer</string>
+
 </dict>
 </plist>

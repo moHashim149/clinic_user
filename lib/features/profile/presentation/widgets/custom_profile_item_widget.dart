@@ -23,7 +23,12 @@ class CustomProfileItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(icon, width: 20.w, height: 20.h),
+        SvgPicture.asset(
+          icon,
+          width: 20.w,
+          height: 20.h,
+          color: AppColors.primaryColor,
+        ),
         widthSpace(4.w),
         Expanded(
           child: Text(

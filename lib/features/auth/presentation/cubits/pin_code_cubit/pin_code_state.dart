@@ -15,6 +15,5 @@ class AuthUserFailure extends PinCodeState {}
 
 class SaveDataFailure extends PinCodeState {}
 
-class ChangeLangFailure extends PinCodeState {}
 
 class PinCodeSuccess extends PinCodeState {}

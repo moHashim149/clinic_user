@@ -7,19 +7,17 @@ import '../../../../../../core/framework/spaces.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 
 class CustomCodeSentSuccessWidget extends StatelessWidget {
-  final String credential;
-  final bool isEmail;
+  final String phone;
 
   const CustomCodeSentSuccessWidget({
     super.key,
-    required this.isEmail,
-    required this.credential,
+    required this.phone,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      isEmail ? credential : "+966 $credential",
+       "+966 $phone",
       textDirection: TextDirection.ltr,
       style: AppTextStyles.textStyle14.copyWith(
         fontWeight: FontWeight.w600,

@@ -1,3 +1,4 @@
+import 'package:brandy_user/core/framework/spaces.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_colors.dart';
@@ -15,11 +16,11 @@ class CustomMessageTextWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadiusDirectional.only(
           topEnd: Radius.circular(24.r),
-          topStart: Radius.circular(24.r),
-          bottomEnd:  message.type != "sender" ? Radius.zero : Radius.circular(24.r),
-          bottomStart: message.type != "sender" ? Radius.circular(24.r) : Radius.zero,
+          topStart: message.viewType == "sender" ? Radius.zero : Radius.circular(24.r),
+          bottomEnd:   Radius.circular(24.r),
+          bottomStart: Radius.circular(24.r),
         ),
-        color: message.type != "sender" ? AppColors.secondary4Color : AppColors.primaryColor,
+        color: message.viewType != "sender" ? AppColors.secondary4Color : AppColors.primaryColor,
       ),
       constraints: BoxConstraints(
         maxWidth: context.width * 0.7,
@@ -31,12 +32,28 @@ class CustomMessageTextWidget extends StatelessWidget {
         bottom: 23.h,
         end: 16.w,
       ),
-      child: Text(
-        message.message,
-        style: AppTextStyles.textStyle14.copyWith(
-          fontWeight: FontWeight.w500,
-          color:  message.type != "sender" ? AppColors.blackTextSecondaryColor : AppColors.secondary4Color,
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            message.message!,
+            style: AppTextStyles.textStyle14.copyWith(
+              fontWeight: FontWeight.w500,
+              color:  message.viewType != "sender" ? AppColors.blackTextSecondaryColor : AppColors.secondary4Color,
+            ),
+          ),
+          heightSpace(2.h),
+          Align(
+            alignment: AlignmentDirectional.bottomEnd,
+            child: Text(
+              message.createdAt,
+              style: AppTextStyles.textStyle10.copyWith(
+                fontWeight: FontWeight.w500,
+                color:  message.viewType != "sender" ? AppColors.blackTextSecondaryColor : AppColors.secondary4Color,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

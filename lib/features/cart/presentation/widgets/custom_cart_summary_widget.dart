@@ -1,5 +1,7 @@
 import 'package:brandy_user/features/cart/presentation/widgets/custom_cart_summary_item_widget.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,15 +10,23 @@ import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
 
 class CustomCartSummaryWidget extends StatelessWidget {
-  const CustomCartSummaryWidget({super.key});
+  final num cartTotal, deliveryFee, discount, grandTotal;
+  final num? tax;
+  const CustomCartSummaryWidget({
+    super.key,
+    required this.cartTotal,
+    required this.deliveryFee,
+    required this.discount,
+    required this.grandTotal, this.tax,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "ملخّص الفاتورة",
+          LocaleKeys.invoiceSummary.tr(),
           style: AppTextStyles.textStyle12.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -35,28 +45,50 @@ class CustomCartSummaryWidget extends StatelessWidget {
           ),
           child: Column(
             children: [
-              CustomCartSummaryItemWidget(title: "سعر المنتجات",price: 500,),
-              Padding(padding: EdgeInsets.symmetric(
-                  vertical: 20.h
-
-              ),child: DottedLine(
-                dashColor: AppColors.strokeColor,
-              ),),
-              CustomCartSummaryItemWidget(title: "التوصيل",price: 20,),
-              Padding(padding: EdgeInsets.symmetric(
-                  vertical: 20.h
-
-              ),child: DottedLine(
-                dashColor: AppColors.strokeColor,
-              ),),
-              CustomCartSummaryItemWidget(title: "الخصم"),
-              Padding(padding: EdgeInsets.symmetric(
-                  vertical: 20.h
-
-              ),child: DottedLine(
-                dashColor: AppColors.strokeColor,
-              ),),
-              CustomCartSummaryItemWidget(title: "الإجمالي",price: 520,),
+              CustomCartSummaryItemWidget(
+                title: LocaleKeys.productsPrice.tr(),
+                value: cartTotal.toString(),
+                isPrice: true,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.h),
+                child: DottedLine(dashColor: AppColors.strokeColor),
+              ),
+              CustomCartSummaryItemWidget(
+                title: LocaleKeys.deliveryFee.tr(),
+                value: deliveryFee.toString(),
+                isPrice: true,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.h),
+                child: DottedLine(dashColor: AppColors.strokeColor),
+              ),
+              CustomCartSummaryItemWidget(
+                title: LocaleKeys.discount.tr(),
+                value: discount.toString(),
+                isPrice: true,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 20.h),
+                child: DottedLine(dashColor: AppColors.strokeColor),
+              ),
+              if(tax != null)
+                ...[
+                  CustomCartSummaryItemWidget(
+                    title: LocaleKeys.tax.tr(),
+                    value: tax.toString(),
+                    isPrice: true,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                    child: DottedLine(dashColor: AppColors.strokeColor),
+                  ),
+                ],
+              CustomCartSummaryItemWidget(
+                title: LocaleKeys.grandTotal.tr(),
+                value: grandTotal.toString(),
+                isPrice: true,
+              ),
             ],
           ),
         ),

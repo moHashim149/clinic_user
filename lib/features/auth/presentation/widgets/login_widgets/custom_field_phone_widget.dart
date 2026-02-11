@@ -81,18 +81,21 @@ class _CustomFieldPhoneWidgetState extends State<CustomFieldPhoneWidget> {
 
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: '5xxxxxxxx',
+              hintText: LocaleKeys.phoneHint.tr(),
               fillColor: widget.fillColor ?? AppColors.transparentColor,
               filled: true,
               enabled: widget.enabled ?? true,
-
 
               prefixIcon: IntrinsicHeight(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     widthSpace(16.w),
-                    SvgPicture.asset(AppAssets.saudi, height: 18.h,width: 24.w,),
+                    SvgPicture.asset(
+                      AppAssets.saudi,
+                      height: 18.h,
+                      width: 24.w,
+                    ),
                     widthSpace(9.w),
                     Text(
                       '+966',
@@ -101,7 +104,11 @@ class _CustomFieldPhoneWidgetState extends State<CustomFieldPhoneWidget> {
                       ),
                     ),
                     widthSpace(5.w),
-                    SvgPicture.asset(AppAssets.arrowDown,fit: BoxFit.scaleDown,color: AppColors.blackColor,),
+                    SvgPicture.asset(
+                      AppAssets.arrowDown,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.blackColor,
+                    ),
                     widthSpace(5.w),
                     VerticalDivider(
                       indent: 9.h,
@@ -137,9 +144,7 @@ class _CustomFieldPhoneWidgetState extends State<CustomFieldPhoneWidget> {
                 ),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.redColor,
-                ),
+                borderSide: BorderSide(color: AppColors.redColor),
                 borderRadius: BorderRadius.circular(
                   widget.borderRadiusValue ?? 12.r,
                 ),

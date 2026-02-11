@@ -1,23 +1,20 @@
+import 'package:json_annotation/json_annotation.dart';
 
-import 'package:equatable/equatable.dart';
+import 'transaction_model.dart';
 
-class PaymentModel extends Equatable{
-  final String name;
-  final String? subtitle, walletBalance;
-  final List<String> icons;
+part 'payment_model.g.dart';
 
-  const PaymentModel({
+@JsonSerializable(createToJson: false)
+class PaymentModel {
+  final int id;
+  final String name,image;
+
+  PaymentModel({
+    required this.id,
     required this.name,
-    this.subtitle,
-    this.walletBalance,
-    required this.icons,
+    required this.image,
   });
 
-  @override
-  List<Object?> get props => [
-    name,
-    subtitle,
-    walletBalance,
-    icons,
-  ];
+  factory PaymentModel.fromJson(Map<String, dynamic> json) =>
+      _$PaymentModelFromJson(json);
 }

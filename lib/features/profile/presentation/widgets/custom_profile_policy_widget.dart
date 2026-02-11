@@ -1,3 +1,5 @@
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,15 +20,12 @@ class CustomProfilePolicyWidget extends StatelessWidget {
         color: AppColors.secondary4Color,
         borderRadius: BorderRadius.circular(16.r),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 14.w,
-        vertical: 20.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
       child: Column(
         children: [
           CustomProfileItemWidget(
             icon: AppAssets.policy,
-            title: "سياسة الخصوصية",
+            title: LocaleKeys.privacyPolicy.tr(),
             onTap: () {
               context.pushWithNamed(Routes.policyView);
             },
@@ -34,7 +33,7 @@ class CustomProfilePolicyWidget extends StatelessWidget {
           heightSpace(20.h),
           CustomProfileItemWidget(
             icon: AppAssets.terms,
-            title: "الشروط والأحكام",
+            title: LocaleKeys.terms.tr(),
             onTap: () {
               context.pushWithNamed(Routes.termsView);
             },

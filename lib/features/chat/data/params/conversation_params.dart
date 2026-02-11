@@ -1,5 +1,5 @@
 class ConversationParams {
-  final int id;
+  final int chatId;
 
-  ConversationParams({required this.id});
+  ConversationParams({required this.chatId});
 }

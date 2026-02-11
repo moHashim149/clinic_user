@@ -1,3 +1,4 @@
+import 'package:brandy_user/core/util/extensions/on_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -87,6 +88,6 @@ class CustomStoriesItemWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ).onTap(function: onTap);
   }
 }

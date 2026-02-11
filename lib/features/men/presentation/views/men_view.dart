@@ -1,5 +1,7 @@
 import 'package:brandy_user/core/constants/app_colors.dart';
 import 'package:brandy_user/core/constants/app_text_styles.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +11,7 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/util/extensions/navigation.dart';
 import '../../../../core/util/routing/routes.dart';
 import '../../../../core/widgets/custom_loading.dart';
+import '../../../../core/widgets/custom_visitor_widget.dart';
 import '../../../women/presentation/cubit/women_cubit.dart';
 import '../../../women/presentation/widgets/custom_best_stores_list_widget.dart';
 import '../../../women/presentation/widgets/custom_categories_widget.dart';
@@ -18,13 +21,12 @@ import '../../../women/presentation/widgets/custom_slider_and_indicator_widget.d
 import '../../../women/presentation/widgets/custom_stores_list_widget.dart';
 import '../../../women/presentation/widgets/custom_stories_widget.dart';
 
-
 class MenView extends StatelessWidget {
   const MenView({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<WomenCubit>(),
+      create: (context) => getIt<WomenCubit>()..fetchHome(2),
       child: Scaffold(
         body: BlocBuilder<WomenCubit, WomenState>(
           builder: (context, state) {
@@ -35,7 +37,7 @@ class MenView extends StatelessWidget {
               return CustomError(
                 error: state.error,
                 retry: () {
-                  // cubit.fetchHome();
+                  cubit.fetchHome(2);
                 },
               );
             } else {
@@ -45,48 +47,49 @@ class MenView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomHeaderWidget(),
-                      heightSpace(16.h),
-                      CustomSearchWidget(
-                        readOnly: true,
-                        onSearchTap: () {
-                          context.pushWithNamed(Routes.searchView);
+                      CustomHeaderWidget(
+                        userModel: cubit.userModel,
+                        address: cubit.currentLocation,
+                      ),
+                      // heightSpace(16.h),
+                      // CustomSearchWidget(
+                      //   readOnly: true,
+                      //   onSearchTap: () {
+                      //     context.pushWithNamed(Routes.searchView);
+                      //   },
+                      // ),
+                      heightSpace(20.h),
+                      CustomStoriesWidget(
+                        stores: cubit.homeModel!.storeStories,
+                      ),
+                      heightSpace(32.h),
+                      CustomSliderAndIndicatorWidget(
+                        banners: cubit.homeModel!.banners,
+                        currentPage: cubit.currentPage,
+                        onPageChanged: (index, reason) {
+                          cubit.changePageIndex(index);
                         },
                       ),
-                      heightSpace(20.h),
-                      CustomStoriesWidget(cubit: cubit),
-                      heightSpace(32.h),
-                      CustomSliderAndIndicatorWidget(cubit: cubit),
                       heightSpace(24.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "اكتشفِ الاقسام",
-                              style: AppTextStyles.textStyle16.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.blackTextEighthColor,
-                              ),
-                            ),
-                            Text(
-                              "عرض المزيد",
-                              style: AppTextStyles.textStyle12.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primaryColor,
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          LocaleKeys.discoverSections.tr(),
+                          style: AppTextStyles.textStyle16.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.blackTextEighthColor,
+                          ),
                         ),
                       ),
                       heightSpace(14.h),
-                      CustomCategoriesWidget(cubit: cubit),
+                      CustomCategoriesWidget(
+                        categories: cubit.homeModel!.categories,
+                      ),
                       heightSpace(22.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Text(
-                          "أشهر المتاجر الرجالي",
+                          LocaleKeys.famousMenStores.tr(),
                           style: AppTextStyles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.blackTextEighthColor,
@@ -94,12 +97,14 @@ class MenView extends StatelessWidget {
                         ),
                       ),
                       heightSpace(12.h),
-                      CustomBestStoresListWidget(),
+                      CustomBestStoresListWidget(
+                        stores: cubit.homeModel!.featuredStores,
+                      ),
                       heightSpace(32.h),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Text(
-                          "المتاجر",
+                          LocaleKeys.menStoresSection.tr(),
                           style: AppTextStyles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.blackTextEighthColor,
@@ -107,7 +112,30 @@ class MenView extends StatelessWidget {
                         ),
                       ),
                       heightSpace(16.h),
-                      CustomStoresListWidget(),
+                      CustomStoresListWidget(
+                        stores: cubit.homeModel!.nearbyStores,
+                        onFavTap: (index) {
+                          if (cubit.userModel != null) {
+                            cubit.favStore(
+                              cubit.homeModel!.nearbyStores[index],
+                            );
+                          } else {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: AppColors.whiteColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(24.r),
+                                ),
+                              ),
+                              builder: (context) {
+                                return CustomVisitorWidget();
+                              },
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),

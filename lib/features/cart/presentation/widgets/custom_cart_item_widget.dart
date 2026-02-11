@@ -1,3 +1,4 @@
+import 'package:brandy_user/features/cart/data/models/cart_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,7 +11,15 @@ import '../../../../core/widgets/custom_image_network.dart';
 import '../../../product_details/presentation/widgets/custom_count_widget.dart';
 
 class CustomCartItemWidget extends StatelessWidget {
-  const CustomCartItemWidget({super.key});
+  final CartItemModel cartItemModel;
+  final VoidCallback plusOnTap, minusOnTap, deleteOnTap;
+  const CustomCartItemWidget({
+    super.key,
+    required this.cartItemModel,
+    required this.plusOnTap,
+    required this.minusOnTap,
+    required this.deleteOnTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,7 @@ class CustomCartItemWidget extends StatelessWidget {
       child: Row(
         children: [
           CustomImageNetwork(
-            image: AppAssets.testImage,
+            image: cartItemModel.product.image ?? "",
             heightImage: 73.h,
             widthImage: 78.w,
             radiusValue: 8.r,
@@ -35,7 +44,7 @@ class CustomCartItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "طقم ولادي حديثي الولادة",
+                  cartItemModel.product.name,
                   style: AppTextStyles.textStyle10.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.blackTextEighthColor,
@@ -45,7 +54,7 @@ class CustomCartItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "500",
+                      "${cartItemModel.priceAfterDiscount == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount}",
                       style: AppTextStyles.textStyle10.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -57,43 +66,44 @@ class CustomCartItemWidget extends StatelessWidget {
                       width: 9.w,
                       height: 10.h,
                     ),
-                    widthSpace(5.w),
-                    Text(
-                      "500",
-                      style: AppTextStyles.textStyle8.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.grayColor,
+                    if (cartItemModel.priceAfterDiscount != 0) ...[
+                      widthSpace(5.w),
+                      Text(
+                        "${cartItemModel.price}",
+                        style: AppTextStyles.textStyle8.copyWith(
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: AppColors.grayColor,
+                          color: AppColors.grayColor,
+                        ),
                       ),
-                    ),
-                    widthSpace(4.w),
-                    SvgPicture.asset(
-                      AppAssets.currency,
-                      color: AppColors.grayColor,
-                      width: 9.w,
-                      height: 10.h,
-                    ),
+                      widthSpace(4.w),
+                      SvgPicture.asset(
+                        AppAssets.currency,
+                        color: AppColors.grayColor,
+                        width: 9.w,
+                        height: 10.h,
+                      ),
+                    ],
                   ],
                 ),
               ],
             ),
           ),
           CustomCountWidget(
-            quantity: 1,
-            plusOnTap: () {},
-            minusOnTap: () {},
-            deleteOnTap: () {},
-            showDelete: true,
+            quantity: cartItemModel.count,
+            plusOnTap: plusOnTap,
+            minusOnTap: minusOnTap,
+            deleteOnTap: deleteOnTap,
+            showDelete: cartItemModel.count == 1,
             iconHeight: 12.h,
             iconWidth: 12.w,
-            height: 24.h,
+            height: 35.h,
             radius: 13.r,
             countTextStyle: AppTextStyles.textStyle10.copyWith(
               fontWeight: FontWeight.w600,
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 13.w,
-              vertical: 6.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 6.h),
             countHorizontalMargin: 12.w,
           ),
         ],

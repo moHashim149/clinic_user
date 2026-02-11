@@ -27,7 +27,8 @@ class SelectLanguageView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Text(LocaleKeys.selectLanguage.tr(),
+                    child: Text(
+                      LocaleKeys.selectLanguage.tr(),
                       style: AppTextStyles.textStyle16.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -44,7 +45,7 @@ class SelectLanguageView extends StatelessWidget {
                   heightSpace(24.h),
                   CustomSelectLanguageItemWidget(
                     flag: AppAssets.saudi,
-                    language: "العربية",
+                    language: LocaleKeys.arabic.tr(),
                     isSelected: 0 == cubit.selectedIndex,
                     onTap: () {
                       context.read<SelectLanguageCubit>().changeIndex(index: 0);
@@ -52,11 +53,8 @@ class SelectLanguageView extends StatelessWidget {
                     },
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 24.h),
-                    child: Divider(
-                      thickness: 1,
-                      color: AppColors.dividerColor,
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 24.h),
+                    child: Divider(thickness: 1, color: AppColors.dividerColor),
                   ),
                   CustomSelectLanguageItemWidget(
                     flag: AppAssets.united,

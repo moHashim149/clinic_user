@@ -24,16 +24,11 @@ class CustomCategoriesItemWidget extends StatelessWidget {
       width: 60.w,
       height: 89.h,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.strokeColor,width: 0.2.w),
+        border: Border.all(color: AppColors.strokeColor, width: 0.2.w),
         borderRadius: BorderRadius.circular(50.r),
-        color: AppColors.whiteColor
+        color: AppColors.whiteColor,
       ),
-      padding: EdgeInsets.only(
-        top: 6.h,
-        right: 6.w,
-        left: 6.w,
-        bottom: 14.h,
-      ),
+      padding: EdgeInsets.only(top: 6.h, right: 6.w, left: 6.w, bottom: 14.h),
       child: Column(
         children: [
           CustomImageNetwork(
@@ -45,6 +40,8 @@ class CustomCategoriesItemWidget extends StatelessWidget {
           heightSpace(6.h),
           Text(
             categoryName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AppTextStyles.textStyle8.copyWith(
               fontWeight: FontWeight.w500,
             ),

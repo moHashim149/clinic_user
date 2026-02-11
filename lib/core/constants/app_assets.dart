@@ -6,7 +6,6 @@ abstract class AppAssets {
   static const String logo = "$_imagesPath/logo.svg";
   static const String saudi = "$_imagesPath/saudi.svg";
   static const String united = "$_imagesPath/united.svg";
-  static const String storeAvatar = "$_imagesPath/store_avatar.svg";
   static const String noInternet = "$_imagesPath/no_internet.svg";
   static const String unAuthenticated = "$_imagesPath/un_authenticated.svg";
   static const String loading = "$_imagesPath/loading.gif";
@@ -14,9 +13,10 @@ abstract class AppAssets {
   static const String error = "$_imagesPath/error.svg";
   static const String emptyData = "$_imagesPath/empty_data.svg";
   static const String currency = "$_imagesPath/currency.svg";
-  static const String marker = "$_imagesPath/marker.svg";
+  static const String marker = "$_imagesPath/marker.png";
   static const String emptyFav = "$_imagesPath/empty_fav.svg";
-  static const String addBalanceBackground = "$_imagesPath/add_balance_background.svg";
+  static const String addBalanceBackground =
+      "$_imagesPath/add_balance_background.svg";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
@@ -32,35 +32,20 @@ abstract class AppAssets {
   static const String unRatedStar = "$_iconsPath/unrated_star.svg";
   static const String close = "$_iconsPath/close.svg";
   static const String location = "$_iconsPath/location.svg";
-  static const String notification = "$_iconsPath/notification.svg";
   static const String filter = "$_iconsPath/filter.svg";
   static const String heart = "$_iconsPath/heart.svg";
   static const String heartFilled = "$_iconsPath/heart_filled.svg";
-  static const String comment = "$_iconsPath/comment.svg";
-  static const String locationFilled = "$_iconsPath/location_filled.svg";
-  static const String moreDots = "$_iconsPath/more_dots.svg";
   static const String trash = "$_iconsPath/trash.svg";
-  static const String flag = "$_iconsPath/flag.svg";
   static const String arrowDown = "$_iconsPath/arrow_down.svg";
-  static const String arrowUp = "$_iconsPath/arrow_up.svg";
   static const String edit = "$_iconsPath/edit.svg";
   static const String arrowForward = "$_iconsPath/arrow_forward.svg";
-  static const String bell = "$_iconsPath/bell.svg";
-  static const String about = "$_iconsPath/about.svg";
-  static const String globe = "$_iconsPath/globe.svg";
   static const String terms = "$_iconsPath/terms.svg";
-  static const String faq = "$_iconsPath/faq.svg";
-  static const String contact = "$_iconsPath/contact.svg";
-  static const String attach = "$_iconsPath/attach.svg";
   static const String locationPin = "$_iconsPath/location_pin.svg";
   static const String add = "$_iconsPath/add.svg";
-  static const String packages = "$_iconsPath/packages.svg";
   static const String sparkle = "$_iconsPath/sparkle.svg";
   static const String user = "$_iconsPath/user.svg";
-  static const String store = "$_iconsPath/store.svg";
   static const String lock = "$_iconsPath/lock.svg";
   static const String delete = "$_iconsPath/delete.svg";
-  static const String gps = "$_iconsPath/gps.svg";
   static const String send = "$_iconsPath/send.svg";
   static const String time = "$_iconsPath/time.svg";
   static const String delivery = "$_iconsPath/delivery.svg";
@@ -85,9 +70,10 @@ abstract class AppAssets {
   static const String policy = "$_iconsPath/policy.svg";
   static const String logout = "$_iconsPath/logout.svg";
   static const String transaction = "$_iconsPath/transaction.svg";
-
+  static const String pin = "$_iconsPath/pin.svg";
+  static const String correct = "$_iconsPath/correct.svg";
 
   // test images
-  static const String testImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s";
-
+  static const String testImage =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s";
 }

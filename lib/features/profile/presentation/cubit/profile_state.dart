@@ -4,10 +4,20 @@ part of 'profile_cubit.dart';
 sealed class ProfileState {}
 
 final class ProfileInitial extends ProfileState {}
-final class ProfileLoading extends ProfileState {}
-final class ProfileLoaded extends ProfileState {}
-final class ProfileFailure extends ProfileState {
-  final String error;
 
-  ProfileFailure({required this.error});
-}
+
+class LogOutLoading extends ProfileState {}
+
+class DeleteAccLoading extends ProfileState {}
+
+class DeleteAccAndLogOutFailure extends ProfileState {}
+
+class DeleteAccAndLogOutSuccess extends ProfileState {}
+
+class ProfileLoading extends ProfileState {}
+
+class ProfileFailure extends ProfileState {}
+
+class ProfileSuccess extends ProfileState {}
+
+

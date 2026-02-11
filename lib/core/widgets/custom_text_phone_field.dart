@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../constants/app_assets.dart';
+import '../../generated/locale_keys.g.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
 import '../framework/spaces.dart';
@@ -179,7 +181,7 @@ class _CustomTextPhoneFieldState extends State<CustomTextPhoneField> {
                         width: 0.5.w,
                       ),
                     ),
-                    hintText: '5xxxxxxxx',
+                    hintText: LocaleKeys.phoneHint.tr(),
                     hintStyle:
                         widget.hintStyle ??
                         AppTextStyles.textStyle16.copyWith(
@@ -200,7 +202,7 @@ class _CustomTextPhoneFieldState extends State<CustomTextPhoneField> {
           heightSpace(10.h),
           Text(
             phoneCtrl.errorMessage,
-            style: 
+            style:
                 widget.errorStyle ??
                 AppTextStyles.textStyle12.copyWith(
                   color: AppColors.redColor,

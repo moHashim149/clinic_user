@@ -4,11 +4,11 @@ part 'sign_in_param.g.dart';
 
 @JsonSerializable(createFactory: false)
 class SignInParam {
-  final String phone;
+  final String phone,otp;
   @JsonKey(name: 'device_key')
   final String deviceKey;
 
-  SignInParam({required this.phone, required this.deviceKey});
+  SignInParam({required this.phone, required this.deviceKey, required this.otp});
 
   Map<String, dynamic> toJson() => _$SignInParamToJson(this);
 }

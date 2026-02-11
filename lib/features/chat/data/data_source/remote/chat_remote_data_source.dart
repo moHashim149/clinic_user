@@ -1,6 +1,9 @@
 
+import '../../models/message_model.dart';
+import '../../params/conversation_params.dart';
+import '../../params/send_message_param.dart';
+
 abstract class ChatRemoteDataSource {
-  // Future<RoomsModel> fetchRooms();
-  // Future<List<MessageModel>> fetchConversation(ConversationParams params);
-  // Future<MessageModel> sendMessage(SendMessageParam params);
+  Future<List<MessageModel>> fetchConversation(ConversationParams params);
+  Future<MessageModel> sendMessage(SendMessageParam params);
 }

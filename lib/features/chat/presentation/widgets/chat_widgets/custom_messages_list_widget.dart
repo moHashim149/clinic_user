@@ -10,7 +10,8 @@ import 'custom_mesage_item_widget.dart';
 
 class CustomMessagesListWidget extends StatelessWidget {
   final ChatCubit cubit;
-  const CustomMessagesListWidget({super.key, required this.cubit});
+  final String receiverImage;
+  const CustomMessagesListWidget({super.key, required this.cubit, required this.receiverImage});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class CustomMessagesListWidget extends StatelessWidget {
         controller: cubit.scrollController,
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 30.h),
         itemBuilder: (context, index) {
-          return CustomMessageItemWidget(messageModel: cubit.messages[index]);
+          return CustomMessageItemWidget(messageModel: cubit.messages[index],receiverImage: receiverImage,);
         },
         separatorBuilder: (context, index) {
           return heightSpace(30.h);

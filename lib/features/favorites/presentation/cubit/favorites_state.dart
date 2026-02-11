@@ -11,3 +11,11 @@ final class FavoritesFailure extends FavoritesState {
 
   FavoritesFailure({required this.error});
 }
+
+class FavoritesPaginationLoading extends FavoritesState {}
+
+class FavoritesPaginationFailure extends FavoritesState {}
+
+class FavLoading extends FavoritesState {}
+class FavLoaded extends FavoritesState {}
+class FavFailure extends FavoritesState {}

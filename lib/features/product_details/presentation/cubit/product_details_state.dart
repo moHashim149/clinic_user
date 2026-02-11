@@ -11,3 +11,11 @@ final class ProductDetailsFailure extends ProductDetailsState {
 
   ProductDetailsFailure({required this.error});
 }
+
+final class AvailableSizeLoading extends ProductDetailsState {}
+final class AvailableSizeLoaded extends ProductDetailsState {}
+final class AvailableSizeFailure extends ProductDetailsState {}
+
+final class AddToCartLoading extends ProductDetailsState {}
+final class AddToCartLoaded extends ProductDetailsState {}
+final class AddToCartFailure extends ProductDetailsState {}

@@ -27,6 +27,7 @@ class AppColors {
   static const Color blackTextNinthColor = Color(0xff433E3F);
   static const Color blackTextTenthColor = Color(0xff565656);
   static const Color blackTextEleventhColor = Color(0xff101010);
+  static const Color blackTextTwelfthColor = Color(0xff4A4A4A);
   static const Color hintColor = Color(0xff6D6D6D);
   static const Color lightBorderColor = Color(0xffF2F2F2);
   static const Color veryLightColor = Color(0xffF5F5F5);
@@ -69,5 +70,6 @@ class AppColors {
   static const Color greenOpacityColor = Color(0xffEAFFEF);
   static const Color redOpacityColor = Color(0xffFFD6D4);
   static const Color successColor = Color(0xff27AE60);
+  static const Color yellowColor = Color(0xffFCBC12);
 
 }

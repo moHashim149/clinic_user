@@ -22,7 +22,7 @@ class CustomMessageImageWidget extends StatelessWidget {
         minWidth: context.width * 0.7,
       ),
       child: CustomImageNetwork(
-        image: message.message,
+        image: message.image!,
         widthImage: context.width,
         heightImage: 161.h,
         radiusValue: 24.r,

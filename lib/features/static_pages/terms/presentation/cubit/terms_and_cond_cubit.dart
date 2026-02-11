@@ -18,18 +18,18 @@ class TermsAndCondCubit extends Cubit<TermsAndCondState> {
 
   String? termsData;
 
-  //
-  // void fetchTerms() async {
-  //   emit(GetTermsLoading());
-  //   var result = await repository.fetchTerms();
-  //   result.fold(
-  //     (failure) {
-  //       emit(GetTermsFailure(error: failure.message));
-  //     },
-  //     (termsData) {
-  //       this.termsData = termsData;
-  //       emit(GetTermsSuccess());
-  //     },
-  //   );
-  // }
+
+  void fetchTerms() async {
+    emit(GetTermsLoading());
+    var result = await repository.fetchTerms();
+    result.fold(
+      (failure) {
+        emit(GetTermsFailure(error: failure.message));
+      },
+      (termsData) {
+        this.termsData = termsData;
+        emit(GetTermsSuccess());
+      },
+    );
+  }
 }

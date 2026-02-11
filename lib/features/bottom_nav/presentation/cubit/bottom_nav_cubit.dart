@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:brandy_user/features/orders/presentation/views/orders_view.dart';
+import 'package:brandy_user/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/constants/app_assets.dart';
@@ -33,7 +34,7 @@ class BottomNavCubit extends Cubit<BottomNavState> {
     MenView(),
     ChildView(),
     OrdersView(),
-    SizedBox(),
+    ProfileView(),
   ];
 
   List<BottomNavItemModel> bottomNavigationBarItems = [

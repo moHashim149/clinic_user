@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:brandy_user/features/auth/data/params/send_code_param.dart';
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/widgets.dart';
 
@@ -64,7 +65,7 @@ class _CustomNotSendCodeAndResendState
     return Row(
       children: [
         Text(
-          "لم يصلك الكود؟\t",
+          "${LocaleKeys.resendCodeQuestion.tr()}\t",
           style: AppTextStyles.textStyle14.copyWith(
             fontWeight: FontWeight.w500,
             color: AppColors.blackTextEighthColor,
@@ -88,7 +89,14 @@ class _CustomNotSendCodeAndResendState
               decorationColor: AppColors.primaryColor,
               fontWeight: FontWeight.w500,
             ),
-          ).onTap(function: () {}),
+          ).onTap(
+            function: () {
+              widget.cubit.sendCode(
+                timer: startTimer,
+                param: SendCodeParam(phone: widget.argument.phone, type: 1),
+              );
+            },
+          ),
       ],
     );
   }

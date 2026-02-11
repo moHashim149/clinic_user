@@ -4,9 +4,8 @@ import '../../../../../core/errors/failures.dart';
 
 abstract class StaticPagesRepository {
 
-  // Future<Either<Failure, String>> fetchTerms();
-  //
-  //
-  // Future<Either<Failure, String>> fetchAboutUs();
+  Future<Either<Failure, String>> fetchTerms();
+
+  Future<Either<Failure, String>> fetchPolicy();
 
 }

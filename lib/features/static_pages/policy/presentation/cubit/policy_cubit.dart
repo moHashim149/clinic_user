@@ -15,17 +15,17 @@ class PolicyCubit extends Cubit<PolicyState> {
 
   String? policyData;
 
-  // void fetchPolicy() async {
-  //   emit(GetPolicyLoading());
-  //   var result = await repository.fetchPolicy();
-  //   result.fold(
-  //     (failure) {
-  //       emit(GetPolicyFailure(error: failure.message));
-  //     },
-  //     (policyData) {
-  //       this.policyData = policyData;
-  //       emit(GetPolicySuccess());
-  //     },
-  //   );
-  // }
+  void fetchPolicy() async {
+    emit(GetPolicyLoading());
+    var result = await repository.fetchPolicy();
+    result.fold(
+      (failure) {
+        emit(GetPolicyFailure(error: failure.message));
+      },
+      (policyData) {
+        this.policyData = policyData;
+        emit(GetPolicySuccess());
+      },
+    );
+  }
 }

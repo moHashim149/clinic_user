@@ -1,3 +1,5 @@
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +9,8 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
 class CustomCartNotesWidget extends StatelessWidget {
-  const CustomCartNotesWidget({super.key});
+  final TextEditingController notesCtrl;
+  const CustomCartNotesWidget({super.key, required this.notesCtrl});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class CustomCartNotesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "ملاحظات",
+          LocaleKeys.notes.tr(),
           style: AppTextStyles.textStyle12.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -23,11 +26,12 @@ class CustomCartNotesWidget extends StatelessWidget {
         heightSpace(12.h),
         CustomTextFormField(
           fillColor: AppColors.secondary4Color,
-          hintText: "اذا كانت لديك اي ملاحظات أكتبها لنا هنا",
+          hintText: LocaleKeys.orderNotesHint.tr(),
           hintStyle: AppTextStyles.textStyle8.copyWith(
             fontWeight: FontWeight.bold,
             color: AppColors.hintColor,
           ),
+          ctrl: notesCtrl,
           borderColor: AppColors.transparentColor,
           borderRadiusValue: 16.r,
           contentPadding: EdgeInsets.symmetric(

@@ -1,5 +1,7 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,7 +14,15 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_visitor_widget.dart';
 
 class CustomPaymentMethodsFooterWidget extends StatelessWidget {
-  const CustomPaymentMethodsFooterWidget({super.key});
+  final num total;
+  final VoidCallback onTap;
+  final bool isLoading;
+  const CustomPaymentMethodsFooterWidget({
+    super.key,
+    required this.total,
+    required this.onTap,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,27 +34,16 @@ class CustomPaymentMethodsFooterWidget extends StatelessWidget {
       ),
       child: CustomButton(
         height: 52.h,
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            backgroundColor: AppColors.whiteColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(24.r),
-              ),
-            ),
-            builder: (context) {
-              return CustomVisitorWidget();
-            },
-          );
-        },
+        onPressed: onTap,
         borderRadius: BorderRadius.circular(24.r),
+        isLoading: isLoading,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "أدفع الآن",
+              LocaleKeys.payNow.tr(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: AppTextStyles.textStyle14.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.whiteColor,
@@ -52,10 +51,15 @@ class CustomPaymentMethodsFooterWidget extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: VerticalDivider(color: AppColors.whiteColor,thickness: 2.w,indent: 13.h,endIndent: 13.h,),
+              child: VerticalDivider(
+                color: AppColors.whiteColor,
+                thickness: 2.w,
+                indent: 13.h,
+                endIndent: 13.h,
+              ),
             ),
             Text(
-              "500",
+              "$total",
               style: AppTextStyles.textStyle16.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.whiteColor,

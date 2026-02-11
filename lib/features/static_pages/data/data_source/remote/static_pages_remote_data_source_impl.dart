@@ -2,6 +2,9 @@ import 'package:brandy_user/features/static_pages/data/data_source/remote/static
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/api/api_consumer.dart';
+import '../../../../../core/api/base_response.dart';
+import '../../../../../core/constants/api_constants.dart';
+import '../../../../../core/errors/exceptions.dart';
 
 @Injectable(as: StaticPagesRemoteDataSource)
 class StaticPagesRemoteDataSourceImpl extends StaticPagesRemoteDataSource {
@@ -13,24 +16,24 @@ class StaticPagesRemoteDataSourceImpl extends StaticPagesRemoteDataSource {
 
 
 
-  // @override
-  // Future<String> fetchTerms() async {
-  //   BaseResponse response = await apiConsumer.get(ApiConstants.terms);
-  //   if (response.status == true) {
-  //     return response.data.toString();
-  //   } else {
-  //     throw ServerException(response.message.toString());
-  //   }
-  // }
-  //
-  //
-  // @override
-  // Future<String> fetchAboutUs() async {
-  //   BaseResponse response = await apiConsumer.get(ApiConstants.aboutUs);
-  //   if (response.status == true) {
-  //     return response.data.toString();
-  //   } else {
-  //     throw ServerException(response.message.toString());
-  //   }
-  // }
+  @override
+  Future<String> fetchTerms() async {
+    BaseResponse response = await apiConsumer.get(ApiConstants.terms);
+    if (response.status == true) {
+      return response.data.toString();
+    } else {
+      throw ServerException(response.message.toString());
+    }
+  }
+
+
+  @override
+  Future<String> fetchPolicy() async {
+    BaseResponse response = await apiConsumer.get(ApiConstants.privacy);
+    if (response.status == true) {
+      return response.data.toString();
+    } else {
+      throw ServerException(response.message.toString());
+    }
+  }
 }

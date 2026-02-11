@@ -4,6 +4,6 @@ part of 'login_cubit.dart';
 abstract class SignInState {}
 
 class SignInInitial extends SignInState {}
-class SignInLoading extends SignInState {}
-class SignInFailure extends SignInState {}
-class SignInSuccess extends SignInState {}
+class CheckPhoneLoading extends SignInState {}
+class CheckPhoneFailure extends SignInState {}
+class CheckPhoneSuccess extends SignInState {}

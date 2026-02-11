@@ -8,11 +8,8 @@ part of 'message_model.dart';
 
 MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
   id: (json['id'] as num).toInt(),
-  sender: UserModel.fromJson(json['sender'] as Map<String, dynamic>),
-  message: json['message'] as String,
-  type: json['type'] as String,
-  isSeen: json['is_seen'] as bool,
+  message: json['message'] as String?,
+  image: json['image'] as String?,
+  viewType: json['view_type'] as String,
   createdAt: json['created_at'] as String,
-  receiver: UserModel.fromJson(json['receiver'] as Map<String, dynamic>),
-  key: json['key'] as String,
 );

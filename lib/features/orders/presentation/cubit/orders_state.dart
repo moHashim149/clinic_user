@@ -4,10 +4,17 @@ part of 'orders_cubit.dart';
 sealed class OrdersState {}
 
 final class OrdersInitial extends OrdersState {}
-final class OrdersLoading extends OrdersState {}
-final class OrdersLoaded extends OrdersState {}
-final class OrdersFailure extends OrdersState {
+class OrdersLoading extends OrdersState {}
+class OrdersPaginationLoading extends OrdersState {}
+class OrdersFailure extends OrdersState {
   final String error;
-
-  OrdersFailure({required this.error});
+  OrdersFailure(this.error);
 }
+class OrdersPaginationFailure extends OrdersState {}
+class OrdersLoaded extends OrdersState {}
+class ReOrderLoading extends OrdersState {}
+class ReOrderFailure extends OrdersState {}
+class ReOrderLoaded extends OrdersState {}
+
+
+

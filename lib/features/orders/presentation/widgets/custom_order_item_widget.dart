@@ -1,7 +1,11 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/features/order_details/data/arguments/order_details_arguments.dart';
+import 'package:brandy_user/features/orders/data/models/order_model.dart';
 import 'package:dotted_line/dotted_line.dart';
+import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter/material.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -13,7 +17,15 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_image_network.dart';
 
 class CustomOrderItemWidget extends StatelessWidget {
-  const CustomOrderItemWidget({super.key});
+  final OrderModel orderModel;
+  final VoidCallback onReorder;
+  final bool reOrderIsLoading;
+  const CustomOrderItemWidget({
+    super.key,
+    required this.orderModel,
+    required this.onReorder,
+    required this.reOrderIsLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +44,24 @@ class CustomOrderItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "جديد",
+                      orderModel.status,
                       style: AppTextStyles.textStyle8.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.thirdColor,
+                        color: orderModel.statusKey == 2
+                            ? AppColors.primaryColor
+                            : orderModel.statusKey == 3 ||
+                                  orderModel.statusKey == 1
+                            ? AppColors.yellowColor
+                            : orderModel.statusKey == 4
+                            ? AppColors.successColor
+                            : orderModel.statusKey == 1
+                            ? AppColors.thirdColor
+                            : AppColors.redColor,
                       ),
                     ),
                     heightSpace(4.h),
                     Text(
-                      "Zara",
+                      orderModel.storeName ?? "",
                       style: AppTextStyles.textStyle10.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.blackTextEighthColor,
@@ -48,7 +69,7 @@ class CustomOrderItemWidget extends StatelessWidget {
                     ),
                     heightSpace(4.h),
                     Text(
-                      "25 مايو 2026 01:25 م",
+                      orderModel.date,
                       style: AppTextStyles.textStyle8.copyWith(
                         fontWeight: FontWeight.w500,
                         color: AppColors.blackTextEighthColor,
@@ -58,7 +79,7 @@ class CustomOrderItemWidget extends StatelessWidget {
                 ),
               ),
               CustomImageNetwork(
-                image: AppAssets.testImage,
+                image: orderModel.orderItems.first.product.image ?? "",
                 widthImage: 73.w,
                 heightImage: 62.h,
                 radiusValue: 8.r,
@@ -69,7 +90,7 @@ class CustomOrderItemWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                "500",
+                "${orderModel.orderItems.first.price == 0 ? orderModel.orderItems.first.price : orderModel.orderItems.first.priceAfterDiscount}",
                 style: AppTextStyles.textStyle10.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -78,7 +99,8 @@ class CustomOrderItemWidget extends StatelessWidget {
               SvgPicture.asset(AppAssets.currency, width: 9.w, height: 10.h),
               Spacer(),
               Text(
-                "2 X معطف",
+                "${orderModel.orderItems.first.count} X ${orderModel.orderItems.first.product.name}",
+                textDirection: TextDirection.ltr,
                 style: AppTextStyles.textStyle8.copyWith(
                   fontWeight: FontWeight.w500,
                   color: AppColors.blackTextEighthColor,
@@ -91,31 +113,36 @@ class CustomOrderItemWidget extends StatelessWidget {
           heightSpace(3.h),
           Row(
             children: [
-              Expanded(
-                child: CustomButton(
-                  onPressed: () {},
-                  backgroundColor: AppColors.transparentColor,
-
-                  text: "تتبع الطلب",
-                  style: AppTextStyles.textStyle10.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor,
+              if (orderModel.statusKey == 4) ...[
+                Expanded(
+                  child: CustomButton(
+                    onPressed: onReorder,
+                    backgroundColor: AppColors.transparentColor,
+                    isLoading: reOrderIsLoading,
+                    text: LocaleKeys.reOrder.tr(),
+                    style: AppTextStyles.textStyle10.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                 ),
-              ),
-              DottedLine(
-                dashColor: AppColors.strokeColor,
-                direction: Axis.vertical,
-                lineLength: 40.h,
-                dashLength: 1,
-              ),
+                DottedLine(
+                  dashColor: AppColors.strokeColor,
+                  direction: Axis.vertical,
+                  lineLength: 40.h,
+                  dashLength: 1,
+                ),
+              ],
               Expanded(
                 child: CustomButton(
                   onPressed: () {
-                    context.pushWithNamed(Routes.orderDetailsView);
+                    context.pushWithNamed(
+                      Routes.orderDetailsView,
+                      arguments: OrderDetailsArguments(orderId: orderModel.id),
+                    );
                   },
                   backgroundColor: AppColors.transparentColor,
-                  text: "عرض التفاصيل",
+                  text: LocaleKeys.viewDetails.tr(),
                   style: AppTextStyles.textStyle10.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

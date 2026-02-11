@@ -518,14 +518,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
-  flutter_debouncer:
-    dependency: "direct main"
-    description:
-      name: flutter_debouncer
-      sha256: "89f98f874e6abbb212f3027a7a27d5ce42c5b6544c8f5967d91140c0ae06ae22"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   flutter_image_compress:
     dependency: "direct main"
     description:
@@ -1085,6 +1077,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      sha256: "53385261521cc4a0c4658fd0ad07a7d14591cf8fc33abbceae306ddb974888dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2"
   json_annotation:
     dependency: "direct main"
     description:
@@ -1485,6 +1485,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  pusher_channels_flutter:
+    dependency: "direct main"
+    description:
+      name: pusher_channels_flutter
+      sha256: "683e4cb7c1803b3358142be895f144ec9818c282630ce6476a0b4dd75faf56b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
   recase:
     dependency: transitive
     description:
@@ -1509,30 +1517,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  scrollable_list_tab_scroller:
+  share_plus:
     dependency: "direct main"
     description:
-      name: scrollable_list_tab_scroller
-      sha256: e2f7b961b5eedde6dd94ceea73e39424db932adf2d914a99341f94dd49fc0265
+      name: share_plus
+      sha256: "14c8860d4de93d3a7e53af51bff479598c4e999605290756bbbe45cf65b37840"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
-  scrollable_positioned_list:
+    version: "12.0.1"
+  share_plus_platform_interface:
     dependency: transitive
     description:
-      name: scrollable_positioned_list
-      sha256: "1b54d5f1329a1e263269abc9e2543d90806131aa14fe7c6062a8054d57249287"
+      name: share_plus_platform_interface
+      sha256: "88023e53a13429bd65d8e85e11a9b484f49d4c190abbd96c7932b74d6927cc9a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.8"
-  scrolls_to_top:
-    dependency: transitive
-    description:
-      name: scrolls_to_top
-      sha256: "8d6684d936b9c1a19c19ee93c836251ae9c803023290762a30cb7657e88e272e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
+    version: "6.1.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1682,6 +1682,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
+  story_view:
+    dependency: "direct main"
+    description:
+      name: story_view
+      sha256: "9035dbdf7633a8491d5ea095dd5a64d794a66e887a2abd5d2b323d510f3e4e54"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.16.6"
   stream_channel:
     dependency: transitive
     description:

@@ -1,5 +1,8 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/features/payment_methods/data/data_source/arguments/payment_methods_arguments.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,7 +14,15 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/widgets/custom_button.dart';
 
 class CustomCartPayWidget extends StatelessWidget {
-  const CustomCartPayWidget({super.key});
+  final int locationId;
+  final String? couponCode;
+  final num total;
+  const CustomCartPayWidget({
+    super.key,
+    required this.locationId,
+    this.couponCode,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +50,7 @@ class CustomCartPayWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "الدفع عن طريق",
+                  LocaleKeys.payVia.tr(),
                   style: AppTextStyles.textStyle8.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppColors.hintColor,
@@ -47,7 +58,7 @@ class CustomCartPayWidget extends StatelessWidget {
                 ),
                 heightSpace(1.h),
                 Text(
-                  "المحفظة",
+                  LocaleKeys.wallet.tr(),
                   style: AppTextStyles.textStyle8.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.blackTextEighthColor,
@@ -60,14 +71,21 @@ class CustomCartPayWidget extends StatelessWidget {
             width: 138.w,
             height: 36.h,
             onPressed: () {
-              context.pushWithNamed(Routes.paymentMethodsView);
+              context.pushWithNamed(
+                Routes.paymentMethodsView,
+                arguments: PaymentMethodsArguments(
+                  locationId: locationId,
+                  total: total,
+                  couponCode: couponCode,
+                ),
+              );
             },
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.secondary4Color,
             ),
             borderRadius: BorderRadius.circular(24.r),
-            text: "أدفع الآن",
+            text: LocaleKeys.payNow.tr(),
           ),
         ],
       ),

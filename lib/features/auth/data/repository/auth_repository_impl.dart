@@ -1,3 +1,5 @@
+import 'package:brandy_user/features/auth/data/models/check_phone_model.dart';
+import 'package:brandy_user/features/auth/data/models/check_phone_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,76 +27,64 @@ class AuthRepositoryImpl extends AuthRepository {
     required this.authLocalDataSource,
   });
 
-  // @override
-  // Future<Either<Failure, String>> sendCode({
-  //   required SendCodeParam param,
-  // }) async {
-  //   try {
-  //     String model = await authRemoteDataSource.sendCode(param: param);
-  //     return Right(model);
-  //   } on ServerException catch (exception) {
-  //     return Left(ApiFailure(exception.message!));
-  //   }
-  // }
-  //
-  // @override
-  // Future<Either<Failure, SignInModel>> checkOtp({
-  //   required CheckOtpParam param,
-  // }) async {
-  //   try {
-  //     SignInModel model = await authRemoteDataSource.checkOtp(param: param);
-  //     return Right(model);
-  //   } on ServerException catch (exception) {
-  //     return Left(ApiFailure(exception.message!));
-  //   }
-  // }
-  //
-  // @override
-  // Future<Either<Failure, SignInModel>> signIn({
-  //   required SignInParam param,
-  // }) async {
-  //   try {
-  //     SignInModel signInModel = await authRemoteDataSource.signIn(param: param);
-  //     return Right(signInModel);
-  //   } on ServerException catch (exception) {
-  //     return Left(ApiFailure(exception.message!));
-  //   }
-  // }
-  //
-  // @override
-  // Future<Either<Failure, SignInModel>> createAcc({
-  //   required CreateAccParam param,
-  // }) async {
-  //   try {
-  //     SignInModel signInModel = await authRemoteDataSource.createAcc(
-  //       param: param,
-  //     );
-  //     return Right(signInModel);
-  //   } on ServerException catch (exception) {
-  //     return Left(ApiFailure(exception.message!));
-  //   }
-  // }
-  //
-  // @override
-  // Future<Either<Failure, List<CityModel>>> fetchCities() async {
-  //   try {
-  //     List<CityModel> cities = await authRemoteDataSource.fetchCities();
-  //     return Right(cities);
-  //   } on ServerException catch (exception) {
-  //     return Left(ApiFailure(exception.message!));
-  //   }
-  // }
-  //
-  // @override
-  // Either<Failure, dynamic> saveUserData({
-  //   required UserModel user,
-  //   required String token,
-  // }) {
-  //   try {
-  //     authLocalDataSource.saveDataUser(user: user, token: token);
-  //     return const Right('Done');
-  //   } on CacheException catch (exception) {
-  //     return Left(CacheFailure(exception.message!));
-  //   }
-  // }
+  @override
+  Future<Either<Failure, CheckPhoneModel>> sendCode({
+    required SendCodeParam param,
+  }) async {
+    try {
+      CheckPhoneModel model = await authRemoteDataSource.sendCode(param: param);
+      return Right(model);
+    } on ServerException catch (exception) {
+      return Left(ApiFailure(exception.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SignInModel>> signIn({
+    required SignInParam param,
+  }) async {
+    try {
+      SignInModel signInModel = await authRemoteDataSource.login(param: param);
+      return Right(signInModel);
+    } on ServerException catch (exception) {
+      return Left(ApiFailure(exception.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SignInModel>> createAcc({
+    required CreateAccParam param,
+  }) async {
+    try {
+      SignInModel signInModel = await authRemoteDataSource.createAcc(
+        param: param,
+      );
+      return Right(signInModel);
+    } on ServerException catch (exception) {
+      return Left(ApiFailure(exception.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CityModel>>> fetchCities() async {
+    try {
+      List<CityModel> cities = await authRemoteDataSource.fetchCities();
+      return Right(cities);
+    } on ServerException catch (exception) {
+      return Left(ApiFailure(exception.message!));
+    }
+  }
+
+  @override
+  Either<Failure, dynamic> saveUserData({
+    required UserModel user,
+    required String token,
+  }) {
+    try {
+      authLocalDataSource.saveDataUser(user: user, token: token);
+      return const Right('Done');
+    } on CacheException catch (exception) {
+      return Left(CacheFailure(exception.message!));
+    }
+  }
 }

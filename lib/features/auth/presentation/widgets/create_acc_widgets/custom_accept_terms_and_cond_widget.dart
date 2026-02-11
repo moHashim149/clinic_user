@@ -1,3 +1,7 @@
+import 'package:brandy_user/core/util/extensions/navigation.dart';
+import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/constants/app_colors.dart';
@@ -10,41 +14,47 @@ class CustomAcceptTermsAndCondWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
-        text: "بإنشاء حسابك، فإنك توافق على\t",
+        text: "${LocaleKeys.agreeToTermsFullText.tr()}\t",
         style: AppTextStyles.textStyle12.copyWith(
           color: AppColors.blackTextEighthColor,
           fontWeight: FontWeight.w500,
         ),
         children: [
           TextSpan(
-            text: "الشروط والأحكام",
+            text: LocaleKeys.terms.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               decorationColor: AppColors.primaryColor,
               color: AppColors.primaryColor,
               fontWeight: FontWeight.w500,
               decoration: TextDecoration.underline,
             ),
-            recognizer: TapGestureRecognizer()..onTap = () {},
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                context.pushWithNamed(Routes.termsView);
+              },
           ),
           TextSpan(
-            text: "\tو\t",
+            text: "\t${LocaleKeys.and.tr()}\t",
             style: AppTextStyles.textStyle12.copyWith(
               color: AppColors.blackTextEighthColor,
               fontWeight: FontWeight.w500,
             ),
           ),
           TextSpan(
-            text: "سياسة الخصوصية",
+            text: LocaleKeys.privacyPolicy.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               decorationColor: AppColors.primaryColor,
               color: AppColors.primaryColor,
               fontWeight: FontWeight.w500,
               decoration: TextDecoration.underline,
             ),
-            recognizer: TapGestureRecognizer()..onTap = () {},
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                context.pushWithNamed(Routes.policyView);
+              },
           ),
           TextSpan(
-            text: "\tلتطبيق براندي",
+            text: "\t${LocaleKeys.forBrandyApp.tr()}",
             style: AppTextStyles.textStyle12.copyWith(
               color: AppColors.blackTextEighthColor,
               fontWeight: FontWeight.w500,

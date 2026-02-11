@@ -1,4 +1,6 @@
 import 'package:brandy_user/core/constants/app_assets.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -57,7 +59,7 @@ class CustomWalletTransactionItemWidget extends StatelessWidget {
                     : AppColors.redOpacityColor,
               ),
               child: Text(
-                isSuccess ? "ناجحه" : "غير ناجحه",
+                isSuccess ? LocaleKeys.success.tr() : LocaleKeys.failed.tr(),
                 style: AppTextStyles.textStyle12.copyWith(
                   fontWeight: FontWeight.w600,
                   color: isSuccess

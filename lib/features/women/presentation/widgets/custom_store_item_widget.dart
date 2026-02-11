@@ -12,7 +12,8 @@ import '../../../../core/widgets/custom_image_network.dart';
 class CustomStoreItemWidget extends StatelessWidget {
   final String storeName, storeLocation, storeImage;
   final num avgRating, ratesNum, distance;
-  final VoidCallback onTap;
+  final VoidCallback onTap,onFavTap;
+  final bool isFav;
 
   const CustomStoreItemWidget({
     super.key,
@@ -22,7 +23,8 @@ class CustomStoreItemWidget extends StatelessWidget {
     required this.avgRating,
     required this.ratesNum,
     required this.onTap,
-    required this.distance,
+    required this.onFavTap,
+    required this.distance, required this.isFav,
   });
 
   @override
@@ -68,20 +70,25 @@ class CustomStoreItemWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  widthSpace(2.w),
+                  if(ratesNum != 0)
+                  ...[widthSpace(2.w),
                   Text(
                     "(+ $ratesNum)",
                     style: AppTextStyles.textStyle10.copyWith(
                       fontWeight: FontWeight.w500,
                       color: AppColors.grayColor,
                     ),
-                  ),
+                  ),]
                 ],
               ),
               heightSpace(9.h),
               Row(
                 children: [
-                  SvgPicture.asset(AppAssets.locationPin,width: 14.w,height: 14.h,),
+                  SvgPicture.asset(
+                    AppAssets.locationPin,
+                    width: 14.w,
+                    height: 14.h,
+                  ),
                   widthSpace(4.w),
                   Text(
                     storeLocation,
@@ -90,22 +97,24 @@ class CustomStoreItemWidget extends StatelessWidget {
                       color: AppColors.blackTextNinthColor,
                     ),
                   ),
-                  widthSpace(12.w),
-                  SvgPicture.asset(AppAssets.distance),
-                  widthSpace(2.w),
-                  Text(
-                    "$distance km",
-                    style: AppTextStyles.textStyle8.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blackTextNinthColor,
+                  if (distance != 0) ...[
+                    widthSpace(12.w),
+                    SvgPicture.asset(AppAssets.distance),
+                    widthSpace(2.w),
+                    Text(
+                      "$distance km",
+                      style: AppTextStyles.textStyle8.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blackTextNinthColor,
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             ],
           ),
         ),
-        SvgPicture.asset(AppAssets.heart, width: 16.w, height: 16.h),
+        SvgPicture.asset(isFav? AppAssets.heartFilled : AppAssets.heart, width: 16.w, height: 16.h).onTap(function: onFavTap),
       ],
     ).onTap(function: onTap);
   }

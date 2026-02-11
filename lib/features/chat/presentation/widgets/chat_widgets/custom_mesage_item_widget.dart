@@ -9,12 +9,13 @@ import 'custom_message_text_widget.dart';
 
 class CustomMessageItemWidget extends StatelessWidget {
   final MessageModel messageModel;
-  const CustomMessageItemWidget({super.key, required this.messageModel});
+  final String receiverImage;
+  const CustomMessageItemWidget({super.key, required this.messageModel, required this.receiverImage});
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      textDirection: messageModel.type != "sender"
+      textDirection: messageModel.viewType != "sender"
           ? context.isArabic
                 ? TextDirection.ltr
                 : TextDirection.rtl
@@ -24,15 +25,15 @@ class CustomMessageItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
 
       children: [
-        if(messageModel.type != "sender")
+        if(messageModel.viewType != "sender")
         CustomImageNetwork(
-          image: messageModel.sender.image,
+          image: receiverImage,
           radiusValue: 16.r,
           heightImage: 32.h,
           widthImage: 32.w,
         ),
         widthSpace(8.w),
-        messageModel.key == "message"
+        messageModel.message != null
             ? CustomMessageTextWidget(message: messageModel)
             : CustomMessageImageWidget(message: messageModel),
       ],

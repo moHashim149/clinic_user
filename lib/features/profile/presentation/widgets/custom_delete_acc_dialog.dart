@@ -1,4 +1,5 @@
 import 'package:brandy_user/core/constants/app_assets.dart';
+import 'package:brandy_user/core/util/extensions/on_tap.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import '../../../../../core/constants/app_colors.dart';
 
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
+import '../../../../core/util/extensions/navigation.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -37,21 +39,27 @@ class CustomDeleteAccDialog extends StatelessWidget {
           children: [
             Align(
               alignment: AlignmentDirectional.topStart,
-              child: SvgPicture.asset(
-                AppAssets.close,
-                width: 24.w,
-                height: 24.h,
-              ),
+              child:
+                  SvgPicture.asset(
+                    AppAssets.close,
+                    width: 24.w,
+                    height: 24.h,
+                  ).onTap(
+                    function: () {
+                      context.pop();
+                    },
+                  ),
             ),
             heightSpace(13.h),
             Text(
-              "هل متأكد من حذف حسابك؟",
+              LocaleKeys.sureDeleteAccount.tr(),
               style: AppTextStyles.textStyle20.copyWith(
                 fontWeight: FontWeight.w500,
               ),
-            ),heightSpace(6.h),
+            ),
+            heightSpace(6.h),
             Text(
-              "سيتم مسح جميع المعلومات الخاصة بك عند حذف الحساب",
+              LocaleKeys.sureDeleteAccountMessage.tr(),
               textAlign: TextAlign.center,
               style: AppTextStyles.textStyle16.copyWith(
                 fontWeight: FontWeight.w500,
@@ -62,7 +70,7 @@ class CustomDeleteAccDialog extends StatelessWidget {
             CustomButton(
               onPressed: onTapDeleteAcc,
               isLoading: isLoading,
-              text: "تأكيد حذف الحساب",
+              text: LocaleKeys.confirmDeleteAccount.tr(),
               backgroundColor: AppColors.redFifthColor,
             ),
           ],

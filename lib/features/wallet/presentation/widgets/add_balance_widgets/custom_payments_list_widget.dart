@@ -22,7 +22,7 @@ class CustomPaymentsListWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
-        color: AppColors.strokeSecondaryColor,
+        border: Border.all(color: AppColors.strokeSecondaryColor),
       ),
       padding: EdgeInsetsDirectional.only(bottom: 9.h, start: 8.w, end: 8.w),
       child: Column(
@@ -32,7 +32,6 @@ class CustomPaymentsListWidget extends StatelessWidget {
             paymentModel: payments[index],
             payment: payment,
             onChanged: onChanged,
-            walletBalance: payments[index].walletBalance,
             isLast: payments.length - 1 == index,
           ),
         ),

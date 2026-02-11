@@ -8,8 +8,7 @@ part of 'send_message_param.dart';
 
 Map<String, dynamic> _$SendMessageParamToJson(SendMessageParam instance) =>
     <String, dynamic>{
-      'receiver_id': instance.receiverId,
-      'product_id': instance.productid,
+      'chat_id': instance.chatId,
       'message': ?instance.message,
-      'img': ?SendMessageParam._multipartFileToJson(instance.image),
+      'file': ?SendMessageParam._multipartFileToJson(instance.file),
     };

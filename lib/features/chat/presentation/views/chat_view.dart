@@ -24,11 +24,19 @@ class ChatView extends StatelessWidget {
       appBar: CustomAppBar(
         titleWidget: Row(
           children: [
-            CustomImageNetwork(image: AppAssets.testImage, widthImage: 40.w, heightImage: 40.h,radiusValue: 20.r,),
+            CustomImageNetwork(
+              image: chatArguments.courier.image,
+              widthImage: 40.w,
+              heightImage: 40.h,
+              radiusValue: 20.r,
+            ),
             widthSpace(10.w),
-            Text("Amr Alnassar",style: AppTextStyles.textStyle10.copyWith(
-                fontWeight: FontWeight.bold
-            ),)
+            Text(
+              chatArguments.courier.name,
+              style: AppTextStyles.textStyle10.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
@@ -41,13 +49,13 @@ class ChatView extends StatelessWidget {
             return CustomError(
               error: state.message,
               retry: () {
-                // cubit.fetchChat(chatArguments.user.id);
+                 cubit.fetchChat(chatArguments.chatId);
               },
             );
           } else {
             return Column(
               children: [
-                CustomMessagesListWidget(cubit: cubit),
+                CustomMessagesListWidget(cubit: cubit,receiverImage: chatArguments.courier.image,),
                 CustomAddMessageFieldWidget(
                   cubit: cubit,
                   arguments: chatArguments,

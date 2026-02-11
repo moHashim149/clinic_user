@@ -6,9 +6,11 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
+import '../../../addresses/data/models/address_model.dart';
 
 class CustomCartAddressWidget extends StatelessWidget {
-  const CustomCartAddressWidget({super.key});
+  final AddressModel addressModel;
+  const CustomCartAddressWidget({super.key, required this.addressModel});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class CustomCartAddressWidget extends StatelessWidget {
               widthSpace(10.w),
               Expanded(
                 child: Text(
-                  "المنزل",
+                  addressModel.name,
                   style: AppTextStyles.textStyle14.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -45,7 +47,7 @@ class CustomCartAddressWidget extends StatelessWidget {
             ],
           ),
           Text(
-            "شارع الملك عبدالعزيز، منطقة الرياض، الرياض، المملكة العربية السعودية",
+            addressModel.location,
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.w500,
               color: AppColors.hintColor,

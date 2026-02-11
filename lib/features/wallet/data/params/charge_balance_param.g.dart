@@ -7,8 +7,4 @@ part of 'charge_balance_param.dart';
 // **************************************************************************
 
 Map<String, dynamic> _$ChargeBalanceParamToJson(ChargeBalanceParam instance) =>
-    <String, dynamic>{
-      'amount': instance.amount,
-      'payment_method': instance.paymentMethod,
-      'payment_response': ?instance.paymentResponse,
-    };
+    <String, dynamic>{'amount': instance.amount};

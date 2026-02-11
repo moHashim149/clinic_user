@@ -4,16 +4,19 @@ part 'transaction_model.g.dart';
 
 @JsonSerializable(createToJson: false)
 class TransactionModel {
+  final int id;
   final num amount;
-  final String title , date, description, type, image;
+  final String description, type;
+  @JsonKey(name: "created_at")
+  final String createdAt;
 
   TransactionModel({
     required this.amount,
-    required this.title,
-    required this.date,
     required this.description,
     required this.type,
-    required this.image,
+    required this.id,
+    required this.createdAt,
+
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>

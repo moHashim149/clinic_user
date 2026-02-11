@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,55 +15,52 @@ class CustomError extends StatelessWidget {
 
   final void Function() retry;
 
-  const CustomError(
-      {super.key,
-      required this.error,
-      required this.retry,
-     });
+  const CustomError({super.key, required this.error, required this.retry});
 
   @override
   Widget build(BuildContext context) {
-    return   Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  error == LocaleKeys.noInternetError.tr() ? AppAssets.noInternet  : AppAssets.error,
-                  width: context.width / 2.5,
-                  height: context.height / 3.2,
-                ),
-                heightSpace(24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w),
-                  child: Text(
-                    error,
-                    style: AppTextStyles.textStyle16.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blackTextSecondaryColor
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                heightSpace(8.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Text(
-                    error == LocaleKeys.noInternetError.tr() ? LocaleKeys.noInternetContent.tr() : LocaleKeys.  errorContent.tr(),
-                    style: AppTextStyles.textStyle12.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blackTextColor
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                heightSpace(20.h),
-                CustomButton(
-                  onPressed: retry,
-                  text: LocaleKeys.retry.tr(),
-                ),
-              ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            error == LocaleKeys.noInternetError.tr()
+                ? AppAssets.noInternet
+                : AppAssets.error,
+            width: context.width * 0.3,
+            height: context.height * 0.2,
+          ),
+          heightSpace(24.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: Text(
+              error,
+              style: AppTextStyles.textStyle16.copyWith(
+                fontWeight: FontWeight.w500,
+                color: AppColors.blackTextSecondaryColor,
+              ),
+              textAlign: TextAlign.center,
             ),
+          ),
+          heightSpace(8.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Text(
+              error == LocaleKeys.noInternetError.tr()
+                  ? LocaleKeys.noInternetContent.tr()
+                  : LocaleKeys.errorContent.tr(),
+              style: AppTextStyles.textStyle12.copyWith(
+                fontWeight: FontWeight.w500,
+                color: AppColors.blackTextColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          heightSpace(20.h),
+          CustomButton(onPressed: retry, text: LocaleKeys.retry.tr()),
+        ],
+      ),
     );
   }
 }

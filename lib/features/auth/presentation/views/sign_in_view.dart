@@ -31,7 +31,7 @@ class SignInView extends StatelessWidget {
           final cubit = context.read<SignInCubit>();
           return SafeArea(
             child: AbsorbPointer(
-              absorbing: state is SignInLoading,
+              absorbing: state is CheckPhoneLoading,
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 40.h),
                 child: Column(
@@ -39,110 +39,75 @@ class SignInView extends StatelessWidget {
 
                   children: [
                     CustomAuthHeader(
-                      title: "مرحباً بك في دليلك لأقرب وأشهر المتاجر! 👋",
-                      body:
-                          "سجّل الآن واكتشف متاجرك المفضلة القريبة، واطلب بخطوة واحدة!",
+                      title: LocaleKeys.signInHeaderTitle.tr(),
+                      body: LocaleKeys.signInHeaderBody.tr(),
                     ),
                     heightSpace(32.h),
                     Text(
-                      cubit.isEmail
-                          ? LocaleKeys.email.tr()
-                          : LocaleKeys.phoneNumber.tr(),
+                      LocaleKeys.phoneNumber.tr(),
                       style: AppTextStyles.textStyle12.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.blackTextEighthColor,
                       ),
                     ),
                     heightSpace(8.h),
-                    if (cubit.isEmail)
-                      Form(
-                        key: cubit.formKey,
-                        child: CustomTextFormField(
-                          fillColor: AppColors.whiteColor,
-                          hintText: "أدخل البريد الإلكتروني",
-                          hintStyle: AppTextStyles.textStyle12.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.hintColor,
-                          ),
-                          ctrl: cubit.emailCtrl,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: AppValidator.fullEmailValidator,
-                          prefixIcon: SvgPicture.asset(
-                            AppAssets.email,
-                            width: 20.w,
-                            height: 20.h,
-                            fit: BoxFit.scaleDown,
-                          ),
-                        ),
-                      ),
-                    if (!cubit.isEmail)
                       CustomFieldPhoneWidget(phoneController: cubit.phoneCtrl),
                     heightSpace(context.height * 0.15),
                     CustomButton(
                       onPressed: () {
                         bool isFormValidated =
-                            cubit.phoneCtrl.validatePhoneField() ||
-                            (cubit.formKey.currentState?.validate() ?? false);
+                            cubit.phoneCtrl.validatePhoneField();
 
                         if (isFormValidated) {
-                          // cubit.signIn(context: context);
-                          context.pushWithNamed(
-                            Routes.pinCodeView,
-                            arguments: PinCodeArgument(
-                              credential: cubit.isEmail
-                                  ? cubit.emailCtrl.text
-                                  : cubit.phoneCtrl.controller.text,
-                              isEmail: cubit.isEmail,
-                            ),
-                          );
+                          cubit.checkPone(context: context);
                         }
                       },
                       text: LocaleKeys.login.tr(),
-                      isLoading: state is SignInLoading,
+                      isLoading: state is CheckPhoneLoading,
                     ),
-                    heightSpace(48.h),
-                    Row(
-                      children: [
-                        Expanded(child: Divider(color: AppColors.strokeColor)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.w),
-                          child: Text(
-                            "أو",
-                            style: AppTextStyles.textStyle16.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.hintColor,
-                            ),
-                          ),
-                        ),
-                        Expanded(child: Divider(color: AppColors.strokeColor)),
-                      ],
-                    ),
-                    heightSpace(48.h),
-                    CustomButton(
-                      onPressed: () {
-                        cubit.toggleCredentialType();
-                      },
-                      borderSide: BorderSide(color: AppColors.strokeColor),
-                      backgroundColor: AppColors.transparentColor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            cubit.isEmail ? AppAssets.phone : AppAssets.email,
-                          ),
-                          widthSpace(10.w),
-                          Text(
-                            cubit.isEmail
-                                ? "استمر عبر رقم الجوال"
-                                : "استمر عبر البريد الإلكتروني",
-                            style: AppTextStyles.textStyle16.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.blackTextEighthColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // heightSpace(48.h),
+                    // Row(
+                    //   children: [
+                    //     Expanded(child: Divider(color: AppColors.strokeColor)),
+                    //     Padding(
+                    //       padding: EdgeInsets.symmetric(horizontal: 30.w),
+                    //       child: Text(
+                    //         "أو",
+                    //         style: AppTextStyles.textStyle16.copyWith(
+                    //           fontWeight: FontWeight.w500,
+                    //           color: AppColors.hintColor,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Expanded(child: Divider(color: AppColors.strokeColor)),
+                    //   ],
+                    // ),
+                    // heightSpace(48.h),
+                    // CustomButton(
+                    //   onPressed: () {
+                    //     cubit.toggleCredentialType();
+                    //   },
+                    //   borderSide: BorderSide(color: AppColors.strokeColor),
+                    //   backgroundColor: AppColors.transparentColor,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       SvgPicture.asset(
+                    //         cubit.isEmail ? AppAssets.phone : AppAssets.email,
+                    //       ),
+                    //       widthSpace(10.w),
+                    //       Text(
+                    //         cubit.isEmail
+                    //             ? "استمر عبر رقم الجوال"
+                    //             : "استمر عبر البريد الإلكتروني",
+                    //         style: AppTextStyles.textStyle16.copyWith(
+                    //           fontWeight: FontWeight.w500,
+                    //           color: AppColors.blackTextEighthColor,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

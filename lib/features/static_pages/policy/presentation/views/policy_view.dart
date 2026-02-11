@@ -9,8 +9,9 @@ class PolicyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: CustomAppBar(title: LocaleKeys.about.tr()),
-      body:  CustomPolicyBodyWidget());
+    return Scaffold(
+      appBar: CustomAppBar(title: LocaleKeys.privacyPolicy.tr()),
+      body: CustomPolicyBodyWidget(),
+    );
   }
 }

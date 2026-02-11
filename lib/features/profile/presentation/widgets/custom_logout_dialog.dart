@@ -7,6 +7,8 @@ import '../../../../../core/constants/app_colors.dart';
 
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
+import '../../../../core/util/extensions/navigation.dart';
+import '../../../../core/util/extensions/on_tap.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -37,15 +39,20 @@ class CustomLogoutDialog extends StatelessWidget {
           children: [
             Align(
               alignment: AlignmentDirectional.topStart,
-              child: SvgPicture.asset(
-                AppAssets.close,
-                width: 24.w,
-                height: 24.h,
-              ),
+              child:
+                  SvgPicture.asset(
+                    AppAssets.close,
+                    width: 24.w,
+                    height: 24.h,
+                  ).onTap(
+                    function: () {
+                      context.pop();
+                    },
+                  ),
             ),
             heightSpace(31.h),
             Text(
-              "هل تريد تسجيل الخروج؟",
+              LocaleKeys.sureLogout.tr(),
               style: AppTextStyles.textStyle20.copyWith(
                 fontWeight: FontWeight.w500,
               ),

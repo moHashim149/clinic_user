@@ -26,7 +26,12 @@ class CustomInputCreateAccWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomProfilePickerWidget(pickImage: () {}),
+          CustomProfilePickerWidget(
+            pickedImage: cubit.userImage,
+            pickImage: () {
+              cubit.pickImage();
+            },
+          ),
           heightSpace(15.h),
           Text(
             LocaleKeys.fullName.tr(),
@@ -47,7 +52,7 @@ class CustomInputCreateAccWidget extends StatelessWidget {
               color: AppColors.blackTextEighthColor,
             ),
             ctrl: cubit.fullNameCtrl,
-            validator: AppValidator.fullEmailValidator,
+            validator: AppValidator.nameValidator,
             hintText: LocaleKeys.enterFullName.tr(),
           ),
           heightSpace(24.h),

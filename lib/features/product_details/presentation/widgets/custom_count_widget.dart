@@ -17,8 +17,7 @@ class CustomCountWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final TextStyle? countTextStyle;
 
-  const CustomCountWidget(
-     {
+  const CustomCountWidget({
     super.key,
     required this.quantity,
     required this.plusOnTap,
@@ -28,7 +27,7 @@ class CustomCountWidget extends StatelessWidget {
     this.iconWidth,
     this.iconHeight,
     this.height,
-     this.countTextStyle,
+    this.countTextStyle,
     this.radius,
     this.padding,
     this.countHorizontalMargin,
@@ -62,10 +61,10 @@ class CustomCountWidget extends StatelessWidget {
               horizontal: countHorizontalMargin ?? 24.w,
             ),
             child: Text(
-              "1",
+              "$quantity",
               style:
                   countTextStyle ??
-                  AppTextStyles.textStyle14.copyWith(
+                  AppTextStyles.textStyle12.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),

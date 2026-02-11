@@ -14,5 +14,11 @@ class DataFailure extends WomenState {
   DataFailure({required this.error});
 }
 
+class FavLoading extends WomenState {}
+class FavLoaded extends WomenState {}
+class FavFailure extends WomenState {}
+
+
+
 
 

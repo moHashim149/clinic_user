@@ -8,11 +8,9 @@ part of 'create_acc_param.dart';
 
 Map<String, dynamic> _$CreateAccParamToJson(CreateAccParam instance) =>
     <String, dynamic>{
-      'f_name': instance.firstName,
-      'l_name': instance.lastName,
-      'phone': instance.phone,
-      'whatsapp': instance.whatsapp,
-      'device_key': instance.deviceKey,
+      'name': instance.name,
+      'phone': ?instance.phone,
+      'fcm_token': instance.fcmToken,
       'city_id': instance.cityId,
-      'img': CreateAccParam._multipartFileToJson(instance.image),
+      'image': ?CreateAccParam._multipartFileToJson(instance.image),
     };

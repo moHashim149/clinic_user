@@ -1,3 +1,5 @@
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,7 +12,7 @@ class CustomCartPrivacyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: EdgeInsetsDirectional.only(
         start: 14.w,
         end: 14.w,
@@ -25,40 +27,42 @@ class CustomCartPrivacyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "سياسة الاستبدال والاسترجاع",
+            LocaleKeys.returnPolicy.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           heightSpace(11.h),
           Text(
-            "شروط الاستبدال",
+            LocaleKeys.exchangeTerms.tr(),
             style: AppTextStyles.textStyle12.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppColors.greySecondaryColor
+              fontWeight: FontWeight.bold,
+              color: AppColors.greySecondaryColor,
             ),
           ),
           Text(
-            "يجب عدم اصطحاب الأطفال الى الصالون.",
+            LocaleKeys.noChildrenInSalon.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.w500,
             ),
-          ),Text(
-            "يفضل المجئ الى الصالون قبل الموعد ب 10د.",
+          ),
+          Text(
+            LocaleKeys.come10MinBefore.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
           heightSpace(18.h),
           Text(
-            "شروط الاسترجاع",
+            LocaleKeys.returnTerms.tr(),
             style: AppTextStyles.textStyle12.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppColors.greySecondaryColor
+              fontWeight: FontWeight.bold,
+              color: AppColors.greySecondaryColor,
             ),
-          ),heightSpace(9.h),
+          ),
+          heightSpace(9.h),
           Text(
-            "لايمكن الاسترجاع بعد مرور 24 ساعة على الحجز أو قبل الحجز ب 24 ساعة",
+            LocaleKeys.noReturnAfter24Hours.tr(),
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.w500,
             ),

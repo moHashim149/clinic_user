@@ -6,15 +6,14 @@ part 'send_message_param.g.dart';
 
 @JsonSerializable(createFactory: false,includeIfNull: false)
 class SendMessageParam {
-  @JsonKey(name: "receiver_id")
-  final int receiverId;
-  @JsonKey(name: "product_id")
-  final int productid;
-  final String? message;
-  @JsonKey(name: "img",toJson: _multipartFileToJson )
-  final MultipartFile? image;
 
-  SendMessageParam({required this.receiverId, required this.productid, this.message,  this.image});
+  @JsonKey(name: "chat_id")
+  final int chatId;
+  final String? message;
+  @JsonKey(toJson: _multipartFileToJson )
+  final MultipartFile? file;
+
+  SendMessageParam({required this.chatId, required this.file, this.message});
 
   static MultipartFile? _multipartFileToJson(MultipartFile? file) {
     return file;

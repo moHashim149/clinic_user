@@ -1,5 +1,4 @@
 import 'package:brandy_user/core/widgets/custom_app_bar.dart';
-import 'package:brandy_user/features/auth/data/arguments/create_acc_argument.dart';
 import 'package:brandy_user/features/auth/presentation/widgets/login_widgets/custom_header_login.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,6 @@ import '../../../../../core/constants/app_text_styles.dart';
 import '../../../../../core/framework/spaces.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/locale_keys.g.dart';
-import '../../../../core/util/extensions/navigation.dart';
-import '../../../../core/util/routing/routes.dart';
 import '../../data/arguments/pin_code_argument.dart';
 import '../cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../widgets/pin_code_widgets/custom_code_sent_success_widget.dart';
@@ -38,17 +35,16 @@ class PinCodeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomAuthHeader(
-                    title: "أدخل رمز التحقق",
-                    body: "لقد قمنا بإرسال كود التحقق الى",
+                    title: LocaleKeys.enterVerificationCodeTitle.tr(),
+                    body: LocaleKeys.verificationCodeSentTo.tr(),
                   ),
                   heightSpace(8.h),
                   CustomCodeSentSuccessWidget(
-                    credential: argument.credential,
-                    isEmail: argument.isEmail,
+                    phone: argument.phone,
                   ),
                   heightSpace(32.h),
                   Text(
-                    "أدخل الرقم المكون من 4 أرقام",
+                    LocaleKeys.enter4DigitCode.tr(),
                     style: AppTextStyles.textStyle14.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.blackTextEighthColor,
@@ -59,13 +55,10 @@ class PinCodeView extends StatelessWidget {
                     controller: cubit.pinCtrl,
                     formKey: cubit.formKey,
                     onSubmitted: (value) {
-                      // cubit.checkOtp(
-                      //   context: context,
-                      //   param: CheckOtpParam(
-                      //     phone: argument.phone,
-                      //     otp: value!,
-                      //   ),
-                      // );
+                      cubit.signIn(
+                        context: context,
+                        phone: argument.phone,
+                      );
                     },
                   ),
                   heightSpace(24.h),
@@ -74,14 +67,10 @@ class PinCodeView extends StatelessWidget {
                   CustomButton(
                     onPressed: () {
                       if (cubit.formKey.currentState!.validate()) {
-                        // cubit.checkOtp(
-                        //   context: context,
-                        //   param: CheckOtpParam(
-                        //     phone: argument.phone,
-                        //     otp: cubit.pinCtrl.text,
-                        //   ),
-                        // );
-                        context.pushWithNamed(Routes.createAccountView,arguments: CreateAccArgument(credential: argument.credential));
+                        cubit.signIn(
+                          context: context,
+                          phone: argument.phone,
+                        );
                       }
                     },
                     isLoading: state is PinCodeLoading,

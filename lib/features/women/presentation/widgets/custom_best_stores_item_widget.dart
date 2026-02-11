@@ -9,7 +9,7 @@ import '../../../../core/util/extensions/on_tap.dart';
 import '../../../../core/widgets/custom_image_network.dart';
 
 class CustomBestStoresItemWidget extends StatelessWidget {
-  final String storeName, time, storeImage, delivery;
+  final String storeName, time, storeImage, deliveryCost;
   final VoidCallback onTap;
 
   const CustomBestStoresItemWidget({
@@ -17,7 +17,7 @@ class CustomBestStoresItemWidget extends StatelessWidget {
     required this.storeName,
     required this.storeImage,
     required this.time,
-    required this.delivery,
+    required this.deliveryCost,
     required this.onTap,
   });
 
@@ -67,7 +67,7 @@ class CustomBestStoresItemWidget extends StatelessWidget {
                       SvgPicture.asset(AppAssets.delivery),
                       widthSpace(2.w),
                       Text(
-                        delivery,
+                        deliveryCost,
                         style: AppTextStyles.textStyle8.copyWith(
                           fontWeight: FontWeight.w500,
                           color: AppColors.hintColor,

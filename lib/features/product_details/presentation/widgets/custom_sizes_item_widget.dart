@@ -8,25 +8,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/app_text_styles.dart';
 
 class CustomSizesItemWidget extends StatelessWidget {
-  const CustomSizesItemWidget({super.key});
+  final String size;
+  final VoidCallback onTap;
+  final bool isSelected;
+  const CustomSizesItemWidget({super.key, required this.size, required this.onTap, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 33.h,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.grayTenthColor),
+        color: isSelected ? AppColors.primaryColor : null,
+        border: isSelected ? null : Border.all(color: AppColors.grayTenthColor),
         borderRadius: BorderRadius.circular(24.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Center(
         child: Text(
-          "SM",
+          size,
           style: AppTextStyles.textStyle16.copyWith(
             fontWeight: FontWeight.bold,
+            color: isSelected ? AppColors.whiteColor : null,
           ),
         ),
       ),
-    );
+    ).onTap(function: onTap);
   }
 }

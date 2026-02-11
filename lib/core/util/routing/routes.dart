@@ -19,4 +19,8 @@ class Routes {
   static const String termsView = '/termsView';
   static const String editProfileView = '/editProfileView';
   static const String languageView = '/languageView';
+  static const String addressesView = '/addressesView';
+  static const String selectAddressView = '/selectAddressView';
+  static const String storiesView = '/storiesView';
+
 }

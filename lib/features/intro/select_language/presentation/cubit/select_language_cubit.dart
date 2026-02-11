@@ -26,6 +26,6 @@ class SelectLanguageCubit extends Cubit<SelectLanguageState> {
     context.setLocale(Locale(selectedIndex == 0 ? 'ar' : "en"));
     appPref.saveData(AppCached.lang, selectedIndex == 0 ? 'ar' : "en");
     appPref.saveData(AppCached.isFirst, true);
-    context.pushWithNamed(Routes.bottomNavView);
+    context.pushAndRemoveUntilWithNamed(Routes.bottomNavView);
   }
 }

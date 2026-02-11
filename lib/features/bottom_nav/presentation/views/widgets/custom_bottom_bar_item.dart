@@ -49,26 +49,25 @@ class CustomBottomBarItem extends StatelessWidget {
         if (cubit.token != null) {
           cubit.changeNavIndex(index: index);
         } else {
-          cubit.changeNavIndex(index: index);
-          // if (index == 3) {
-          //   if (context.mounted) {
-          //     showModalBottomSheet(
-          //       context: context,
-          //       isScrollControlled: true,
-          //       backgroundColor: AppColors.whiteColor,
-          //       shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.vertical(
-          //           top: Radius.circular(24.r),
-          //         ),
-          //       ),
-          //       builder: (context) {
-          //         return CustomVisitorWidget();
-          //       },
-          //     );
-          //   }
-          // } else {
-          //   cubit.changeNavIndex(index: index);
-          // }
+          if (index == 3) {
+            if (context.mounted) {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: AppColors.whiteColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(24.r),
+                  ),
+                ),
+                builder: (context) {
+                  return CustomVisitorWidget();
+                },
+              );
+            }
+          } else {
+            cubit.changeNavIndex(index: index);
+          }
         }
       },
     );

@@ -28,5 +28,6 @@ class CustomRoundedIconWidget extends StatelessWidget {
       ),
       child: SvgPicture.asset(icon),
     ).onTap(function: onTap);
+
   }
 }

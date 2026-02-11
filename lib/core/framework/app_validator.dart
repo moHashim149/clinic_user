@@ -21,6 +21,13 @@ class AppValidator {
     return null;
   }
 
+  static String? addressNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.pleaseEnterAddressName.tr();
+    }
+    return null;
+  }
+
   static String? fullEmailValidator(String? value) {
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
     if (value == null || value.isEmpty) {
@@ -145,12 +152,11 @@ class AppValidator {
   }
 
   static String? reportReasonValidator(String? value) {
-
-      if (value == null || value.isEmpty) {
-        return LocaleKeys.emptyReportReason.tr();
-      }
-      return null;
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.emptyReportReason.tr();
     }
+    return null;
+  }
 
   static String? cityValidator(CityModel? value) {
     if (value == null) {
@@ -159,4 +165,10 @@ class AppValidator {
     return null;
   }
 
+  static String? addBalanceValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.emptyChargeAmount.tr();
+    }
+    return null;
+  }
 }

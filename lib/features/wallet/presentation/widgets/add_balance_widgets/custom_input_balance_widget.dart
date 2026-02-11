@@ -1,6 +1,9 @@
 import 'package:brandy_user/core/constants/app_assets.dart';
 import 'package:brandy_user/core/constants/app_colors.dart';
 import 'package:brandy_user/core/constants/app_text_styles.dart';
+import 'package:brandy_user/core/framework/app_validator.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,23 +19,27 @@ class CustomInputBalanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
-      hintText: "أدخل قيمة الشحن",
-      ctrl: cubit.balanceCtrl,
-      hintStyle: AppTextStyles.textStyle12.copyWith(
-        fontWeight: FontWeight.w600,
-        color: AppColors.grayColor,
+    return Form(
+      key: cubit.formKey,
+      child: CustomTextFormField(
+        hintText: LocaleKeys.enterChargeAmount.tr(),
+        ctrl: cubit.balanceCtrl,
+        hintStyle: AppTextStyles.textStyle12.copyWith(
+          fontWeight: FontWeight.w600,
+          color: AppColors.grayColor,
+        ),
+        validator: AppValidator.addBalanceValidator,
+        borderRadiusValue: 8.r,
+        borderColor: AppColors.strokeSecondaryColor,
+        suffixIcon: SvgPicture.asset(
+          AppAssets.currency,
+          width: 18.w,
+          height: 20.h,
+          fit: BoxFit.scaleDown,
+        ),
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
       ),
-      borderRadiusValue: 8.r,
-      borderColor: AppColors.strokeSecondaryColor,
-      suffixIcon: SvgPicture.asset(
-        AppAssets.currency,
-        width: 18.w,
-        height: 20.h,
-        fit: BoxFit.scaleDown,
-      ),
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
     );
   }
 }

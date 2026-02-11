@@ -1,4 +1,6 @@
 import 'package:brandy_user/features/product_details/presentation/widgets/custom_count_widget.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,8 +12,21 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/widgets/custom_button.dart';
 
 class CustomAddToCartWidget extends StatelessWidget {
-
-  const CustomAddToCartWidget({super.key});
+  final int quantity;
+  final void Function() plusOnTap;
+  final void Function() minusOnTap;
+  final void Function() onTap;
+  final bool onTapLoading;
+  final num price;
+  const CustomAddToCartWidget({
+    super.key,
+    required this.quantity,
+    required this.plusOnTap,
+    required this.minusOnTap,
+    required this.price,
+    required this.onTap,
+    required this.onTapLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +38,37 @@ class CustomAddToCartWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CustomCountWidget(quantity: 1, plusOnTap: (){}, minusOnTap: (){}, deleteOnTap: (){}, showDelete: false),
-          widthSpace(32.w),
+          CustomCountWidget(
+            quantity: quantity,
+            plusOnTap: plusOnTap,
+            minusOnTap: minusOnTap,
+            deleteOnTap: () {},
+            showDelete: false,
+          ),
+          widthSpace(5.w),
           Expanded(
             child: CustomButton(
-              onPressed: () {},
+              onPressed: onTap,
+              isLoading: onTapLoading,
               height: 43.h,
               borderRadius: BorderRadius.circular(40.r),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 29.5.w),
                 child: Row(
                   children: [
-                    Text(
-                      "أضف الى السلة",
-                      style: AppTextStyles.textStyle14.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.whiteColor,
+                    Expanded(
+                      child: Text(
+                        LocaleKeys.addToCart.tr(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.textStyle14.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.whiteColor,
+                        ),
                       ),
                     ),
-                    Spacer(),
                     Text(
-                      "25",
+                      "${price * quantity}",
                       style: AppTextStyles.textStyle16.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.whiteColor,

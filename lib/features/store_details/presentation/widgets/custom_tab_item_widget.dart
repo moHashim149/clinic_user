@@ -1,3 +1,4 @@
+import 'package:brandy_user/core/util/extensions/on_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +8,8 @@ import '../../../../core/constants/app_text_styles.dart';
 class CustomTabItemWidget extends StatelessWidget {
   final bool isActive;
   final String title;
-  const CustomTabItemWidget({super.key, required this.isActive, required this.title});
+  final VoidCallback onTap;
+  const CustomTabItemWidget({super.key, required this.isActive, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,6 @@ class CustomTabItemWidget extends StatelessWidget {
               : AppColors.hintColor,
         ),
       ),
-    );
+    ).onTap(function: onTap);
   }
 }

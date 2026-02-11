@@ -7,22 +7,18 @@ part 'message_model.g.dart';
 @JsonSerializable(createToJson: false,includeIfNull: false)
 class MessageModel {
   final int id;
-  final UserModel sender,receiver;
-  final String message,type,key;
-  @JsonKey(name: "is_seen")
-  final bool isSeen;
+  final String? message,image;
+  @JsonKey(name: "view_type")
+  final String viewType;
   @JsonKey(name: "created_at")
   final String createdAt;
 
   MessageModel({
     required this.id,
-    required this.sender,
-    required this.message,
-    required this.type,
-    required this.isSeen,
+    this.message,
+    this.image,
+    required this.viewType,
     required this.createdAt,
-    required this.receiver,
-    required this.key,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
