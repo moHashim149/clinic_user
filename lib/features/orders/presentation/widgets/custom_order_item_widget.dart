@@ -90,7 +90,7 @@ class CustomOrderItemWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                "${orderModel.orderItems.first.price == 0 ? orderModel.orderItems.first.price : orderModel.orderItems.first.priceAfterDiscount}",
+                "${orderModel.orderItems.first.priceAfterDiscount == 0 ? orderModel.orderItems.first.price : orderModel.orderItems.first.priceAfterDiscount}",
                 style: AppTextStyles.textStyle10.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

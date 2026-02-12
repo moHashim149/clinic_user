@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/features/cart/data/arguments/cart_arguments.dart';
 import 'package:brandy_user/features/orders/data/models/order_model.dart';
 import 'package:brandy_user/features/orders/data/repository/orders_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,7 +106,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       (message) {
         showToast(text: message, state: ToastStates.success);
         emit(ReOrderLoaded());
-        context.pushWithNamed(Routes.cartView);
+        context.pushWithNamed(Routes.cartView,arguments: CartArguments());
       },
     );
   }

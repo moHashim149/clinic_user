@@ -54,16 +54,6 @@ class CustomBestStoresItemWidget extends StatelessWidget {
                   heightSpace(6.h),
                   Row(
                     children: [
-                      SvgPicture.asset(AppAssets.time),
-                      widthSpace(2.w),
-                      Text(
-                        time,
-                        style: AppTextStyles.textStyle8.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.hintColor,
-                        ),
-                      ),
-                      widthSpace(8.w),
                       SvgPicture.asset(AppAssets.delivery),
                       widthSpace(2.w),
                       Text(

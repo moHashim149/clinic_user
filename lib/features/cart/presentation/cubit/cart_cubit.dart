@@ -57,7 +57,7 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> updateCart(CartItemModel cartItemModel, bool isIncrement) async {
+  Future<void> updateCart(CartItemModel cartItemModel, bool isIncrement,VoidCallback? onUpdate) async {
     if (isIncrement) {
       cartItemModel.count = cartItemModel.count + 1;
       cartModel!.itemsTotal += cartItemModel.priceAfterDiscount == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount;
@@ -75,6 +75,9 @@ class CartCubit extends Cubit<CartState> {
         emit(UpdateCartFailure());
       },
       (message) {
+        if(onUpdate != null) {
+          onUpdate();
+        }
         emit(UpdateCartLoaded());
       },
     );
@@ -82,7 +85,8 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> deleteCart(
     CartItemModel cartItemModel,
-    BuildContext context,
+    BuildContext context
+  ,VoidCallback? onUpdate
   ) async {
     emit(DeleteCartLoading());
     final result = await cartRepository.removeFromCart(
@@ -97,6 +101,9 @@ class CartCubit extends Cubit<CartState> {
         cartModel!.orderItems.remove(cartItemModel);
         cartModel!.itemsTotal = cartModel!.itemsTotal - 1;
         cartModel!.grandTotal = cartModel!.grandTotal - cartItemModel.total;
+        if(onUpdate != null) {
+          onUpdate();
+        }
         emit(DeleteCartLoaded());
       },
     );

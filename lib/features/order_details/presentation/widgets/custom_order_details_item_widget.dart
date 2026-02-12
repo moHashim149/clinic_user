@@ -15,15 +15,12 @@ class CustomOrderDetailsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       decoration: BoxDecoration(
         color: AppColors.secondary4Color,
         borderRadius: BorderRadius.circular(16.r),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 14.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
       margin: EdgeInsets.only(bottom: 16.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,9 +30,7 @@ class CustomOrderDetailsItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  cartItemModel
-                      .product
-                      .name,
+                  cartItemModel.product.name,
                   style: AppTextStyles.textStyle14.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppColors.blackTextEighthColor,
@@ -45,7 +40,7 @@ class CustomOrderDetailsItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${cartItemModel.price == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount}",
+                      "${cartItemModel.priceAfterDiscount == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount}",
                       style: AppTextStyles.textStyle12.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -71,11 +66,7 @@ class CustomOrderDetailsItemWidget extends StatelessWidget {
           ),
           widthSpace(7.w),
           CustomImageNetwork(
-            image:
-            cartItemModel
-                .product
-                .image ??
-                "",
+            image: cartItemModel.product.image ?? "",
             radiusValue: 8.r,
             heightImage: 62.h,
             widthImage: 73.w,

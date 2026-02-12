@@ -38,6 +38,7 @@ import '../../../features/auth/presentation/views/pin_code_view.dart';
 import '../../../features/auth/presentation/views/sign_in_view.dart';
 import '../../../features/bottom_nav/presentation/cubit/bottom_nav_cubit.dart';
 import '../../../features/bottom_nav/presentation/views/bottom_nav_view.dart';
+import '../../../features/cart/data/arguments/cart_arguments.dart';
 import '../../../features/chat/data/arguments/chat_arguments.dart';
 import '../../../features/edit_profile/presentation/views/edit_profile_view.dart';
 import '../../../features/intro/select_language/presentation/cubit/select_language_cubit.dart';
@@ -115,10 +116,13 @@ class AppRouter {
           ),
         );
       case Routes.cartView:
+        var args = arguments as CartArguments;
         return _buildRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<CartCubit>()..fetchCart(),
-            child: CartView(),
+            child: CartView(
+              cartArguments: args,
+            ),
           ),
         );
       case Routes.paymentMethodsView:

@@ -183,5 +183,6 @@
   "delivered": "Delivered",
   "cancelled": "Cancelled",
   "rejected": "Rejected",
-  "all" : "All"
+  "all" : "All",
+  "youMustAddAddress" : "You must add address"
 }

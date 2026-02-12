@@ -1,3 +1,9 @@
+import 'package:brandy_user/core/util/extensions/navigation.dart';
+import 'package:brandy_user/core/util/extensions/on_tap.dart';
+import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/features/addresses/data/arguments/select_address_argument.dart';
+import 'package:brandy_user/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,8 +15,9 @@ import '../../../../core/framework/spaces.dart';
 import '../../../addresses/data/models/address_model.dart';
 
 class CustomCartAddressWidget extends StatelessWidget {
-  final AddressModel addressModel;
-  const CustomCartAddressWidget({super.key, required this.addressModel});
+  final AddressModel? addressModel;
+  final VoidCallback onUpdate;
+  const CustomCartAddressWidget({super.key, required this.addressModel, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class CustomCartAddressWidget extends StatelessWidget {
               widthSpace(10.w),
               Expanded(
                 child: Text(
-                  addressModel.name,
+                  addressModel?.name ?? LocaleKeys.addNewAddress.tr(),
                   style: AppTextStyles.textStyle14.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -47,7 +54,7 @@ class CustomCartAddressWidget extends StatelessWidget {
             ],
           ),
           Text(
-            addressModel.location,
+            addressModel?.location ?? "",
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.w500,
               color: AppColors.hintColor,
@@ -55,6 +62,10 @@ class CustomCartAddressWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).onTap(function: (){
+      if(addressModel == null){
+        context.pushWithNamed(Routes.selectAddressView,arguments: SelectAddressArgument(onUpdate: onUpdate));
+      }
+    });
   }
 }

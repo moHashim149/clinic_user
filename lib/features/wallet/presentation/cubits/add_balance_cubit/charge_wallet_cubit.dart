@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -34,7 +36,9 @@ class ChargeWalletCubit extends Cubit<ChargeWalletState> {
       payments,
     ) {
       this.payments = payments
-          .where((element) => element.id == 4 || element.id == 3)
+          .where(
+            (element) => element.id == 4 || (element.id == 3 && Platform.isIOS),
+          )
           .toList();
       currentPayment = this.payments.first;
       emit(PaymentsSuccess());

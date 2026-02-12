@@ -14,14 +14,11 @@ import '../../../../core/framework/spaces.dart';
 import '../../../../core/widgets/custom_button.dart';
 
 class CustomCartPayWidget extends StatelessWidget {
-  final int locationId;
-  final String? couponCode;
-  final num total;
+  final VoidCallback onTap;
+
   const CustomCartPayWidget({
     super.key,
-    required this.locationId,
-    this.couponCode,
-    required this.total,
+    required this.onTap,
   });
 
   @override
@@ -70,16 +67,7 @@ class CustomCartPayWidget extends StatelessWidget {
           CustomButton(
             width: 138.w,
             height: 36.h,
-            onPressed: () {
-              context.pushWithNamed(
-                Routes.paymentMethodsView,
-                arguments: PaymentMethodsArguments(
-                  locationId: locationId,
-                  total: total,
-                  couponCode: couponCode,
-                ),
-              );
-            },
+            onPressed: onTap,
             style: AppTextStyles.textStyle12.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.secondary4Color,

@@ -136,20 +136,18 @@ class CustomStoreHeaderWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 18.w),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CustomStoreDetailsItemWidget(
-                        icon: AppAssets.timer,
-                        title: LocaleKeys.deliveryTime.tr(),
-                        body: storeModel.deliveryTime ?? "",
-                      ),
-                      VerticalDivider(color: AppColors.greyColor, width: 1),
                       CustomStoreDetailsItemWidget(
                         icon: AppAssets.time,
                         title: LocaleKeys.workingHours.tr(),
                         body: storeModel.workingHours ?? "",
                       ),
-                      VerticalDivider(color: AppColors.greyColor, width: 1),
+                      Container(
+                        width: 1.w,
+                        height: 24.h,
+                        color: AppColors.greyColor,
+                      ),
                       CustomStoreDetailsItemWidget(
                         icon: AppAssets.location,
                         title: LocaleKeys.distance.tr(),

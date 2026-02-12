@@ -1,5 +1,6 @@
 import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/features/cart/data/arguments/cart_arguments.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ import '../../../../core/widgets/custom_button.dart';
 class CustomCartCountWidget extends StatelessWidget {
   final int count;
   final num totalPrice;
-  const CustomCartCountWidget({super.key, required this.count, required this.totalPrice});
+  final VoidCallback onUpdate;
+
+  const CustomCartCountWidget({super.key, required this.count, required this.totalPrice, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class CustomCartCountWidget extends StatelessWidget {
       ),
       child: CustomButton(
         onPressed: () {
-          context.pushWithNamed(Routes.cartView);
+          context.pushWithNamed(Routes.cartView,arguments: CartArguments(onUpdate: onUpdate));
         },
         borderRadius: BorderRadius.circular(40.r),
         child: Padding(

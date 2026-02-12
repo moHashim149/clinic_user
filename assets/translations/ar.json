@@ -183,5 +183,6 @@
   "delivered": "تم التوصيل",
   "cancelled": "ملغي",
   "rejected": "مرفوض",
-  "all" : "الكل"
+  "all" : "الكل",
+  "youMustAddAddress" : "يجب اضافة عنوان"
 }

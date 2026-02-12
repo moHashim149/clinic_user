@@ -188,5 +188,6 @@ abstract class  LocaleKeys {
   static const cancelled = 'cancelled';
   static const rejected = 'rejected';
   static const all = 'all';
+  static const youMustAddAddress = 'youMustAddAddress';
 
 }

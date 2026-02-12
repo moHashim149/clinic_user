@@ -27,10 +27,14 @@ class StoreDetailsView extends StatelessWidget {
         BlocBuilder<StoreDetailsCubit, StoreDetailsState>(
           builder: (context, state) {
             var cubit = context.read<StoreDetailsCubit>();
-            if ((cubit.cartModel?.orderItems.isNotEmpty ?? false) && cubit.token != null) {
+            if ((cubit.cartModel?.orderItems.isNotEmpty ?? false) &&
+                cubit.token != null) {
               return CustomCartCountWidget(
                 count: cubit.cartModel!.orderItems.length,
                 totalPrice: cubit.cartModel!.itemsTotal,
+                onUpdate: () {
+                  cubit.fetchCart();
+                },
               );
             } else {
               return SizedBox();
