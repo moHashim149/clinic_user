@@ -27,7 +27,7 @@ class CustomLogoutWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 20.h),
       child: CustomProfileItemWidget(
         icon: AppAssets.logout,
-        title: isAuth ? LocaleKeys.logout.tr() : LocaleKeys.login.tr(),
+        title: isAuth ? LocaleKeys.logout : LocaleKeys.login,
         onTap: () {
           if (isAuth) {
             showDialog(
@@ -44,7 +44,7 @@ class CustomLogoutWidget extends StatelessWidget {
                           cubit.logOut(context: context);
                         },
                       );
-                    },
+                    }, 
                   ),
                 );
               },

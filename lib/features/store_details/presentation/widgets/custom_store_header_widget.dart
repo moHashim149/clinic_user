@@ -9,6 +9,7 @@ import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_shadows.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
+import '../../../../core/util/extensions/directionality.dart';
 import '../../../../core/util/extensions/media_query.dart';
 import '../../../../core/util/extensions/navigation.dart';
 import '../../../../core/widgets/custom_image_network.dart';
@@ -39,11 +40,16 @@ class CustomStoreHeaderWidget extends StatelessWidget {
           start: 24.w,
           top: 8.h,
           child: SafeArea(
-            child: CustomRoundedIconWidget(
-              onTap: () {
-                context.pop();
-              },
-              icon: AppAssets.smallArrowBack,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..scale(context.isArabic ? 1.0 : -1.0, 1.0),
+              child: CustomRoundedIconWidget(
+                onTap: () {
+                  context.pop();
+                },
+                icon: AppAssets.smallArrowBack,
+              ),
             ),
           ),
         ),

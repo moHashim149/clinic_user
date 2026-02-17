@@ -25,7 +25,7 @@ class CustomProfilePolicyWidget extends StatelessWidget {
         children: [
           CustomProfileItemWidget(
             icon: AppAssets.policy,
-            title: LocaleKeys.privacyPolicy.tr(),
+            title: LocaleKeys.privacyPolicy,
             onTap: () {
               context.pushWithNamed(Routes.policyView);
             },
@@ -33,7 +33,7 @@ class CustomProfilePolicyWidget extends StatelessWidget {
           heightSpace(20.h),
           CustomProfileItemWidget(
             icon: AppAssets.terms,
-            title: LocaleKeys.terms.tr(),
+            title: LocaleKeys.terms,
             onTap: () {
               context.pushWithNamed(Routes.termsView);
             },

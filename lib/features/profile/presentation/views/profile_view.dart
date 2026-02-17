@@ -61,7 +61,9 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                     heightSpace(8.h),
-                    CustomProfileSettingsWidget(isAuth: cubit.token != null),
+                    CustomProfileSettingsWidget(isAuth: cubit.token != null,onUpdate: () {
+                      cubit.updateUi();
+                    },),
                     heightSpace(24.h),
                     Text(
                       LocaleKeys.contactAndShare.tr(),

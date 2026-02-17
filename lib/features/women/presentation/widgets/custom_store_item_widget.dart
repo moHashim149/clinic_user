@@ -90,11 +90,13 @@ class CustomStoreItemWidget extends StatelessWidget {
                     height: 14.h,
                   ),
                   widthSpace(4.w),
-                  Text(
-                    storeLocation,
-                    style: AppTextStyles.textStyle8.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blackTextNinthColor,
+                  Expanded(
+                    child: Text(
+                      storeLocation,
+                      style: AppTextStyles.textStyle8.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blackTextNinthColor,
+                      ),
                     ),
                   ),
                   if (distance != 0) ...[

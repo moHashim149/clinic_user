@@ -10,6 +10,7 @@ import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_text_styles.dart';
 import '../../../../core/framework/spaces.dart';
+import '../../../../core/util/extensions/directionality.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
 class CustomCartCouponFieldWidget extends StatelessWidget {
@@ -59,10 +60,15 @@ class CustomCartCouponFieldWidget extends StatelessWidget {
                     showText: false,
                   ),
                 )
-              : SvgPicture.asset(
-                  !isCouponApplied ? AppAssets.arrowForward : AppAssets.cancel,
-                  fit: BoxFit.scaleDown,
-                ).onTap(function: onTap),
+              : Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.identity()
+              ..scale(context.isArabic ? 1.0 : -1.0, 1.0),
+                child: SvgPicture.asset(
+                    !isCouponApplied ? AppAssets.arrowForward : AppAssets.cancel,
+                    fit: BoxFit.scaleDown,
+                  ).onTap(function: onTap),
+              ),
         ),
       ],
     );

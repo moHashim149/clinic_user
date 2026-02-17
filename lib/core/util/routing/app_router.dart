@@ -45,6 +45,7 @@ import '../../../features/intro/select_language/presentation/cubit/select_langua
 import '../../../features/intro/select_language/presentation/views/select_language_view.dart';
 import '../../../features/intro/splash/presentation/cubit/splash_cubit.dart';
 import '../../../features/intro/splash/presentation/views/splash_view.dart';
+import '../../../features/language/data/arguments/language_arguments.dart';
 import '../../../features/language/presentation/views/language_view.dart';
 import '../../../features/order_details/data/arguments/order_details_arguments.dart';
 import '../../../features/payment_methods/data/data_source/arguments/payment_methods_arguments.dart';
@@ -120,9 +121,7 @@ class AppRouter {
         return _buildRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<CartCubit>()..fetchCart(),
-            child: CartView(
-              cartArguments: args,
-            ),
+            child: CartView(cartArguments: args),
           ),
         );
       case Routes.paymentMethodsView:
@@ -170,7 +169,8 @@ class AppRouter {
         final chatArguments = arguments as ChatArguments;
         return _buildRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<ChatCubit>()..fetchChat(chatArguments.chatId),
+            create: (context) =>
+                getIt<ChatCubit>()..fetchChat(chatArguments.chatId),
             child: ChatView(chatArguments: chatArguments),
           ),
         );
@@ -182,10 +182,11 @@ class AppRouter {
           ),
         );
       case Routes.languageView:
+        var args = arguments as LanguageArguments;
         return _buildRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<LanguageCubit>(),
-            child: LanguageView(),
+            child: LanguageView(arguments: args),
           ),
         );
       case Routes.storiesView:

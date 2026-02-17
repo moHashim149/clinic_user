@@ -4,6 +4,7 @@ import 'package:brandy_user/core/constants/app_text_styles.dart';
 import 'package:brandy_user/core/framework/spaces.dart';
 import 'package:brandy_user/core/util/extensions/on_tap.dart';
 import 'package:brandy_user/core/widgets/custom_app_bar.dart';
+import 'package:brandy_user/features/language/data/arguments/language_arguments.dart';
 import 'package:brandy_user/features/language/presentation/cubit/language_cubit.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,7 +15,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/custom_language_header_widget.dart';
 
 class LanguageView extends StatefulWidget {
-  const LanguageView({super.key});
+  final LanguageArguments arguments;
+  const LanguageView({super.key, required this.arguments});
 
   @override
   State<LanguageView> createState() => _LanguageViewState();
@@ -67,7 +69,7 @@ class _LanguageViewState extends State<LanguageView> {
                         ],
                       ).onTap(
                         function: () {
-                          cubit.saveChanges(context, 0);
+                          cubit.saveChanges(context, 0, widget.arguments);
                         },
                       ),
                       Spacer(),
@@ -91,7 +93,7 @@ class _LanguageViewState extends State<LanguageView> {
                         ],
                       ).onTap(
                         function: () {
-                          cubit.saveChanges(context, 1);
+                          cubit.saveChanges(context, 1, widget.arguments);
                         },
                       ),
                     ],

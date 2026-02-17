@@ -72,7 +72,7 @@ class CustomWalletTransactionItemWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "+$balance",
+                  "$balance",
                   style: AppTextStyles.textStyle12.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

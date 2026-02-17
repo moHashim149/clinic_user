@@ -1,3 +1,4 @@
+import 'package:brandy_user/features/language/data/arguments/language_arguments.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ import 'custom_profile_item_widget.dart';
 
 class CustomProfileSettingsWidget extends StatelessWidget {
   final bool isAuth;
-  const CustomProfileSettingsWidget({super.key, required this.isAuth});
+  final VoidCallback onUpdate;
+  const CustomProfileSettingsWidget({super.key, required this.isAuth, required this.onUpdate});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class CustomProfileSettingsWidget extends StatelessWidget {
           if (isAuth) ...[
             CustomProfileItemWidget(
               icon: AppAssets.mapPin,
-              title: LocaleKeys.myAddresses.tr(),
+              title: LocaleKeys.myAddresses,
               onTap: () {
                 context.pushWithNamed(Routes.addressesView);
               },
@@ -37,15 +39,15 @@ class CustomProfileSettingsWidget extends StatelessWidget {
           ],
           CustomProfileItemWidget(
             icon: AppAssets.language,
-            title: LocaleKeys.changeLanguage.tr(),
+            title: LocaleKeys.changeLanguage,
             onTap: () {
-              context.pushWithNamed(Routes.languageView);
+              context.pushWithNamed(Routes.languageView,arguments: LanguageArguments(onUpdate: onUpdate));
             },
           ),
           // heightSpace(20.h),
           // CustomProfileItemWidget(
           //   icon: AppAssets.theme,
-          //   title: LocaleKeys.darkMode.tr(),
+          //   title: LocaleKeys.darkMode,
           //   onTap: () {},
           // ),
         ],

@@ -26,7 +26,7 @@ class CustomProfileGeneralInfoWidget extends StatelessWidget {
         children: [
           CustomProfileItemWidget(
             icon: AppAssets.profile,
-            title: LocaleKeys.profileData.tr(),
+            title: LocaleKeys.profileData,
             onTap: () {
               context.pushWithNamed(Routes.editProfileView);
             },
@@ -34,7 +34,7 @@ class CustomProfileGeneralInfoWidget extends StatelessWidget {
           heightSpace(24.h),
           CustomProfileItemWidget(
             icon: AppAssets.wallet,
-            title: LocaleKeys.myWallet.tr(),
+            title: LocaleKeys.myWallet,
             onTap: () {
               context.pushWithNamed(Routes.walletView);
             },

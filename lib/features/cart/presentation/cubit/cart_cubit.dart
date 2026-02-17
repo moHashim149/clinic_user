@@ -150,9 +150,9 @@ class CartCubit extends Cubit<CartState> {
     return num.parse(couponModel!.discount.toDouble().toStringAsFixed(1));
   }
 
-  num calculateTotal(num subtotal, num deliveryCost) {
+  num calculateTotal(num subtotal, num deliveryCost,num taxAmount) {
     return num.parse(
-      (subtotal - (calculateDiscountValue(subtotal) ?? 0) + deliveryCost)
+      (subtotal - (calculateDiscountValue(subtotal) ?? 0) + deliveryCost + taxAmount)
           .toDouble()
           .toStringAsFixed(1),
     );

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:brandy_user/core/local/shared_preferences/shared_pref_services.dart';
+import 'package:brandy_user/features/language/data/arguments/language_arguments.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
@@ -26,10 +27,11 @@ class LanguageCubit extends Cubit<LanguageState> {
     emit(LanguageLoaded());
   }
 
-  void saveChanges(BuildContext context, int index) {
+  void saveChanges(BuildContext context, int index,LanguageArguments arguments) {
     String lang = index == 0 ? 'ar' : 'en';
     context.setLocale(Locale(lang));
     appPrefs.saveData(AppCached.lang, lang);
+    arguments.onUpdate();
     context.pop();
 
     emit(LanguageLoaded());

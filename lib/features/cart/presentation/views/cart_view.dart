@@ -46,6 +46,7 @@ class CartView extends StatelessWidget {
                         total: cubit.calculateTotal(
                           cubit.cartModel!.itemsTotal,
                           cubit.cartModel!.deliveryCost,
+                          cubit.cartModel!.taxAmount
                         ),
                         couponCode: cubit.couponController.text.isEmpty
                             ? null
@@ -147,7 +148,9 @@ class CartView extends StatelessWidget {
                           grandTotal: cubit.calculateTotal(
                             cubit.cartModel!.itemsTotal,
                             cubit.cartModel!.deliveryCost,
+                            cubit.cartModel!.taxAmount
                           ),
+                          tax: cubit.cartModel!.taxAmount,
                         ),
                         heightSpace(24.h),
                         CustomCartPrivacyWidget(),

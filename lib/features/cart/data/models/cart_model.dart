@@ -11,15 +11,19 @@ class CartModel  {
   num itemsTotal;
   @JsonKey(name: 'delivery_cost')
   num deliveryCost;
+  @JsonKey(name: 'tax_amount')
+  num taxAmount;
   @JsonKey(name: 'order_items')
   List<CartItemModel> orderItems;
   @JsonKey(name: 'grand_total')
   num grandTotal;
 
 
-  CartModel({required this.id,
+  CartModel({
+    required this.id,
     required this.itemsTotal,
     required this.deliveryCost,
+    required this.taxAmount,
     required this.orderItems,
     required this.grandTotal});
 

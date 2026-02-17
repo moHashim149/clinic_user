@@ -22,6 +22,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   String? get token => appPrefs.getData(key: AppCached.token);
   SettingsModel? settingsModel;
 
+  void updateUi(){
+    emit(ProfileSuccess());
+  }
+
   void logOut({required BuildContext context}) async {
     emit(LogOutLoading());
     var result = await profileRepository.logout();

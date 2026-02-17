@@ -11,13 +11,14 @@ import '../../../../core/framework/spaces.dart';
 
 class CustomCartSummaryWidget extends StatelessWidget {
   final num cartTotal, deliveryFee, discount, grandTotal;
-  final num? tax;
+  final num tax;
   const CustomCartSummaryWidget({
     super.key,
     required this.cartTotal,
     required this.deliveryFee,
     required this.discount,
-    required this.grandTotal, this.tax,
+    required this.grandTotal,
+    required this.tax,
   });
 
   @override
@@ -72,8 +73,7 @@ class CustomCartSummaryWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 20.h),
                 child: DottedLine(dashColor: AppColors.strokeColor),
               ),
-              if(tax != null)
-                ...[
+
                   CustomCartSummaryItemWidget(
                     title: LocaleKeys.tax.tr(),
                     value: tax.toString(),
@@ -83,7 +83,7 @@ class CustomCartSummaryWidget extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: DottedLine(dashColor: AppColors.strokeColor),
                   ),
-                ],
+
               CustomCartSummaryItemWidget(
                 title: LocaleKeys.grandTotal.tr(),
                 value: grandTotal.toString(),

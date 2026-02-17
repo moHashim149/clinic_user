@@ -28,7 +28,7 @@ class CustomProfileContactAndShareWidget extends StatelessWidget {
         children: [
           CustomProfileItemWidget(
             icon: AppAssets.share,
-            title: LocaleKeys.shareApp.tr(),
+            title: LocaleKeys.shareApp,
             onTap: () {
               SharePlus.instance.share(
                 ShareParams(
@@ -42,7 +42,7 @@ class CustomProfileContactAndShareWidget extends StatelessWidget {
           heightSpace(20.h),
           CustomProfileItemWidget(
             icon: AppAssets.sparkle,
-            title: LocaleKeys.rateApp.tr(),
+            title: LocaleKeys.rateApp,
             onTap: () {
               UrlLauncherHelper.openLink(
                 Platform.isIOS
