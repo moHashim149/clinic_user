@@ -89,7 +89,7 @@ class ChildView extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Text(
-                          LocaleKeys.famousWomenStores.tr(),
+                          LocaleKeys.famousChildStores.tr(),
                           style: AppTextStyles.textStyle16.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.blackTextEighthColor,

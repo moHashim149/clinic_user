@@ -102,6 +102,7 @@ abstract class  LocaleKeys {
   static const verificationCodeSentTo = 'verificationCodeSentTo';
   static const invoiceSummary = 'invoiceSummary';
   static const famousMenStores = 'famousMenStores';
+  static const famousChildStores = 'famousChildStores';
   static const km = 'km';
   static const emptyName = 'emptyName';
   static const changeLanguage = 'changeLanguage';
