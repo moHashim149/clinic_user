@@ -1,6 +1,8 @@
+import 'package:brandy_user/core/widgets/pulsing_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../generated/locale_keys.g.dart';
 import '../constants/app_assets.dart';
 import '../constants/app_colors.dart';
@@ -40,32 +42,34 @@ class CustomLoading extends StatelessWidget {
               ),
             )
           : SizedBox(
-              width: context.width,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppAssets.loading,
-                      width: widthLoading ?? context.width / 2.5,
-                      height: heightLoading ?? 100.h,
-                    ),
-                   if(showText)
-                   ...[
-                     heightSpace(10.h),
-                     Text(
-                       LocaleKeys.loading.tr(),
-                       style: AppTextStyles.textStyle16.copyWith(
-                           fontWeight: FontWeight.w700,
-                           color: textColor
-                       ),
-                       textAlign: TextAlign.center,
-                     ),
-                   ]
-                  ],
+        width: context.width,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PulsingWidget(
+                duration: Duration(milliseconds: 800),
+                tween: Tween(begin: 0.5, end: 0.7),
+                child: SvgPicture.asset(
+                    AppAssets.logo,
+                    width: context.width / 2.5,
+                    height: 100.h,
+                    color : AppColors.primaryColor
                 ),
               ),
-            ),
+              heightSpace(10.h),
+              Text(
+                LocaleKeys.loading.tr(),
+                style: AppTextStyles.textStyle16.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
 }
