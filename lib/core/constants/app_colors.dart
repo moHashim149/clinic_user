@@ -72,4 +72,11 @@ class AppColors {
   static const Color successColor = Color(0xff27AE60);
   static const Color yellowColor = Color(0xffFCBC12);
 
+  static const Color primary = Color(0xFF1C443A);
+  static const Color background = Colors.white;
+  static const Color mintBackground = Color(0xFFF1FBF9);
+  static const Color textPrimary = Color(0xFF181818);
+  static const Color textSecondary = Color(0xFF707070);
+  static const Color indicatorInactive = Color(0xFFE8E8E8);
+
 }

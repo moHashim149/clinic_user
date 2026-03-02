@@ -68,4 +68,34 @@ abstract class AppTextStyles {
     letterSpacing: 0.0, 
     color: AppColors.blackColor,
   );
+
+  static final TextStyle title = TextStyle(
+    fontSize: AppFonts.t20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimary,
+  );
+
+  static final TextStyle subtitle = TextStyle(
+    fontSize: AppFonts.t16,
+    color: AppColors.textSecondary,
+    height: 1.5,
+  );
+
+  static final TextStyle buttonLabel = TextStyle(
+    fontSize: AppFonts.t18,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+
+  static final TextStyle textButtonLabel = TextStyle(
+    fontSize: AppFonts.t18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+
+  static final TextStyle languageSwitch = TextStyle(
+    fontSize: AppFonts.t14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textPrimary,
+  );
 }

@@ -1,5 +1,7 @@
+import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_content.dart';
+import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_image.dart';
+import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_indicators.dart';
 import 'package:flutter/material.dart';
-import '../onboarding_imports.dart';
 
 class OnboardingPageData {
   final String title;

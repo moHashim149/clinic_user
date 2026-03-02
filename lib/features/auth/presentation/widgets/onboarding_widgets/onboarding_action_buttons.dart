@@ -1,6 +1,7 @@
+import 'package:brandy_user/core/constants/app_colors.dart';
+import 'package:brandy_user/core/constants/app_text_styles.dart';
+import 'package:brandy_user/core/framework/spaces.dart';
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_text_styles.dart';
 
 class OnboardingActionButtons extends StatelessWidget {
   final VoidCallback onNext;
@@ -16,7 +17,6 @@ class OnboardingActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Primary Button (Next)
         SizedBox(
           width: double.infinity,
           height: 60,
@@ -29,17 +29,16 @@ class OnboardingActionButtons extends StatelessWidget {
               ),
               elevation: 0,
             ),
-            child: const Text(
+            child:  Text(
               'التالي',
               style: AppTextStyles.buttonLabel,
             ),
           ),
         ),
-        const SizedBox(height: 12),
-        // Text Button (Skip)
+        heightSpace(12),
         TextButton(
           onPressed: onSkip,
-          child: const Text(
+          child:  Text(
             'تخطي',
             style: AppTextStyles.textButtonLabel,
           ),
