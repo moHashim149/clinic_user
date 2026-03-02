@@ -38,6 +38,7 @@ import '../../../features/auth/presentation/views/pin_code_view.dart';
 import '../../../features/auth/presentation/views/sign_in_view.dart';
 import '../../../features/create_service_provider_account/widgets/verify_email_view.dart';
 import '../../../features/auth/data/arguments/verify_email_argument.dart';
+import '../../../features/auth/presentation/views/log_in_view.dart';
 import '../../../features/bottom_nav/presentation/cubit/bottom_nav_cubit.dart';
 import '../../../features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../../../features/cart/data/arguments/cart_arguments.dart';
