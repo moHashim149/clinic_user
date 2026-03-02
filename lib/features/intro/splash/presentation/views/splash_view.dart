@@ -1,33 +1,75 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../../core/util/extensions/media_query.dart';
-import '../../../../../core/constants/app_assets.dart';
-import '../../../../../core/constants/app_colors.dart';
-import '../cubit/splash_cubit.dart';
+part of 'splash_imports.dart';
 
-class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+class Splash extends StatefulWidget {
+  const Splash({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  State<Splash> createState() => _SplashState();
 }
 
-class _SplashViewState extends State<SplashView> {
+class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _scaleAnimation;
+  late final Animation<double> _fadeAnimation;
+
   @override
   void initState() {
     super.initState();
-    context.read<SplashCubit>().handlePageNext(context);
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 0.85, end: 1).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOutBack),
+    );
+
+    _fadeAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeIn,
+    );
+
+    _controller.forward();
+
+    Future<void>.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) =>  Onboarding()),
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 27.w),
-        child: Center(child: SvgPicture.asset(AppAssets.logo, width: context.width)),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Color(0xFF1C443A),
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        backgroundColor: const Color(0xFF1C443A),
+        body: SafeArea(
+          child: Center(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: ScaleTransition(
+                scale: _scaleAnimation,
+                child: SplashLogo(
+                  assetPath: 'assets/native_splash/splash_logo.png',
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
