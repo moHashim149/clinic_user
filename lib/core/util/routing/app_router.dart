@@ -35,7 +35,7 @@ import '../../../features/auth/presentation/cubits/login_cubit/login_cubit.dart'
 import '../../../features/auth/presentation/cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../../../features/auth/presentation/views/create_acc_view.dart';
 import '../../../features/auth/presentation/views/pin_code_view.dart';
-import '../../../features/auth/presentation/views/sign_in_view.dart';
+import '../../../features/auth/presentation/views/log_in_view.dart';
 import '../../../features/bottom_nav/presentation/cubit/bottom_nav_cubit.dart';
 import '../../../features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../../../features/cart/data/arguments/cart_arguments.dart';
