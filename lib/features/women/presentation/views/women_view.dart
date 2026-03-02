@@ -13,6 +13,7 @@ import '../../../../core/util/routing/routes.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../../../../core/widgets/custom_visitor_widget.dart';
 import '../../../create_account/create_account_imports.dart' show CreateAccount;
+import '../../../create_service_provider_account/create_service_provider_account_imports.dart';
 import '../cubit/women_cubit.dart';
 import '../widgets/custom_best_stores_list_widget.dart';
 import '../widgets/custom_categories_widget.dart';
@@ -70,7 +71,7 @@ class WomenView extends StatelessWidget {
                         onTap: () => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CreateAccount(),
+                            builder: (context) => CreateServiceProviderAccount(),
                           ),
                         ),
                         child: Container(

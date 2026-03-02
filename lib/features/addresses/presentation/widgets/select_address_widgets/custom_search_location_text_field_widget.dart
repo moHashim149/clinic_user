@@ -26,36 +26,40 @@ class _CustomSearchLocationTextFieldWidgetState
     return TextField(
       keyboardType: TextInputType.text,
       controller: widget.bloc.searchCtrl,
-      style: AppTextStyles.textStyle16.copyWith(color: AppColors.blackColor),
+      textAlign: TextAlign.right,
+      style: AppTextStyles.textStyle14.copyWith(color: AppColors.blackColor),
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       onChanged: (value) {
         widget.bloc.add(GetPlacesSuggestionsEvent(searchQuery: value));
       },
-      cursorColor: AppColors.primaryColor,
+      cursorColor: AppColors.primary,
       decoration: InputDecoration(
-        prefixIcon: SvgPicture.asset(AppAssets.search, fit: BoxFit.scaleDown),
-        hintText: LocaleKeys.searchHint.tr(),
+        prefixIcon: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Image.asset(AppAssets.searchLocationIcon, fit: BoxFit.scaleDown, color: AppColors.blackColor,width: 16,height: 16),
+        ),
+        hintText: "ابحث عن موقعك....",
         filled: true,
         hintStyle: AppTextStyles.textStyle12.copyWith(
-          fontWeight: FontWeight.w500,
           color: AppColors.hintColor,
         ),
         fillColor: AppColors.whiteColor,
         border: buildOutlineInputBorder(),
         disabledBorder: buildOutlineInputBorder(),
         focusedBorder: buildOutlineInputBorder(),
-        enabledBorder: buildOutlineInputBorder(),
+        enabledBorder: buildOutlineInputBorder(), 
         isDense: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       ),
     );
   }
 
   OutlineInputBorder buildOutlineInputBorder() {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: AppColors.strokeColor),
-      borderRadius: BorderRadius.circular(24.r),
+      borderSide: const BorderSide(color: AppColors.stroke),
+      borderRadius: BorderRadius.circular(30.r),
     );
   }
 }

@@ -27,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function()? onTap;
 
   final AutovalidateMode? autoValidateMode;
+  final bool obscureText;
 
   const CustomTextFormField({
     super.key,
@@ -53,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.borderColor,
     this.borderWidth,
+    this.obscureText = false,
   });
 
   @override
@@ -60,6 +62,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       controller: ctrl,
+      obscureText: obscureText,
       focusNode: focusNode,
       onTapOutside: (event) {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -73,7 +76,7 @@ class CustomTextFormField extends StatelessWidget {
       inputFormatters: inputFormatters,
       readOnly: readOnly,
       validator: validator,
-      maxLines: maxLines,
+      maxLines: obscureText ? 1 : maxLines,
       maxLength: maxLength,
       textInputAction: textInputAction ?? TextInputAction.next,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,

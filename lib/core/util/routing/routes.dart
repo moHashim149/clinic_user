@@ -22,5 +22,6 @@ class Routes {
   static const String addressesView = '/addressesView';
   static const String selectAddressView = '/selectAddressView';
   static const String storiesView = '/storiesView';
+  static const String verifyEmailView = '/verifyEmailView';
 
 }

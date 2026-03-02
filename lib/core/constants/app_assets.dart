@@ -18,6 +18,11 @@ abstract class AppAssets {
   static const String addBalanceBackground ="$_imagesPath/add_balance_background.svg";
   static const String profile = "$_imagesPath/Profile.png";
   static const String editPin = "$_imagesPath/edit_pin.png";
+  static const String addIcon = "$_imagesPath/add_icon.png";
+  static const String searchLocationIcon = "$_imagesPath/search_location_icon.png";
+  static const String locationIcon = "$_imagesPath/location_icon.png";
+  static const String openLocation = "$_imagesPath/open_location.png";
+  static const String simplification = "$_imagesPath/simplification.png";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
@@ -73,6 +78,7 @@ abstract class AppAssets {
   static const String transaction = "$_iconsPath/transaction.svg";
   static const String pin = "$_iconsPath/pin.svg";
   static const String correct = "$_iconsPath/correct.svg";
+  static const String locationIcon2 = "$_iconsPath/location_icon2.svg";
 
   // test images
   static const String testImage =
