@@ -12,6 +12,7 @@ import '../../../../core/util/extensions/navigation.dart';
 import '../../../../core/util/routing/routes.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../../../../core/widgets/custom_visitor_widget.dart';
+import '../../../create_account/create_account_imports.dart' show CreateAccount;
 import '../cubit/women_cubit.dart';
 import '../widgets/custom_best_stores_list_widget.dart';
 import '../widgets/custom_categories_widget.dart';
@@ -23,6 +24,7 @@ import '../widgets/custom_stories_widget.dart';
 
 class WomenView extends StatelessWidget {
   const WomenView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -50,6 +52,32 @@ class WomenView extends StatelessWidget {
                       CustomHeaderWidget(
                         userModel: cubit.userModel,
                         address: cubit.currentLocation,
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccount(),
+                          ),
+                        ),
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          color: AppColors.blueColor,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateAccount(),
+                          ),
+                        ),
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          color: AppColors.blackColor,
+                        ),
                       ),
                       // heightSpace(16.h),
                       // CustomSearchWidget(

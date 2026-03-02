@@ -18,6 +18,7 @@ class CustomMultiSelectDropDownField<T> extends StatelessWidget {
   final Widget? prefixIcon;
   final AutovalidateMode? autoValidateMode;
   final Color? fillColor, borderColor;
+  final bool canSearch;
   final double? borderRadiusValue, borderWidth;
 
   const CustomMultiSelectDropDownField({
@@ -33,6 +34,7 @@ class CustomMultiSelectDropDownField<T> extends StatelessWidget {
     this.borderColor,
     this.borderRadiusValue,
     this.borderWidth,
+    this.canSearch = true,
   });
 
   @override
@@ -48,11 +50,12 @@ class CustomMultiSelectDropDownField<T> extends StatelessWidget {
           isDense: true,
         ),
       ),
-      child: CustomDropdown<T>.multiSelectSearch(
-        hintText: hintText,
-        items: items,
-        listValidator: validator,
-        searchHintText: LocaleKeys.search.tr(),
+      child: canSearch
+          ? CustomDropdown<T>.multiSelectSearch(
+              hintText: hintText,
+              items: items,
+              listValidator: validator,
+              searchHintText: LocaleKeys.search.tr(),
         hintBuilder: (context, hint, enabled) {
           return Text(
             hint,
@@ -103,7 +106,48 @@ class CustomMultiSelectDropDownField<T> extends StatelessWidget {
         onListChanged: onChanged,
         initialItems: initialItems,
         noResultFoundText: LocaleKeys.emptyData.tr(),
-      ),
+      )
+          : CustomDropdown<T>.multiSelect(
+              hintText: hintText,
+              items: items,
+              listValidator: validator,
+              headerListBuilder: (context, selectedItems, enabled) {
+                return Text(
+                  selectedItems.join(" _ "),
+                  style: AppTextStyles.textStyle14,
+                );
+              },
+              hintBuilder: (context, hint, enabled) {
+                return Text(
+                  hint,
+                  style: AppTextStyles.textStyle10.copyWith(
+                    color: AppColors.grayColor,
+                  ),
+                );
+              },
+              decoration: CustomDropdownDecoration(
+                hintStyle: AppTextStyles.textStyle14.copyWith(
+                  color: AppColors.hintColor,
+                ),
+                prefixIcon: prefixIcon,
+                closedSuffixIcon: SvgPicture.asset(
+                  AppAssets.arrowDown,
+                  fit: BoxFit.scaleDown,
+                ),
+                errorStyle: AppTextStyles.textStyle12.copyWith(
+                  color: AppColors.redColor,
+                ),
+                expandedFillColor: fillColor,
+                closedFillColor: fillColor,
+                closedBorderRadius: BorderRadius.circular(borderRadiusValue ?? 16.r),
+                expandedBorderRadius: BorderRadius.circular(borderRadiusValue ?? 16.r),
+                closedErrorBorderRadius: BorderRadius.circular(borderRadiusValue ?? 16.r),
+                closedErrorBorder: Border.all(color: AppColors.redColor),
+                closedBorder: Border.all(color: borderColor ?? AppColors.borderColor),
+              ),
+              onListChanged: onChanged,
+              initialItems: initialItems,
+            ),
     );
   }
 

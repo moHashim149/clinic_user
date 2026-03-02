@@ -15,15 +15,16 @@ abstract class AppAssets {
   static const String currency = "$_imagesPath/currency.svg";
   static const String marker = "$_imagesPath/marker.png";
   static const String emptyFav = "$_imagesPath/empty_fav.svg";
-  static const String addBalanceBackground =
-      "$_imagesPath/add_balance_background.svg";
+  static const String addBalanceBackground ="$_imagesPath/add_balance_background.svg";
+  static const String profile = "$_imagesPath/Profile.png";
+  static const String editPin = "$_imagesPath/edit_pin.png";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
   static const String men = "$_iconsPath/men.svg";
   static const String child = "$_iconsPath/child.svg";
   static const String orders = "$_iconsPath/orders.svg";
-  static const String profile = "$_iconsPath/profile.svg";
+  // static const String profile = "$_iconsPath/profile.svg";
 
   //icons
   static const String arrowBack = "$_iconsPath/arrow_back.svg";
