@@ -7,8 +7,8 @@ import 'package:brandy_user/core/util/routing/routes.dart';
 import 'package:brandy_user/core/widgets/custom_button.dart';
 import 'package:brandy_user/features/auth/data/arguments/pin_code_argument.dart';
 import 'package:brandy_user/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
-import 'package:brandy_user/features/cart/data/arguments/cart_arguments.dart';
 import 'package:flutter/material.dart';
+
 
 class LoginActionButtons extends StatelessWidget {
   final SignInCubit cubit;
@@ -18,40 +18,37 @@ class LoginActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomButton(
-          text: "ارسال كود",
-          onPressed: () => cubit.sendCode(context),
-        ),
+       CustomButton(
+         text: "ارسال كود",
+         onPressed: () => cubit.sendCode(context)
+       ),
         heightSpace(16),
         CustomButton(
-          onPressed: () =>
-              context.pushWithNamed(Routes.createServiceProviderAccount),
+          onPressed: () => context.pushWithNamed(
+            Routes.createServiceProviderAccount,
+          ),
           text: "تسجيل دخول كمقدم خدمه",
           backgroundColor: Colors.transparent,
           borderColor: AppColors.primary,
           txtColor: AppColors.primary,
         ),
-        heightSpace(16),
+       heightSpace(16),
         CustomButton(
-          onPressed: () => context.pushWithNamed(Routes.createAccount),
+          onPressed: () => context.pushWithNamed(
+            Routes.createAccount,
+          ),
           text: "انشاء حساب",
           backgroundColor: Colors.transparent,
           borderColor: AppColors.primary,
           txtColor: AppColors.primary,
         ),
         heightSpace(16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            "الدخول كزائر",
-            style: AppTextStyles.textStyle18w700.copyWith(
-              color: AppColors.primary,
-            ),
-          ),
-        ).onTapShadow(
-          function: () {
-            context.pushWithNamed(Routes.cartView, arguments: CartArguments());
-          },
+        CustomButton(
+          onPressed: () => context.pushWithNamed(Routes.homePage),
+          text: "انشاء حساب",
+          backgroundColor: AppColors.transparentColor,
+          borderColor: AppColors.transparentColor,
+          txtColor: AppColors.primary,
         ),
       ],
     );

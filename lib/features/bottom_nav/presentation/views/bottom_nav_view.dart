@@ -5,9 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../cubit/bottom_nav_cubit.dart';
 
-class BottomNavView extends StatelessWidget {
+class BottomNavView extends StatefulWidget {
   const BottomNavView({super.key});
 
+  @override
+  State<BottomNavView> createState() => _BottomNavViewState();
+}
+
+class _BottomNavViewState extends State<BottomNavView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavCubit, BottomNavState>(

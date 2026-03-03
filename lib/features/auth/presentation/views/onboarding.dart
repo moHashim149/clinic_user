@@ -94,7 +94,7 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 OnboardingFooterButtonsWidget(
                   onPressNext: () => _onNextPressed(),
-                  onPressSkip: () {  },
+                  onPressSkip: () => context.pushWithNamed(Routes.homePage),
                 )
               ],
             ),
