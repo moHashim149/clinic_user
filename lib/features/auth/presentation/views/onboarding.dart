@@ -1,10 +1,11 @@
 
 import 'package:brandy_user/core/constants/app_colors.dart';
-import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_page.dart';
-import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_primary_button.dart';
-import 'package:brandy_user/features/auth/presentation/widgets/onboarding_widgets/onboarding_top_bar.dart';
+import 'package:brandy_user/core/util/extensions/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../../../core/util/routing/routes.dart';
+import '../widgets/onboarding_widgets/widgets_imports.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -34,33 +35,36 @@ class _OnboardingState extends State<Onboarding> {
         curve: Curves.easeInOut,
       );
     } else {
-
+      context.pushWithNamed(
+        Routes.signInView,
+      );
     }
   }
 
+
+  final pages = <OnboardingPageData>[
+    OnboardingPageData(
+      title: 'جميع خدمات العناية الطبية بين يديك',
+      description:
+      'استعرض باقة متنوعة من خدمات الليزر والتجميل، الجلدية، وطب الأسنان من مقدمي خدمات معتمدين، بكل سهولة .',
+      imagePath: 'assets/images/onboarding_img1.png',
+    ),
+    OnboardingPageData(
+      title: 'أفضل العروض الأقرب لك',
+      description:
+      'تصفح أفضل الأطباء، واطّلع على العروض الأكثر طلبًا والأقرب لموقعك، مع إمكانية حفظ عروضك المفضلة للرجوع لها لاحقًا.',
+      imagePath: 'assets/images/onboarding_img2.png',
+    ),
+    OnboardingPageData(
+      title: 'احجز موعدك بثقة وسهولة',
+      description:
+      'احجز العرض المناسب، حدّد االوقت المناسب لك ، وتابع حالة الحجز  مع إمكانية تقييم مقدم الخدمة بعد انتهاء الزيارة.',
+      imagePath: 'assets/images/onboarding_img3.png',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    const pages = <OnboardingPageData>[
-      OnboardingPageData(
-        title: 'جميع خدمات العناية الطبية بين يديك',
-        description:
-            'استعرض باقة متنوعة من خدمات الليزر والتجميل، الجلدية، وطب الأسنان من مقدمي خدمات معتمدين، بكل سهولة .',
-        imagePath: 'assets/images/onboarding_img1.png',
-      ),
-      OnboardingPageData(
-        title: 'أفضل العروض الأقرب لك',
-        description:
-            'تصفح أفضل الأطباء، واطّلع على العروض الأكثر طلبًا والأقرب لموقعك، مع إمكانية حفظ عروضك المفضلة للرجوع لها لاحقًا.',
-        imagePath: 'assets/images/onboarding_img2.png',
-      ),
-      OnboardingPageData(
-        title: 'احجز موعدك بثقة وسهولة',
-        description:
-            'احجز العرض المناسب، حدّد االوقت المناسب لك ، وتابع حالة الحجز  مع إمكانية تقييم مقدم الخدمة بعد انتهاء الزيارة.',
-        imagePath: 'assets/images/onboarding_img3.png',
-      ),
-    ];
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Colors.white,
@@ -88,24 +92,10 @@ class _OnboardingState extends State<Onboarding> {
                     },
                   ),
                 ),
-                OnboardingPrimaryButton(
-                  label: 'التالي',
-                  onPressed: _onNextPressed,
-                ),
-                const SizedBox(height: 8),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'تخطي',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primary,
-                      fontFamily: 'Cairo',
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40)
+                OnboardingFooterButtonsWidget(
+                  onPressNext: () => _onNextPressed(),
+                  onPressSkip: () {  },
+                )
               ],
             ),
           ),

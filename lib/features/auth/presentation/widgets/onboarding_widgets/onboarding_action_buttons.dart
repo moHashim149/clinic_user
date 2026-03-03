@@ -1,7 +1,7 @@
-import 'package:brandy_user/core/constants/app_colors.dart';
-import 'package:brandy_user/core/constants/app_text_styles.dart';
-import 'package:brandy_user/core/framework/spaces.dart';
-import 'package:flutter/material.dart';
+
+
+part of 'widgets_imports.dart';
+
 
 class OnboardingActionButtons extends StatelessWidget {
   final VoidCallback onNext;

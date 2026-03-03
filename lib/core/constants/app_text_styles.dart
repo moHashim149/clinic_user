@@ -21,6 +21,10 @@ abstract class AppTextStyles {
       fontSize: AppFonts.t18,
       fontWeight: FontWeight.w400,
       color: AppColors.blackColor);
+  static final TextStyle textStyle18w700 = TextStyle(
+      fontSize: AppFonts.t18,
+      fontWeight: FontWeight.w700,
+      color: AppColors.blackColor);
   static final TextStyle textStyle16 = TextStyle(
       fontSize: AppFonts.t16,
       fontWeight: FontWeight.w400,
@@ -39,6 +43,12 @@ abstract class AppTextStyles {
       fontSize: AppFonts.t12,
       fontWeight: FontWeight.w400,
       color: AppColors.blackColor);
+
+  static final TextStyle textStyle12w500 = TextStyle(
+      fontSize: AppFonts.t12,
+      fontWeight: FontWeight.w500,
+      color: AppColors.blackColor
+  );
 
   static final TextStyle textStyle10 = TextStyle(
       fontSize: AppFonts.t10,

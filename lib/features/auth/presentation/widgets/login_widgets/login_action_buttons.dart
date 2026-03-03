@@ -1,82 +1,48 @@
-
 import 'package:brandy_user/core/constants/app_colors.dart';
+import 'package:brandy_user/core/constants/app_text_styles.dart';
+import 'package:brandy_user/core/framework/spaces.dart';
+import 'package:brandy_user/core/util/extensions/navigation.dart';
+import 'package:brandy_user/core/util/extensions/on_tap.dart';
+import 'package:brandy_user/core/util/routing/routes.dart';
+import 'package:brandy_user/core/widgets/custom_button.dart';
+import 'package:brandy_user/features/auth/data/arguments/pin_code_argument.dart';
+import 'package:brandy_user/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../views/check_phone_num.dart';
 
 
 class LoginActionButtons extends StatelessWidget {
-  const LoginActionButtons({super.key});
+  final SignInCubit cubit;
+  const LoginActionButtons({super.key, required this.cubit});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          height: 56,
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const CheckPhoneNum()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              elevation: 0,
-            ),
-            child: const Text(
-              "ارسال كود",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          height: 56,
-          child: OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: AppColors.primary),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-            child: const Text(
-              "تسجيل دخول كمقدم خدمه",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: AppColors.primary,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 16),
-        TextButton(
+       CustomButton(
+         text: "ارسال كود",
+         onPressed: () => cubit.sendCode(context)
+       ),
+        heightSpace(16),
+        CustomButton(
           onPressed: () {},
-          child: const Text(
+          text: "تسجيل دخول كمقدم خدمه",
+          backgroundColor: Colors.transparent,
+          borderColor: AppColors.primary,
+          txtColor: AppColors.primary,
+        ),
+       heightSpace(16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
             "الدخول كزائر",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: AppColors.primary,
-              fontFamily: 'Cairo',
-              decoration: TextDecoration.underline,
+            style: AppTextStyles.textStyle18w700.copyWith(
+                color: AppColors.primary
             ),
           ),
-        ),
+        ).onTapShadow(
+          function: () {
+
+          },),
       ],
     );
   }

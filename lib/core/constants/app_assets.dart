@@ -4,6 +4,7 @@ abstract class AppAssets {
 
   //images
   static const String logo = "$_imagesPath/logo.svg";
+  static const String splashLogo = "$_imagesPath/splash_logo.png";
   static const String saudi = "$_imagesPath/saudi.svg";
   static const String united = "$_imagesPath/united.svg";
   static const String noInternet = "$_imagesPath/no_internet.svg";

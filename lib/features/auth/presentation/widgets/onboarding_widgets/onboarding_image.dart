@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'widgets_imports.dart';
 
 class OnboardingImage extends StatelessWidget {
   final String imagePath;

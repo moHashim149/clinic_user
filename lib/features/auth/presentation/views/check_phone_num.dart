@@ -2,16 +2,24 @@
 import 'package:brandy_user/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CheckPhoneNum extends StatelessWidget {
-  const CheckPhoneNum({super.key});
+import '../../data/arguments/pin_code_argument.dart';
 
+class CheckPhoneNum extends StatefulWidget {
+  final PinCodeArgument argument;
+  const CheckPhoneNum({super.key, required this.argument});
+
+  @override
+  State<CheckPhoneNum> createState() => _CheckPhoneNumState();
+}
+
+class _CheckPhoneNumState extends State<CheckPhoneNum> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: SizedBox(),
+        backgroundColor: AppColors.background,
+        leading: SizedBox.shrink(),
         elevation: 0,
         actions: [
           Padding(

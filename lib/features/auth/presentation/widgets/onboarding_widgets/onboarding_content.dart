@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'widgets_imports.dart';
 
 class OnboardingContent extends StatelessWidget {
   final String title;

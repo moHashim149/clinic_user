@@ -1,5 +1,5 @@
-import 'package:brandy_user/core/constants/app_colors.dart';
-import 'package:flutter/material.dart';
+part of 'widgets_imports.dart';
+
 
 class OnboardingPrimaryButton extends StatelessWidget {
   final String label;

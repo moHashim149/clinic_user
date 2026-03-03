@@ -19,6 +19,8 @@ class CustomButton extends StatelessWidget {
   final String? text;
   final TextStyle? style;
   final bool? isLoading;
+  final Color? txtColor;
+  final Color? borderColor;
 
 
   const CustomButton({
@@ -37,6 +39,8 @@ class CustomButton extends StatelessWidget {
     this.borderRadius,
     this.padding,
     this.strokeWidth,
+    this.txtColor,
+    this.borderColor,
   });
 
   @override
@@ -46,6 +50,9 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
+          overlayColor: WidgetStatePropertyAll(
+            AppColors.primary.withAlpha(45),
+          ),
           backgroundColor: WidgetStatePropertyAll(
             backgroundColor ?? AppColors.primaryColor,
           ),
@@ -65,7 +72,7 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          side: WidgetStatePropertyAll(borderSide ?? BorderSide.none),
+          side: WidgetStatePropertyAll(borderSide ?? BorderSide(color: borderColor ?? AppColors.primaryColor)),
         ),
         child: Center(
           child: isLoading == true
@@ -103,9 +110,8 @@ class CustomButton extends StatelessWidget {
                       maxLines: 1,
                       style:
                           style ??
-                          AppTextStyles.textStyle16.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.whiteColor,
+                          AppTextStyles.textStyle18w700.copyWith(
+                            color: txtColor ?? AppColors.whiteColor,
                           ),
                     ),
         ),

@@ -30,8 +30,13 @@ class BrandyApp extends StatelessWidget {
         onGenerateRoute: appRouter.generateRoute,
         initialRoute: Routes.splashView,
         theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: AppColors.primary,
+            selectionColor: AppColors.primary.withAlpha(35),
+            selectionHandleColor: AppColors.primary,
+          ),
           fontFamily: AppConstants.fontFamily,
-          scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+          scaffoldBackgroundColor: AppColors.background,
         ),
       ),
     );

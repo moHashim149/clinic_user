@@ -15,10 +15,10 @@ import '../widgets/pin_code_widgets/custom_code_sent_success_widget.dart';
 import '../widgets/pin_code_widgets/custom_not_send_code_and_resend.dart';
 import '../widgets/pin_code_widgets/custom_pin_code_widget.dart';
 
-class PinCodeView extends StatelessWidget {
+class VerifyPhone extends StatelessWidget {
   final PinCodeArgument argument;
 
-  const PinCodeView({super.key, required this.argument});
+  const VerifyPhone({super.key, required this.argument});
 
   @override
   Widget build(BuildContext context) {

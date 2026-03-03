@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+part of 'widgets_imports.dart';
+
 
 class LanguageSwitcher extends StatefulWidget {
   const LanguageSwitcher({super.key});

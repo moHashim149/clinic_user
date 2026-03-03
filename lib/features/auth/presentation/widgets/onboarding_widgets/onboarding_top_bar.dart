@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'language_switcher.dart';
+part of 'widgets_imports.dart';
+
 
 class OnboardingTopBar extends StatelessWidget {
   final VoidCallback? onLanguageTap;

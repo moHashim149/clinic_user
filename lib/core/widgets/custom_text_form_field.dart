@@ -27,6 +27,8 @@ class CustomTextFormField extends StatelessWidget {
   final void Function()? onTap;
 
   final AutovalidateMode? autoValidateMode;
+  final TextDirection? textDirection;
+  final TextAlign? txtAlign;
   final bool obscureText;
 
   const CustomTextFormField({
@@ -54,6 +56,8 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.borderColor,
     this.borderWidth,
+    this.txtAlign,
+    this.textDirection,
     this.obscureText = false,
   });
 
@@ -61,6 +65,9 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
+      textAlign: txtAlign ?? TextAlign.start,
+      textDirection: textDirection,
+      cursorColor : AppColors.primary,
       controller: ctrl,
       obscureText: obscureText,
       focusNode: focusNode,
@@ -70,7 +77,7 @@ class CustomTextFormField extends StatelessWidget {
       enabled: enabled,
       onTap: onTap,
       scrollPadding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+        bottom: MediaQuery.viewInsetsOf(context).bottom,
       ),
       style: AppTextStyles.textStyle14,
       inputFormatters: inputFormatters,
@@ -83,7 +90,9 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: fillColor ?? AppColors.transparentColor,
-        border: buildOutlineInputBorder(),
+        border: buildOutlineInputBorder(
+            borderColor ?? AppColors.stroke
+        ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         hintText: hintText,
@@ -91,17 +100,17 @@ class CustomTextFormField extends StatelessWidget {
             hintStyle ??
             AppTextStyles.textStyle10.copyWith(color: AppColors.grayColor),
         focusedBorder: buildOutlineInputBorder(
-          borderColor ?? AppColors.strokeColor,
+          borderColor ?? AppColors.stroke,
           isUnderlineInputBorder,
         ),
         enabledBorder: buildOutlineInputBorder(
-          borderColor ?? AppColors.strokeColor,
+          borderColor ?? AppColors.stroke,
           isUnderlineInputBorder,
         ),
         errorBorder: buildOutlineInputBorder(AppColors.redColor),
         focusedErrorBorder: buildOutlineInputBorder(AppColors.redColor),
         disabledBorder: buildOutlineInputBorder(
-          borderColor ?? AppColors.strokeColor,
+          borderColor ?? AppColors.stroke,
           isUnderlineInputBorder,
         ),
         errorStyle: AppTextStyles.textStyle12.copyWith(

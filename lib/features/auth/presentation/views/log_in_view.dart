@@ -1,3 +1,5 @@
+import 'package:brandy_user/core/constants/app_colors.dart';
+import 'package:brandy_user/core/framework/spaces.dart';
 import 'package:brandy_user/features/auth/presentation/widgets/login_widgets/login_action_buttons.dart';
 import 'package:brandy_user/features/auth/presentation/widgets/login_widgets/login_num_field_widget.dart';
 import 'package:brandy_user/features/auth/presentation/widgets/login_widgets/login_page_logo.dart';
@@ -13,25 +15,29 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: BlocBuilder<SignInCubit, SignInState>(
         builder: (context, state) {
-          final cubit = context.read<SignInCubit>();
+          final SignInCubit cubit = context.read<SignInCubit>();
           return SafeArea(
             child: AbsorbPointer(
               absorbing: state is CheckPhoneLoading,
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 40),
-                    const LoginPageLogo(),
-                    const SizedBox(height: 12),
-                    const LoginWelcomeText(),
-                    const SizedBox(height: 16),
-                    const LoginNumFieldWidget(),
-                    const SizedBox(height: 40),
-                    const LoginActionButtons(),
-                  ],
+              child: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                     heightSpace(40),
+                      const LoginPageLogo(),
+                      heightSpace(12),
+                      const LoginWelcomeText(),
+                      heightSpace(16),
+                       LoginNumFieldWidget(cubit: cubit),
+                      heightSpace(40),
+                       LoginActionButtons(cubit: cubit),
+                    ],
+                  ),
                 ),
               ),
             ),

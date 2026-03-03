@@ -3,6 +3,7 @@ import 'package:brandy_user/core/util/routing/routes.dart';
 import 'package:brandy_user/features/addresses/presentation/views/addresses_view.dart';
 import 'package:brandy_user/features/auth/data/arguments/create_acc_argument.dart';
 import 'package:brandy_user/features/auth/presentation/cubits/create_acc_cubit/create_acc_cubit.dart';
+import 'package:brandy_user/features/auth/presentation/views/check_phone_num.dart';
 import 'package:brandy_user/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:brandy_user/features/cart/presentation/views/cart_view.dart';
 import 'package:brandy_user/features/chat/presentation/cubit/chat_cubit.dart';
@@ -34,7 +35,7 @@ import '../../../features/auth/data/arguments/pin_code_argument.dart';
 import '../../../features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../../features/auth/presentation/cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../../../features/auth/presentation/views/create_acc_view.dart';
-import '../../../features/auth/presentation/views/pin_code_view.dart';
+import '../../../features/auth/presentation/views/verify_phone.dart';
 import '../../../features/create_service_provider_account/widgets/verify_email_view.dart';
 import '../../../features/auth/data/arguments/verify_email_argument.dart';
 import '../../../features/auth/presentation/views/log_in_view.dart';
@@ -83,6 +84,15 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<SelectLanguageCubit>(),
             child: const SelectLanguageView(),
+          ),
+        );
+      case Routes.pinCodeView:
+        final pinCodeArguments = arguments as PinCodeArgument;
+        return _buildRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<PinCodeCubit>(),
+            // child: VerifyPhone(argument: pinCodeArguments),
+            child: CheckPhoneNum(argument: pinCodeArguments),
           ),
         );
       case Routes.bottomNavView:
@@ -139,15 +149,6 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<SignInCubit>(),
             child: const SignInView(),
-          ),
-        );
-
-      case Routes.pinCodeView:
-        final pinCodeArguments = arguments as PinCodeArgument;
-        return _buildRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<PinCodeCubit>(),
-            child: PinCodeView(argument: pinCodeArguments),
           ),
         );
       case Routes.createAccountView:

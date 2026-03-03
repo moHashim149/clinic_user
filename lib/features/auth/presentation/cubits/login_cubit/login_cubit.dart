@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:country_picker/country_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../../core/framework/app_firebase.dart';
@@ -20,9 +22,16 @@ class SignInCubit extends Cubit<SignInState> {
   final AuthRepository repository;
   final AppFirebase appFirebase;
 
-  SignInCubit(this.repository, this.appFirebase) : super(SignInInitial());
+  SignInCubit(this.repository, this.appFirebase)
+      : super(SignInInitial())
+  ;
 
   PhoneFieldController phoneCtrl = PhoneFieldController();
+
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+
+  final ValueNotifier<Country?> countryValue = ValueNotifier<Country?>(null);
 
 
   void checkPone({required BuildContext context}) async {
@@ -54,6 +63,35 @@ class SignInCubit extends Cubit<SignInState> {
     );
   }
 
+
+  void openCountryPicker(BuildContext context) {
+    showCountryPicker(
+      context: context,
+      showPhoneCode: true,
+      favorite: const ['SA'],
+      onSelect: (country) {
+        countryValue.value = country;
+      },
+      countryListTheme: CountryListThemeData(
+        borderRadius: BorderRadius.circular(16),
+        inputDecoration: const InputDecoration(
+          labelText: 'ابحث عن الدولة',
+          prefixIcon: Icon(Icons.search),
+        ),
+      ),
+    );
+  }
+
+
+
+  void sendCode(BuildContext context){
+    if(formKey.currentState!.validate()){
+      context.pushWithNamed(
+          Routes.pinCodeView,
+          arguments: PinCodeArgument(phone: phoneCtrl.controller.text)
+      );
+    }
+  }
 
 
   @override
