@@ -23,6 +23,8 @@ class Routes {
   static const String selectAddressView = '/selectAddressView';
   static const String storiesView = '/storiesView';
   static const String verifyEmailView = '/verifyEmailView';
+  static const String createAccount = '/createAccount';
+  static const String createServiceProviderAccount = '/createServiceProviderAccount';
 
 
 

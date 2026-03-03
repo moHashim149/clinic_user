@@ -36,6 +36,8 @@ import '../../../features/auth/presentation/cubits/login_cubit/login_cubit.dart'
 import '../../../features/auth/presentation/cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../../../features/auth/presentation/views/create_acc_view.dart';
 import '../../../features/auth/presentation/views/verify_phone.dart';
+import '../../../features/create_account/create_account_imports.dart' show CreateAccount;
+import '../../../features/create_service_provider_account/create_service_provider_account_imports.dart';
 import '../../../features/create_service_provider_account/widgets/verify_email_view.dart';
 import '../../../features/auth/data/arguments/verify_email_argument.dart';
 import '../../../features/auth/presentation/views/log_in_view.dart';
@@ -250,6 +252,14 @@ class AppRouter {
         final verifyEmailArguments = arguments as VerifyEmailArgument;
         return _buildRoute(
           builder: (_) => VerifyEmailView(argument: verifyEmailArguments),
+        );
+      case Routes.createAccount:
+        return _buildRoute(
+          builder: (_) => CreateAccount(),
+        );
+      case Routes.createServiceProviderAccount:
+        return _buildRoute(
+          builder: (_) => CreateServiceProviderAccount(),
         );
 
       default:

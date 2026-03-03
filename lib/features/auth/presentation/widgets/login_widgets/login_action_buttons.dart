@@ -24,13 +24,25 @@ class LoginActionButtons extends StatelessWidget {
        ),
         heightSpace(16),
         CustomButton(
-          onPressed: () {},
+          onPressed: () => context.pushWithNamed(
+            Routes.createServiceProviderAccount,
+          ),
           text: "تسجيل دخول كمقدم خدمه",
           backgroundColor: Colors.transparent,
           borderColor: AppColors.primary,
           txtColor: AppColors.primary,
         ),
        heightSpace(16),
+        CustomButton(
+          onPressed: () => context.pushWithNamed(
+            Routes.createAccount,
+          ),
+          text: "انشاء حساب",
+          backgroundColor: Colors.transparent,
+          borderColor: AppColors.primary,
+          txtColor: AppColors.primary,
+        ),
+        heightSpace(16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
