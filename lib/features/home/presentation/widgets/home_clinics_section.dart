@@ -48,15 +48,19 @@ class HomeClinicsSection extends StatelessWidget {
                   border: Border.all(color: AppColors.indicatorInactive),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       flex: 3,
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16.r),
+                          ),
                           image: const DecorationImage(
-                            image: AssetImage(AppAssets.locationIcon), // Placeholder
+                            image: AssetImage(
+                              AppAssets.locationIcon,
+                            ), // Placeholder
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -67,7 +71,7 @@ class HomeClinicsSection extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(8.r),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               "بيوتي كلينك",
@@ -82,7 +86,11 @@ class HomeClinicsSection extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(Icons.location_on, size: 12.r, color: AppColors.primary),
+                                    Icon(
+                                      Icons.location_on,
+                                      size: 12.r,
+                                      color: AppColors.primary,
+                                    ),
                                     Text(
                                       "2.5 كم",
                                       style: AppTextStyles.textStyle8.copyWith(
@@ -94,13 +102,17 @@ class HomeClinicsSection extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                     Text(
+                                    Text(
                                       "4.8 (500)",
                                       style: AppTextStyles.textStyle8.copyWith(
                                         color: AppColors.grayColor,
                                       ),
                                     ),
-                                    Icon(Icons.star, size: 12.r, color: Colors.amber),
+                                    Icon(
+                                      Icons.star,
+                                      size: 12.r,
+                                      color: Colors.amber,
+                                    ),
                                   ],
                                 ),
                               ],

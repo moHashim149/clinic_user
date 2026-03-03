@@ -45,7 +45,9 @@ class HomeHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              _buildIconContainer(AppAssets.locationIcon), // Notification bell placeholder
+              _buildIconContainer(
+                AppAssets.locationIcon,
+              ), // Notification bell placeholder
               SizedBox(width: 8.w),
               _buildIconContainer(AppAssets.search),
               SizedBox(width: 8.w),
@@ -73,10 +75,15 @@ class HomeHeader extends StatelessWidget {
           ),
         ],
       ),
-      child: SvgPicture.asset(
-        asset,
-        colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
-      ),
+      child: asset.endsWith('.svg')
+          ? SvgPicture.asset(
+              asset,
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+            )
+          : Image.asset(asset, color: AppColors.primary),
     );
   }
 }

@@ -47,16 +47,20 @@ class HomeBestSellersSection extends StatelessWidget {
                   border: Border.all(color: AppColors.indicatorInactive),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
                       children: [
                         Container(
                           height: 120.h,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.r),
+                            ),
                             image: const DecorationImage(
-                              image: AssetImage(AppAssets.locationIcon), // Placeholder
+                              image: AssetImage(
+                                AppAssets.locationIcon,
+                              ), // Placeholder
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -65,7 +69,10 @@ class HomeBestSellersSection extends StatelessWidget {
                           top: 8,
                           right: 8,
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 2.h,
+                            ),
                             decoration: BoxDecoration(
                               color: AppColors.whiteColor.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(4.r),
@@ -85,7 +92,7 @@ class HomeBestSellersSection extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(8.r),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,7 +113,11 @@ class HomeBestSellersSection extends StatelessWidget {
                                       color: AppColors.grayColor,
                                     ),
                                   ),
-                                  Icon(Icons.star, size: 12.r, color: Colors.amber),
+                                  Icon(
+                                    Icons.star,
+                                    size: 12.r,
+                                    color: Colors.amber,
+                                  ),
                                 ],
                               ),
                             ],
@@ -134,7 +145,11 @@ class HomeBestSellersSection extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.location_on, size: 12.r, color: AppColors.primary),
+                                  Icon(
+                                    Icons.location_on,
+                                    size: 12.r,
+                                    color: AppColors.primary,
+                                  ),
                                   Text(
                                     "حي السويدي",
                                     style: AppTextStyles.textStyle8.copyWith(

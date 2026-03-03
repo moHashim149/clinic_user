@@ -9,7 +9,6 @@ import '../../../../generated/locale_keys.g.dart';
 import '../../data/models/reservation_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/constants/app_assets.dart';
-import 'package:dotted_line/dotted_line.dart';
 
 class ReservationItemWidget extends StatelessWidget {
   final ReservationModel reservation;
@@ -57,43 +56,46 @@ class ReservationItemWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(color: const Color(0xFFC6C6C6)),
         ),
-        padding: EdgeInsets.all(16.r),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top Row: Offer Number and Status
+            // Top Row: Status and Offer Number
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Right child: Offer Number
                 Row(
                   children: [
                     Text(
                       "${LocaleKeys.offerId.tr()}: ",
-                      style: AppTextStyles.textStyle12.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.blackTextEighthColor,
+                      style: AppTextStyles.textStyle14.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
                       ),
                     ),
                     Text(
                       reservation.offerNumber,
-                      style: AppTextStyles.textStyle12.copyWith(
+                      style: AppTextStyles.textStyle14.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
                       ),
                     ),
                   ],
                 ),
+                // Left child: Status Tag
                 Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 6.h,
+                    horizontal: 16.w,
+                    vertical: 4.h,
                   ),
                   decoration: BoxDecoration(
                     color: _getStatusColor(),
-                    borderRadius: BorderRadius.circular(24.r),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   child: Text(
                     reservation.status,
-                    style: AppTextStyles.textStyle10.copyWith(
+                    style: AppTextStyles.textStyle14.copyWith(
                       color: _getStatusTextColor(),
                       fontWeight: FontWeight.bold,
                     ),
@@ -101,41 +103,85 @@ class ReservationItemWidget extends StatelessWidget {
                 ),
               ],
             ),
-            heightSpace(12.h),
 
-            // Order Number
+            // Divider
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 12.h),
+              child: const Divider(
+                color: Color(0xFFC6C6C6),
+                thickness: 1,
+                height: 1,
+              ),
+            ),
+
+            // Order Number and Price
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "${LocaleKeys.orderNumber.tr()}: ",
-                  style: AppTextStyles.textStyle12.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.blackTextEighthColor,
-                  ),
+                // Right child: Order Number
+                Row(
+                  children: [
+                    Text(
+                      "${LocaleKeys.orderNumber.tr()}: ",
+                      style: AppTextStyles.textStyle16.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.blackColor,
+                      ),
+                    ),
+                    Text(
+                      reservation.orderNumber,
+                      style: AppTextStyles.textStyle16.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.blackColor,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  reservation.orderNumber,
-                  style: AppTextStyles.textStyle12.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                // Left child: Price
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${reservation.price}",
+                      style: AppTextStyles.textStyle16.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.blackColor,
+                      ),
+                    ),
+                    widthSpace(4.w),
+                    SvgPicture.asset(
+                      AppAssets.currency,
+                      width: 14.w,
+                      height: 14.h,
+                      colorFilter: const ColorFilter.mode(
+                        AppColors.blackColor,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            heightSpace(12.h),
+            heightSpace(16.h),
 
             // Date and Time
             Row(
               children: [
-                Icon(
-                  Icons.calendar_today_outlined,
-                  size: 16.r,
-                  color: AppColors.blackTextEighthColor,
+                SvgPicture.asset(
+                  AppAssets.calender,
+                  width: 20.r,
+                  height: 20.r,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 widthSpace(8.w),
                 Text(
                   reservation.date,
-                  style: AppTextStyles.textStyle12.copyWith(
+                  style: AppTextStyles.textStyle14.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: AppColors.blackColor,
                   ),
                 ),
               ],
@@ -146,65 +192,24 @@ class ReservationItemWidget extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  size: 16.r,
-                  color: AppColors.blackTextEighthColor,
+                SvgPicture.asset(
+                  AppAssets.locationIcon2, // Replacing old Icon with mapped SVG
+                  width: 20.r,
+                  height: 20.r,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 widthSpace(8.w),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        reservation.locationDistrict,
-                        style: AppTextStyles.textStyle12.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      heightSpace(4.h),
-                      Text(
-                        reservation.locationSubText,
-                        style: AppTextStyles.textStyle10.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.blackTextEighthColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            heightSpace(16.h),
-            DottedLine(dashColor: AppColors.strokeColor),
-            heightSpace(12.h),
-
-            // Price Row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  LocaleKeys.grandTotal.tr(),
-                  style: AppTextStyles.textStyle12.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${reservation.price}",
-                      style: AppTextStyles.textStyle14.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  child: Text(
+                    "${reservation.locationDistrict} | ${reservation.locationSubText}",
+                    style: AppTextStyles.textStyle14.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blackTextEighthColor,
                     ),
-                    widthSpace(4.w),
-                    SvgPicture.asset(
-                      AppAssets.currency,
-                      width: 10.w,
-                      height: 12.h,
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

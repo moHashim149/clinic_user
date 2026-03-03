@@ -1,6 +1,6 @@
-
 import 'package:brandy_user/core/constants/app_colors.dart';
 import 'package:brandy_user/core/util/extensions/navigation.dart';
+import 'package:brandy_user/features/home/presentation/views/home_page_imports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -35,30 +35,27 @@ class _OnboardingState extends State<Onboarding> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.pushWithNamed(
-        Routes.signInView,
-      );
+      context.pushWithNamed(Routes.signInView);
     }
   }
-
 
   final pages = <OnboardingPageData>[
     OnboardingPageData(
       title: 'جميع خدمات العناية الطبية بين يديك',
       description:
-      'استعرض باقة متنوعة من خدمات الليزر والتجميل، الجلدية، وطب الأسنان من مقدمي خدمات معتمدين، بكل سهولة .',
+          'استعرض باقة متنوعة من خدمات الليزر والتجميل، الجلدية، وطب الأسنان من مقدمي خدمات معتمدين، بكل سهولة .',
       imagePath: 'assets/images/onboarding_img1.png',
     ),
     OnboardingPageData(
       title: 'أفضل العروض الأقرب لك',
       description:
-      'تصفح أفضل الأطباء، واطّلع على العروض الأكثر طلبًا والأقرب لموقعك، مع إمكانية حفظ عروضك المفضلة للرجوع لها لاحقًا.',
+          'تصفح أفضل الأطباء، واطّلع على العروض الأكثر طلبًا والأقرب لموقعك، مع إمكانية حفظ عروضك المفضلة للرجوع لها لاحقًا.',
       imagePath: 'assets/images/onboarding_img2.png',
     ),
     OnboardingPageData(
       title: 'احجز موعدك بثقة وسهولة',
       description:
-      'احجز العرض المناسب، حدّد االوقت المناسب لك ، وتابع حالة الحجز  مع إمكانية تقييم مقدم الخدمة بعد انتهاء الزيارة.',
+          'احجز العرض المناسب، حدّد االوقت المناسب لك ، وتابع حالة الحجز  مع إمكانية تقييم مقدم الخدمة بعد انتهاء الزيارة.',
       imagePath: 'assets/images/onboarding_img3.png',
     ),
   ];
@@ -94,8 +91,12 @@ class _OnboardingState extends State<Onboarding> {
                 ),
                 OnboardingFooterButtonsWidget(
                   onPressNext: () => _onNextPressed(),
-                  onPressSkip: () => context.pushWithNamed(Routes.homePage),
-                )
+                  onPressSkip: () =>
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) =>  HomePage()),
+                      ),
+                ),
               ],
             ),
           ),

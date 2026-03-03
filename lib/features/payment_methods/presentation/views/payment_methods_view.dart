@@ -3,8 +3,9 @@ import 'package:brandy_user/features/payment_methods/data/data_source/arguments/
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../core/constants/app_colors.dart';
+
 import '../../../../core/constants/app_assets.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../widgets/custom_payment_method_item_widget.dart';
 import '../widgets/custom_payment_summary_widget.dart';
 import 'payment_success_view.dart';
@@ -28,12 +29,21 @@ class PaymentMethodsView extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                  height: 175.h,
+                  height: MediaQuery.sizeOf(context).height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: const [Color(0x57C9C7D8), Color(0xFFFFF4ED)],
+                      colors: const [
+                        Color(0x57C9C7D8),
+                        Color(0xFFFFF4ED),
+                        Color(0xffffffff),
+                        Color(0xffffffff),
+                        Color(0xffffffff),
+                        Color(0xffffffff),
+                        Color(0xffffffff),
+                        Color(0xffffffff),
+                      ],
                     ),
                   ),
                 ),
@@ -44,27 +54,19 @@ class PaymentMethodsView extends StatelessWidget {
                   children: [
                     // Custom App Bar
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 10.h,
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             "استكمال الحجز",
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Cairo',
-                            ),
+                            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, fontFamily: 'Cairo'),
                           ),
                           widthSpace(12.w),
                           GestureDetector(
                             onTap: () => Navigator.pop(context),
                             child: SvgPicture.asset(
-                              AppAssets
-                                  .arrowForward, // Assuming arrow_forward for RTL back
+                              AppAssets.arrowForward, // Assuming arrow_forward for RTL back
                               width: 32.w,
                               height: 32.h,
                             ),
@@ -77,25 +79,17 @@ class PaymentMethodsView extends StatelessWidget {
                       child: SingleChildScrollView(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             heightSpace(24.h),
                             // Discount Code Section
                             Text(
                               "إضافة كود خصم (اختياري)",
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Cairo',
-                              ),
+                              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, fontFamily: 'Cairo'),
                             ),
                             Text(
                               "استخدم كود خصم للحصول على المزيد من الخصم",
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: AppColors.grayColor,
-                                fontFamily: 'Cairo',
-                              ),
+                              style: TextStyle(fontSize: 12.sp, color: AppColors.grayColor, fontFamily: 'Cairo'),
                             ),
                             heightSpace(12.h),
                             Container(
@@ -121,10 +115,7 @@ class PaymentMethodsView extends StatelessWidget {
                                       textAlign: TextAlign.right,
                                       decoration: InputDecoration(
                                         hintText: "اكتب كود الخصم",
-                                        hintStyle: TextStyle(
-                                          fontSize: 12.sp,
-                                          fontFamily: 'Cairo',
-                                        ),
+                                        hintStyle: TextStyle(fontSize: 12.sp, fontFamily: 'Cairo'),
                                         border: InputBorder.none,
                                         prefixIcon: Padding(
                                           padding: EdgeInsets.all(12.w),
@@ -181,20 +172,12 @@ class PaymentMethodsView extends StatelessWidget {
                                     logo: Row(
                                       children: [
                                         // Mocking card logos
-                                        Icon(
-                                          Icons.credit_card,
-                                          size: 24.w,
-                                          color: Colors.blue,
-                                        ),
+                                        Icon(Icons.credit_card, size: 24.w, color: Colors.blue),
                                       ],
                                     ),
                                     isSelected: false,
                                     onTap: () {},
-                                    trailing: Icon(
-                                      Icons.add_circle_outline,
-                                      color: AppColors.grayColor,
-                                      size: 20.sp,
-                                    ),
+                                    trailing: Icon(Icons.add_circle_outline, color: AppColors.grayColor, size: 20.sp),
                                   ),
                                   CustomPaymentMethodItemWidget(
                                     title: "Apple Pay",
@@ -205,15 +188,10 @@ class PaymentMethodsView extends StatelessWidget {
                                   CustomPaymentMethodItemWidget(
                                     title: "تابي",
                                     logo: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 8.w,
-                                        vertical: 2.h,
-                                      ),
+                                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                                       decoration: BoxDecoration(
                                         color: Color(0xff00d084),
-                                        borderRadius: BorderRadius.circular(
-                                          4.r,
-                                        ),
+                                        borderRadius: BorderRadius.circular(4.r),
                                       ),
                                       child: Text(
                                         "tabby",
@@ -230,15 +208,10 @@ class PaymentMethodsView extends StatelessWidget {
                                   CustomPaymentMethodItemWidget(
                                     title: "تمارا",
                                     logo: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 8.w,
-                                        vertical: 2.h,
-                                      ),
+                                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                                       decoration: BoxDecoration(
                                         color: Color(0xfffcd667),
-                                        borderRadius: BorderRadius.circular(
-                                          4.r,
-                                        ),
+                                        borderRadius: BorderRadius.circular(4.r),
                                       ),
                                       child: Text(
                                         "tamara",
@@ -272,17 +245,12 @@ class PaymentMethodsView extends StatelessWidget {
                             // Navigate to payment success demo
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const PaymentSuccessView(),
-                              ),
+                              MaterialPageRoute(builder: (context) => const PaymentSuccessView()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                            ),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.r)),
                           ),
                           child: Text(
                             "إتمام الدفع",

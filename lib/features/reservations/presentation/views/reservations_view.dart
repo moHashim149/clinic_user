@@ -10,6 +10,10 @@ import '../../../../generated/locale_keys.g.dart';
 import '../../data/models/reservation_model.dart';
 import '../widgets/custom_reservations_tab_widget.dart';
 import '../widgets/reservation_item_widget.dart';
+import '../../../../core/constants/app_assets.dart';
+import '../../../../core/util/routing/routes.dart';
+import '../../../../core/util/extensions/navigation.dart';
+import '../../data/models/reservation_details_model.dart';
 
 class ReservationsView extends StatefulWidget {
   const ReservationsView({super.key});
@@ -143,7 +147,51 @@ class _ReservationsViewState extends State<ReservationsView> {
                                     return ReservationItemWidget(
                                       reservation: filteredList[index],
                                       onTap: () {
-                                        // Navigate to details (To be implemented)
+                                        // Mocking details model for UI
+                                        final mockDetails = ReservationDetailsModel(
+                                          id: filteredList[index].id,
+                                          offerNumber:
+                                              filteredList[index].offerNumber,
+                                          orderNumber:
+                                              filteredList[index].orderNumber,
+                                          status: filteredList[index].status,
+                                          statusKey:
+                                              filteredList[index].statusKey ==
+                                                  'new'
+                                              ? 1
+                                              : filteredList[index].statusKey ==
+                                                    'current'
+                                              ? 2
+                                              : 3,
+                                          isPrevious:
+                                              filteredList[index].isPrevious,
+                                          date: filteredList[index].date.split(
+                                            ' ',
+                                          )[0],
+                                          time: "10:00 AM", // Mock time
+                                          clinicName:
+                                              "عيادات راما الطبية - فرع السويدي",
+                                          clinicRating: 4.8,
+                                          locationDistrict: filteredList[index]
+                                              .locationDistrict,
+                                          locationSubText: filteredList[index]
+                                              .locationSubText,
+                                          latitude: 24.7136,
+                                          longitude: 46.6753,
+                                          sessionsCount: 3,
+                                          offerImage: AppAssets.testImage,
+                                          originalPrice:
+                                              filteredList[index].price + 50.0,
+                                          discount: 50.0,
+                                          priceAfterDiscount:
+                                              filteredList[index].price,
+                                          vat: 0.0, // Mock VAT
+                                          total: filteredList[index].price,
+                                        );
+                                        context.pushWithNamed(
+                                          Routes.reservationDetailsView,
+                                          arguments: mockDetails,
+                                        );
                                       },
                                     );
                                   },

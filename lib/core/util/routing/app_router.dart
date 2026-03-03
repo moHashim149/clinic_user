@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:brandy_user/core/util/routing/routes.dart';
 import 'package:brandy_user/features/addresses/presentation/views/addresses_view.dart';
 import 'package:brandy_user/features/auth/data/arguments/create_acc_argument.dart';
@@ -9,6 +8,9 @@ import 'package:brandy_user/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:brandy_user/features/cart/presentation/views/cart_view.dart';
 import 'package:brandy_user/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:brandy_user/features/chat/presentation/views/chat_view.dart';
+import 'package:brandy_user/features/clinics/data/models/offer_model.dart';
+import 'package:brandy_user/features/clinics/presentation/views/clinic_location_map_view.dart';
+import 'package:brandy_user/features/clinics/presentation/views/offer_details_view.dart';
 import 'package:brandy_user/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:brandy_user/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:brandy_user/features/favorites/presentation/views/favorites_view.dart';
@@ -18,16 +20,15 @@ import 'package:brandy_user/features/order_details/presentation/cubit/order_deta
 import 'package:brandy_user/features/order_details/presentation/views/order_details_view.dart';
 import 'package:brandy_user/features/payment_methods/presentation/cubit/payment_methods_cubit.dart';
 import 'package:brandy_user/features/payment_methods/presentation/views/payment_methods_view.dart';
+import 'package:brandy_user/features/report/presentation/views/report_complaint_view.dart';
+import 'package:brandy_user/features/reservations/data/models/reservation_details_model.dart';
+import 'package:brandy_user/features/reservations/presentation/views/reservation_details_view.dart';
+import 'package:brandy_user/features/reservations/presentation/views/reservations_view.dart';
 import 'package:brandy_user/features/static_pages/terms/presentation/cubit/terms_and_cond_cubit.dart';
 import 'package:brandy_user/features/store_details/data/arguments/store_details_arguments.dart';
 import 'package:brandy_user/features/store_details/presentation/cubit/store_details_cubit.dart';
 import 'package:brandy_user/features/store_details/presentation/views/store_details_view.dart';
 import 'package:brandy_user/features/stories/presentation/views/stories_view.dart';
-import 'package:brandy_user/features/clinics/data/models/offer_model.dart';
-import 'package:brandy_user/features/clinics/presentation/views/offer_details_view.dart';
-import 'package:brandy_user/features/reservations/presentation/views/reservations_view.dart';
-import 'package:brandy_user/features/report/presentation/views/report_complaint_view.dart';
-import 'package:brandy_user/features/clinics/presentation/views/clinic_location_map_view.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +40,12 @@ import '../../../features/addresses/presentation/cubit/search_places_cubit/searc
 import '../../../features/addresses/presentation/cubit/select_location_cubit/select_location_cubit.dart';
 import '../../../features/addresses/presentation/views/select_address_view.dart';
 import '../../../features/auth/data/arguments/pin_code_argument.dart';
+import '../../../features/auth/data/arguments/verify_email_argument.dart';
 import '../../../features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../../features/auth/presentation/cubits/pin_code_cubit/pin_code_cubit.dart';
 import '../../../features/auth/presentation/views/create_acc_view.dart';
 import '../../../features/auth/presentation/views/create_account_imports.dart';
 import '../../../features/auth/presentation/views/create_service_provider_account_imports.dart';
-import '../../../features/auth/data/arguments/verify_email_argument.dart';
 import '../../../features/auth/presentation/views/log_in_view.dart';
 import '../../../features/bottom_nav/presentation/cubit/bottom_nav_cubit.dart';
 import '../../../features/bottom_nav/presentation/views/bottom_nav_view.dart';
@@ -72,7 +73,6 @@ import '../../../features/wallet/presentation/cubits/wallet_cubit/wallet_cubit.d
 import '../../../features/wallet/presentation/views/charge_wallet_view.dart';
 import '../../../features/wallet/presentation/views/wallet_view.dart';
 import '../../di/di.dart';
-import '../../framework/navigation_animation.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
@@ -267,6 +267,11 @@ class AppRouter {
         return _buildRoute(builder: (_) => OfferDetailsView(offer: args));
       case Routes.reservationsView:
         return _buildRoute(builder: (_) => const ReservationsView());
+      case Routes.reservationDetailsView:
+        final args = arguments as ReservationDetailsModel;
+        return _buildRoute(
+          builder: (_) => ReservationDetailsView(reservationDetails: args),
+        );
       case Routes.reportComplaintView:
         return _buildRoute(builder: (_) => const ReportComplaintView());
       case Routes.clinicLocationMapView:
@@ -274,10 +279,8 @@ class AppRouter {
         return _buildRoute(
           builder: (_) => ClinicLocationMapView(arguments: args),
         );
-        case Routes.homePage:
-        return _buildRoute(
-          builder: (_) => HomePage(),
-        );
+      case Routes.homePage:
+        return MaterialPageRoute(builder: (_) => HomePage());
 
       default:
         return _buildRoute(
@@ -291,8 +294,6 @@ class AppRouter {
   }
 
   PageRoute _buildRoute({required WidgetBuilder builder}) {
-    return Platform.isAndroid
-        ? FadePageRoute(builder: builder)
-        : MaterialPageRoute(builder: builder);
+    return MaterialPageRoute(builder: builder);
   }
 }

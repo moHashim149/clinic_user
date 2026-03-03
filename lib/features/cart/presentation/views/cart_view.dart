@@ -55,7 +55,7 @@ class CartView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             LocaleKeys.cartTitle.tr(),
@@ -132,7 +132,7 @@ class CartView extends StatelessWidget {
                       ];
 
                       return Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(

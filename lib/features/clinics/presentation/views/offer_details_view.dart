@@ -23,7 +23,7 @@ class OfferDetailsView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   heightSpace(24.h),
                   _buildCategoryAndTag(),
@@ -165,7 +165,7 @@ class OfferDetailsView extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -428,7 +428,7 @@ class OfferDetailsView extends StatelessWidget {
 
   Widget _buildDescriptionSection() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           LocaleKeys.offerDescription.tr(),

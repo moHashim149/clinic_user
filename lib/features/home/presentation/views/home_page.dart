@@ -75,7 +75,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBody(int index) {
-    if (index != 0) {
+    if (index == 1) {
+      return CartView(cartArguments: CartArguments());
+    } else if (index == 2) {
+      return const ReservationsView();
+    } else if (index != 0) {
       return Center(child: Text("Page $index"));
     }
     return SafeArea(
@@ -85,12 +89,7 @@ class _HomePageState extends State<HomePage> {
           Stack(
             children: [
               HomeBannerSlider(),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: HomeHeader(),
-              ),
+              Positioned(top: 0, left: 0, right: 0, child: HomeHeader()),
             ],
           ),
           // Shop our services
