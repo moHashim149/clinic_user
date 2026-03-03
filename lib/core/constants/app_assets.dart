@@ -25,6 +25,13 @@ abstract class AppAssets {
   static const String openLocation = "$_imagesPath/open_location.png";
   static const String simplification = "$_imagesPath/simplification.png";
   static const String homeBanner = "$_imagesPath/home_banner.png";
+  static const String servTestImg = "$_imagesPath/serv_test_img.png";
+  static const String bestClinicImgTest = "$_imagesPath/best_clinic_img_test.png";
+  static const String closestClinicImgTest = "$_imagesPath/closest_clinic_img_test.png";
+  static const String mostSellerImgTest = "$_imagesPath/most_seller_img_test.png";
+  static const String homeImgTest = "$_imagesPath/home_img_test.png";
+  static const String offersImg = "$_imagesPath/offers_img.png";
+  static const String loginReqImg = "$_imagesPath/login_req_img.png";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
@@ -84,8 +91,16 @@ abstract class AppAssets {
   static const String home = "$_iconsPath/home.svg";
   static const String cart = "$_iconsPath/cart.svg";
   static const String calender = "$_iconsPath/calender.svg";
-  static const String more = "$_iconsPath/more.svg";
   static const String notification = "$_iconsPath/notification.svg";
+  static const String more = "$_iconsPath/more.svg";
+  static const String chat2 = "$_iconsPath/chat2.svg";
+  static const String starHome = "$_iconsPath/star_home.svg";
+  static const String doubleLocation = "$_iconsPath/double_location.svg";
+  static const String infoIcon = "$_iconsPath/simplification.svg";
+  static const String termsIcon = "$_iconsPath/terms_icon.svg";
+  static const String faqIcon = "$_iconsPath/faq_icon.svg";
+  static const String communicateIcon = "$_iconsPath/communicate_icon.svg";
+  static const String ionChevronBack = "$_iconsPath/ion_chevron-back.svg";
 
   // test images
   static const String testImage =

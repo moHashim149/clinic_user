@@ -24,6 +24,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      HomeOffersDialog.show(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
       valueListenable: _bottomNavIndexNotifier,
@@ -31,6 +39,17 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackgroundColor,
           body: _buildBody(activeIndex),
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: AppColors.primary,
+            shape: const CircleBorder(),
+            child: SvgPicture.asset(
+              AppAssets.chat2,
+              height: 26.h,
+              width: 28.w,
+            ),
+          ),
           bottomNavigationBar: AnimatedBottomNavigationBar.builder(
             itemCount: _iconList.length,
             tabBuilder: (int index, bool isActive) {
@@ -75,30 +94,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBody(int index) {
-    if (index == 1) {
-      return CartView(cartArguments: CartArguments());
-    } else if (index == 2) {
-      return const ReservationsView();
-    } else if (index != 0) {
+    if (index == 3) {
+      return const MoreView();
+    }
+    if (index != 0) {
       return Center(child: Text("Page $index"));
     }
-    return SafeArea(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          Stack(
-            children: [
-              HomeBannerSlider(),
-              Positioned(top: 0, left: 0, right: 0, child: HomeHeader()),
-            ],
-          ),
-          // Shop our services
-          // Best clinics
-          // Nearest to you
-          // Best sellers
-          // Banners
-        ],
-      ),
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        Stack(
+          children: [
+            HomeBannerSlider(),
+            Positioned(
+              top: 80,
+              left: 0,
+              right: 0,
+              child: HomeHeader(),
+            ),
+          ],
+        ),
+        HomeServicesSection(),          // Best clinics
+        HomeClinicsSection(),
+        HomeClosestClinicSection(),
+        HomeBestSellersSection(),
+        HomeAdsImgSection(),
+      ],
     );
   }
 

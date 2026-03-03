@@ -281,6 +281,13 @@ class AppRouter {
         );
       case Routes.homePage:
         return MaterialPageRoute(builder: (_) => HomePage());
+      case Routes.loginView:
+        return _buildRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignInCubit>(),
+            child: const SignInView(),
+          ),
+        );
 
       default:
         return _buildRoute(

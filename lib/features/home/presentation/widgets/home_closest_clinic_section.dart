@@ -1,7 +1,7 @@
 part of 'home_widgets_imports.dart';
 
-class HomeClinicsSection extends StatelessWidget {
-  const HomeClinicsSection({super.key,});
+class HomeClosestClinicSection extends StatelessWidget {
+  const HomeClosestClinicSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +13,18 @@ class HomeClinicsSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'افضل العيادات',
+                'الاقرب لك',
                 style: AppTextStyles.textStyle16.copyWith(
                   fontWeight: FontWeight.w700,
                   color: AppColors.headline,
                 ),
               ),
-              GestureDetector(
-                onTap: () => HomeLoginRequiredDialog.show(context),
-                child: Text(
-                  "عرض الكل",
-                  style: AppTextStyles.textStyle10.copyWith(
-                    color: AppColors.headline,
-                    fontWeight: FontWeight.w700,
-                    decoration: TextDecoration.underline,
-                  ),
+              Text(
+                "عرض الكل",
+                style: AppTextStyles.textStyle10.copyWith(
+                  color: AppColors.headline,
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ],
@@ -43,7 +40,7 @@ class HomeClinicsSection extends StatelessWidget {
               return Container(
                 width: 154.w,
                 height: 195.h,
-                margin: EdgeInsetsGeometry.symmetric(horizontal: 8.w),
+                margin: EdgeInsets.symmetric(horizontal: 8.w),
                 padding: EdgeInsets.all(8.r),
                 decoration: BoxDecoration(
                   color: AppColors.whiteColor,
@@ -64,7 +61,7 @@ class HomeClinicsSection extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.r),
                             image: const DecorationImage(
-                              image: AssetImage(AppAssets.bestClinicImgTest),
+                              image: AssetImage(AppAssets.closestClinicImgTest),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -102,8 +99,8 @@ class HomeClinicsSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SvgPicture.asset(
-                        AppAssets.doubleLocation,
-                      ),
+                          AppAssets.doubleLocation,
+                        ),
                         SizedBox(width: 4.w),
                         Text(
                           "2.5 كم",

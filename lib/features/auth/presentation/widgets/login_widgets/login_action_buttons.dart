@@ -39,18 +39,12 @@ class LoginActionButtons extends StatelessWidget {
           txtColor: AppColors.primary,
         ),
         heightSpace(16),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            "الدخول كزائر",
-            style: AppTextStyles.textStyle18w700.copyWith(
-              color: AppColors.primary,
-            ),
-          ),
-        ).onTapShadow(
-          function: () {
-            context.pushAndRemoveUntilWithNamed(Routes.homePage);
-          },
+        CustomButton(
+          onPressed: () => context.pushWithNamed(Routes.homePage),
+          text: "الدخول كزائر",
+          backgroundColor: AppColors.transparentColor,
+          borderColor: AppColors.transparentColor,
+          txtColor: AppColors.primary,
         ),
       ],
     );
