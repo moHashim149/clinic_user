@@ -8,17 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/custom_error.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/framework/spaces.dart';
-import '../../../../core/util/extensions/navigation.dart';
-import '../../../../core/util/routing/routes.dart';
 import '../../../../core/widgets/custom_loading.dart';
 import '../../../../core/widgets/custom_visitor_widget.dart';
-import '../../../create_account/create_account_imports.dart' show CreateAccount;
-import '../../../create_service_provider_account/create_service_provider_account_imports.dart';
+import '../../../auth/presentation/views/create_service_provider_account_imports.dart';
 import '../cubit/women_cubit.dart';
 import '../widgets/custom_best_stores_list_widget.dart';
 import '../widgets/custom_categories_widget.dart';
 import '../widgets/custom_header_widget.dart';
-import '../widgets/custom_search_widget.dart';
 import '../widgets/custom_slider_and_indicator_widget.dart';
 import '../widgets/custom_stores_list_widget.dart';
 import '../widgets/custom_stories_widget.dart';
@@ -54,19 +50,19 @@ class WomenView extends StatelessWidget {
                         userModel: cubit.userModel,
                         address: cubit.currentLocation,
                       ),
-                      GestureDetector(
-                        onTap: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateAccount(),
-                          ),
-                        ),
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          color: AppColors.blueColor,
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: () => Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => CreateAccount(),
+                      //     ),
+                      //   ),
+                      //   child: Container(
+                      //     width: 50,
+                      //     height: 50,
+                      //     color: AppColors.blueColor,
+                      //   ),
+                      // ),
                       GestureDetector(
                         onTap: () => Navigator.pushReplacement(
                           context,

@@ -1,4 +1,4 @@
-part of 'create_account_widgets_imports.dart';
+part of "create_account_widgets_imports.dart";
 
 class CreateAccountButton extends StatelessWidget {
   final VoidCallback onPressed;
