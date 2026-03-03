@@ -6,6 +6,7 @@ import 'package:brandy_user/core/constants/app_colors.dart';
 import 'package:brandy_user/core/constants/app_assets.dart';
 import 'package:brandy_user/core/constants/app_text_styles.dart';
 
+import '../../../more/presentation/views/more_view.dart';
 import '../widgets/home_widgets_imports.dart';
 
 part 'home_page.dart';

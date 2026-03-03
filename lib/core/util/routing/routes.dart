@@ -26,6 +26,7 @@ class Routes {
   static const String createAccount = '/createAccount';
   static const String createServiceProviderAccount = '/createServiceProviderAccount';
   static const String homePage = '/homePage';
+  static const String loginView = '/login_view';
 
 
 

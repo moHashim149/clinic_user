@@ -261,9 +261,16 @@ class AppRouter {
         return _buildRoute(
           builder: (_) => CreateServiceProviderAccount(),
         );
-        case Routes.homePage:
+      case Routes.homePage:
         return _buildRoute(
           builder: (_) => HomePage(),
+        );
+      case Routes.loginView:
+        return _buildRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignInCubit>(),
+            child: const SignInView(),
+          ),
         );
 
       default:

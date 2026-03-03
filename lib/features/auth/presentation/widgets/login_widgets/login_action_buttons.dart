@@ -45,7 +45,7 @@ class LoginActionButtons extends StatelessWidget {
         heightSpace(16),
         CustomButton(
           onPressed: () => context.pushWithNamed(Routes.homePage),
-          text: "انشاء حساب",
+          text: "الدخول كزائر",
           backgroundColor: AppColors.transparentColor,
           borderColor: AppColors.transparentColor,
           txtColor: AppColors.primary,

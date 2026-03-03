@@ -6,6 +6,7 @@ class AppColors {
   static const Color stroke = Color(0xffC6C6C6);
   static const Color inputTextColor = Color(0xffAAAAAA);
   static const Color secondary = Color(0xffEFFFFB);
+  static const Color secondaryWhite = Color(0xffFFECEF);
   static const Color ratingStarColor = Color(0xffFCDB38);
   static const Color whiteSecondaryColor = Color(0xffFCFCFC);
   static const Color scaffoldBackgroundColor = Color(0xffFEFCFF);
