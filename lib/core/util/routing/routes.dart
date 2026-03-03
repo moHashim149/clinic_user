@@ -25,6 +25,7 @@ class Routes {
   static const String verifyEmailView = '/verifyEmailView';
   static const String createAccount = '/createAccount';
   static const String createServiceProviderAccount = '/createServiceProviderAccount';
+  static const String homePage = '/homePage';
 
 
 

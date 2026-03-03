@@ -12,6 +12,7 @@ import 'package:brandy_user/features/chat/presentation/views/chat_view.dart';
 import 'package:brandy_user/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:brandy_user/features/favorites/presentation/cubit/favorites_cubit.dart';
 import 'package:brandy_user/features/favorites/presentation/views/favorites_view.dart';
+import 'package:brandy_user/features/home/presentation/views/home_page_imports.dart';
 import 'package:brandy_user/features/language/presentation/cubit/language_cubit.dart';
 import 'package:brandy_user/features/order_details/presentation/cubit/order_details_cubit.dart';
 import 'package:brandy_user/features/order_details/presentation/views/order_details_view.dart';
@@ -259,6 +260,10 @@ class AppRouter {
       case Routes.createServiceProviderAccount:
         return _buildRoute(
           builder: (_) => CreateServiceProviderAccount(),
+        );
+        case Routes.homePage:
+        return _buildRoute(
+          builder: (_) => HomePage(),
         );
 
       default:

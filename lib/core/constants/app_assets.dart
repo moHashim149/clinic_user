@@ -24,6 +24,7 @@ abstract class AppAssets {
   static const String locationIcon = "$_imagesPath/location_icon.png";
   static const String openLocation = "$_imagesPath/open_location.png";
   static const String simplification = "$_imagesPath/simplification.png";
+  static const String homeBanner = "$_imagesPath/home_banner.png";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
@@ -80,6 +81,11 @@ abstract class AppAssets {
   static const String pin = "$_iconsPath/pin.svg";
   static const String correct = "$_iconsPath/correct.svg";
   static const String locationIcon2 = "$_iconsPath/location_icon2.svg";
+  static const String home = "$_iconsPath/home.svg";
+  static const String cart = "$_iconsPath/cart.svg";
+  static const String calender = "$_iconsPath/calender.svg";
+  static const String more = "$_iconsPath/more.svg";
+  static const String notification = "$_iconsPath/notification.svg";
 
   // test images
   static const String testImage =
