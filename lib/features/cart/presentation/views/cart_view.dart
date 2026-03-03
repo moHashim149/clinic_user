@@ -1,26 +1,14 @@
 import 'package:brandy_user/core/framework/spaces.dart';
-import 'package:brandy_user/core/widgets/custom_app_bar.dart';
-import 'package:brandy_user/core/widgets/custom_empty_data_widget.dart';
-import 'package:brandy_user/core/widgets/custom_toast.dart';
 import 'package:brandy_user/features/cart/data/arguments/cart_arguments.dart';
-import 'package:brandy_user/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:brandy_user/features/cart/presentation/widgets/custom_cart_coupon_field_widget.dart';
-import 'package:brandy_user/features/cart/presentation/widgets/custom_cart_item_widget.dart';
-import 'package:brandy_user/features/cart/presentation/widgets/custom_cart_notes_widget.dart';
+import 'package:brandy_user/features/cart/data/models/offer_cart_item_model.dart';
+import 'package:brandy_user/features/cart/presentation/widgets/custom_offer_cart_item_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
-import '../../../../core/util/extensions/navigation.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/util/routing/routes.dart';
-import '../../../../core/widgets/custom_error.dart';
-import '../../../../core/widgets/custom_loading.dart';
 import '../../../payment_methods/data/data_source/arguments/payment_methods_arguments.dart';
-import '../widgets/custom_cart_address_widget.dart';
-import '../widgets/custom_cart_pay_widget.dart';
-import '../widgets/custom_cart_privacy_widget.dart';
-import '../widgets/custom_cart_summary_widget.dart';
 
 class CartView extends StatelessWidget {
   final CartArguments cartArguments;
@@ -29,139 +17,175 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: LocaleKeys.cartTitle.tr()),
-      persistentFooterDecoration: BoxDecoration(),
-      persistentFooterButtons: [
-        BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            final cubit = context.read<CartCubit>();
-            if (cubit.cartModel?.orderItems.isNotEmpty ?? false) {
-              return CustomCartPayWidget(
-                onTap: () {
-                  if (cubit.addresses.isNotEmpty) {
-                    context.pushWithNamed(
-                      Routes.paymentMethodsView,
-                      arguments: PaymentMethodsArguments(
-                        locationId: cubit.addresses.firstOrNull?.id ?? 0,
-                        total: cubit.calculateTotal(
-                          cubit.cartModel!.itemsTotal,
-                          cubit.cartModel!.deliveryCost,
-                          cubit.cartModel!.taxAmount
-                        ),
-                        couponCode: cubit.couponController.text.isEmpty
-                            ? null
-                            : cubit.couponController.text,
+      backgroundColor: AppColors.whiteColor,
+      body: Stack(
+        children: [
+          // Gradient Header Background
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 175.h,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color(0xffececec).withOpacity(0.4),
+                    const Color(0xffecfffb),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+          ),
+
+          // Main Content
+          SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Top App Bar Area
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.w,
+                    vertical: 10.h,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            LocaleKeys.cartTitle.tr(),
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            "(${LocaleKeys.beautyClinic.tr()})",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Cairo',
+                              color: AppColors.grayColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    );
-                  } else {
-                    showToast(
-                      text: LocaleKeys.youMustAddAddress.tr(),
-                      state: ToastStates.error,
-                    );
-                  }
-                },
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-        ),
-      ],
-      body: BlocBuilder<CartCubit, CartState>(
-        builder: (context, state) {
-          final cubit = context.read<CartCubit>();
-          if (state is CartLoading) {
-            return CustomLoading();
-          } else if (state is CartFailure) {
-            return CustomError(
-              error: state.error,
-              retry: () {
-                cubit.fetchCart();
-              },
-            );
-          } else {
-            return cubit.cartModel!.orderItems.isNotEmpty
-                ? SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 30.h,
-                      horizontal: 24.w,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomCartAddressWidget(
-                          addressModel: cubit.addresses.firstOrNull,
-                          onUpdate: () {
-                            cubit.fetchCart();
-                          },
-                        ),
-                        heightSpace(24.h),
-                        ...List.generate(
-                          cubit.cartModel!.orderItems.length,
-                          (index) => CustomCartItemWidget(
-                            cartItemModel: cubit.cartModel!.orderItems[index],
-                            plusOnTap: () {
-                              cubit.updateCart(
-                                cubit.cartModel!.orderItems[index],
-                                true,
-                                  cartArguments.onUpdate
-                              );
-                            },
-                            minusOnTap: () {
-                              cubit.updateCart(
-                                cubit.cartModel!.orderItems[index],
-                                false,
-                                cartArguments.onUpdate
-                              );
-                            },
-                            deleteOnTap: () {
-                              cubit.deleteCart(
-                                cubit.cartModel!.orderItems[index],
-                                context,
-                                  cartArguments.onUpdate
-                              );
-                            },
+                      widthSpace(10.w),
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          width: 32.w,
+                          height: 32.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            size: 14.sp,
+                            color: Colors.black,
                           ),
                         ),
-                        heightSpace(12.h),
-                        CustomCartCouponFieldWidget(
-                          controller: cubit.couponController,
-                          isCouponApplied: cubit.couponModel != null,
-                          isLoading: state is CheckCouponLoading,
-                          onTap: () {
-                            if (cubit.couponModel == null) {
-                              cubit.checkCoupon();
-                            } else {
-                              cubit.clearCoupon();
-                            }
-                          },
+                      ),
+                    ],
+                  ),
+                ),
+
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      final items = [
+                        OfferCartItemModel(
+                          id: 1,
+                          offerNumber: "45896",
+                          bookingDate: "02 يناير 2026 ، 09:00م",
+                          district: "حي السويدي",
+                          locationSubText: "مجمع الرياض امام مسجد الفرج",
+                          image:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+                          price: 500.70,
                         ),
-                        heightSpace(24.h),
-                        CustomCartSummaryWidget(
-                          cartTotal: cubit.cartModel!.itemsTotal,
-                          deliveryFee: cubit.cartModel!.deliveryCost,
-                          discount:
-                              cubit.calculateDiscountValue(
-                                cubit.cartModel!.itemsTotal,
-                              ) ??
-                              0,
-                          grandTotal: cubit.calculateTotal(
-                            cubit.cartModel!.itemsTotal,
-                            cubit.cartModel!.deliveryCost,
-                            cubit.cartModel!.taxAmount
+                        OfferCartItemModel(
+                          id: 2,
+                          offerNumber: "45897",
+                          bookingDate: "05 يناير 2026 ، 10:30ص",
+                          district: "حي المروج",
+                          locationSubText: "برج المملكة، الدور الثالث",
+                          image:
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+                          price: 750.00,
+                        ),
+                      ];
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 24.w,
+                              vertical: 16.h,
+                            ),
+                            child: Text(
+                              LocaleKeys.cartContent.tr(
+                                namedArgs: {'count': items.length.toString()},
+                              ),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Cairo',
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
-                          tax: cubit.cartModel!.taxAmount,
-                        ),
-                        heightSpace(24.h),
-                        CustomCartPrivacyWidget(),
-                        heightSpace(24.h),
-                        CustomCartNotesWidget(notesCtrl: cubit.notesController),
-                      ],
-                    ),
-                  )
-                : CustomEmptyDataWidget(text: LocaleKeys.emptyCart.tr());
-          }
-        },
+                          Expanded(
+                            child: ListView.separated(
+                              padding: EdgeInsets.symmetric(horizontal: 24.w),
+                              itemCount: items.length,
+                              separatorBuilder: (context, index) =>
+                                  heightSpace(25.h),
+                              itemBuilder: (context, index) {
+                                return CustomOfferCartItemWidget(
+                                  offerCartItemModel: items[index],
+                                  onDelete: () {
+                                    // Static delete logic for UI only
+                                  },
+                                  onCompleteBooking: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.paymentMethodsView,
+                                      arguments: PaymentMethodsArguments(
+                                        locationId: 1, // Mock location ID
+                                        total: items[index].price,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -190,5 +190,34 @@ abstract class  LocaleKeys {
   static const rejected = 'rejected';
   static const all = 'all';
   static const youMustAddAddress = 'youMustAddAddress';
+  static const delete = 'delete';
+  static const completeBooking = 'completeBooking';
+  static const cartContent = 'cartContent';
+  static const beautyClinic = 'beautyClinic';
+  static const offerId = 'offerId';
+  static const openMap = 'openMap';
+  static const cashbackMessage = 'cashbackMessage';
+  static const deviceUsed = 'deviceUsed';
+  static const sessionsCount = 'sessionsCount';
+  static const offerDescription = 'offerDescription';
+  static const myReservations = 'myReservations';
+  static const currentReservations = 'currentReservations';
+  static const previousReservations = 'previousReservations';
+  static const noActiveReservations = 'noActiveReservations';
+  static const orderStatusNew = 'orderStatusNew';
+  static const orderStatusCurrent = 'orderStatusCurrent';
+  static const orderStatusInProgress = 'orderStatusInProgress';
+  static const orderStatusEnded = 'orderStatusEnded';
+  static const orderStatusMissed = 'orderStatusMissed';
+  static const reservationDetails = 'reservationDetails';
+  static const report = 'report';
+  static const complaintTitle = 'complaintTitle';
+  static const complaintText = 'complaintText';
+  static const attachImageOptional = 'attachImageOptional';
+  static const cancel = 'cancel';
+  static const submitComplaint = 'submitComplaint';
+  static const chat = 'chat';
+  static const call = 'call';
+  static const evaluateClinic = 'evaluateClinic';
 
 }

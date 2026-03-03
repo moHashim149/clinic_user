@@ -1,9 +1,11 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'brandy_app.dart';
 import 'core/di/di.dart';
 import 'core/framework/bloc_observer.dart';
@@ -19,10 +21,7 @@ import 'core/util/routing/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   await configureDependencies();
   await Future.wait([
@@ -31,7 +30,6 @@ void main() async {
     EasyLocalization.ensureInitialized(),
   ]);
   Bloc.observer = MyBlocObserver();
-
 
   runApp(
     EasyLocalization(

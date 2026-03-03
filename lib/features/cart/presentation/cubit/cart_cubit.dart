@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:brandy_user/features/addresses/data/repository/addresses_repository.dart';
+import 'package:brandy_user/features/cart/data/models/offer_cart_item_model.dart';
 import 'package:brandy_user/features/cart/data/params/remove_from_cart_param.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -24,6 +25,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit(this.cartRepository, this.appPrefs, this.addressesRepository)
     : super(CartInitial());
   CartModel? cartModel;
+  List<OfferCartItemModel> offerItems = [];
 
   String? get token => appPrefs.getData(key: AppCached.token);
 
@@ -48,26 +50,106 @@ class CartCubit extends Cubit<CartState> {
     final result = await cartRepository.fetchCart();
     result.fold(
       (l) {
-        emit(CartFailure(l.message));
+        // user requested mock data instead of failure for testing the UI
+        offerItems = [
+          OfferCartItemModel(
+            id: 1,
+            offerNumber: "45896",
+            bookingDate: "02 يناير 2026 ، 09:00م",
+            district: "حي السويدي",
+            locationSubText: "مجمع الرياض امام مسجد الفرج",
+            image:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+            price: 500.70,
+          ),
+          OfferCartItemModel(
+            id: 2,
+            offerNumber: "45897",
+            bookingDate: "05 يناير 2026 ، 10:30ص",
+            district: "حي المروج",
+            locationSubText: "برج المملكة، الدور الثالث",
+            image:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+            price: 750.00,
+          ),
+        ];
+        emit(CartLoaded());
       },
       (cartModel) {
         this.cartModel = cartModel;
+        // Mocking mapping to OfferCartItemModel for the new design
+        offerItems = cartModel.orderItems
+            .map(
+              (item) => OfferCartItemModel(
+                id: item.id,
+                offerNumber: "4589${item.id}", // Mocked
+                bookingDate: "02 يناير 2026 ، 09:00م", // Mocked
+                district: "حي السويدي", // Mocked
+                locationSubText: "مجمع الرياض امام مسجد الفرج", // Mocked
+                image:
+                    item.product.image ??
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+                price: item.priceAfterDiscount != 0
+                    ? item.priceAfterDiscount
+                    : item.price,
+              ),
+            )
+            .toList();
+
+        // Ensure some data for demo if empty
+        if (offerItems.isEmpty) {
+          offerItems = [
+            OfferCartItemModel(
+              id: 1,
+              offerNumber: "45896",
+              bookingDate: "02 يناير 2026 ، 09:00م",
+              district: "حي السويدي",
+              locationSubText: "مجمع الرياض امام مسجد الفرج",
+              image:
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+              price: 500.70,
+            ),
+            OfferCartItemModel(
+              id: 2,
+              offerNumber: "45897",
+              bookingDate: "05 يناير 2026 ، 10:30ص",
+              district: "حي المروج",
+              locationSubText: "برج المملكة، الدور الثالث",
+              image:
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmrDDrc-6BUaso8th2bVUxJI8rpvTVa-Zpbg&s",
+              price: 750.00,
+            ),
+          ];
+        }
+
         fetchAddresses();
       },
     );
   }
 
-  Future<void> updateCart(CartItemModel cartItemModel, bool isIncrement,VoidCallback? onUpdate) async {
+  Future<void> updateCart(
+    CartItemModel cartItemModel,
+    bool isIncrement,
+    VoidCallback? onUpdate,
+  ) async {
     if (isIncrement) {
       cartItemModel.count = cartItemModel.count + 1;
-      cartModel!.itemsTotal += cartItemModel.priceAfterDiscount == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount;
+      cartModel!.itemsTotal += cartItemModel.priceAfterDiscount == 0
+          ? cartItemModel.price
+          : cartItemModel.priceAfterDiscount;
     } else {
       cartItemModel.count = cartItemModel.count - 1;
-      cartModel!.itemsTotal -= cartItemModel.priceAfterDiscount == 0 ? cartItemModel.price : cartItemModel.priceAfterDiscount;
+      cartModel!.itemsTotal -= cartItemModel.priceAfterDiscount == 0
+          ? cartItemModel.price
+          : cartItemModel.priceAfterDiscount;
     }
     emit(UpdateCartLoading());
     final result = await cartRepository.updateCart(
-      UpdateCartParam(productId: cartItemModel.product.id, count: cartItemModel.count,variantId: cartItemModel.variantId),
+      UpdateCartParam(
+        productId: cartItemModel.product.id,
+        count: cartItemModel.count,
+        variantId: cartItemModel.variantId,
+      ),
     );
     result.fold(
       (l) {
@@ -75,7 +157,7 @@ class CartCubit extends Cubit<CartState> {
         emit(UpdateCartFailure());
       },
       (message) {
-        if(onUpdate != null) {
+        if (onUpdate != null) {
           onUpdate();
         }
         emit(UpdateCartLoaded());
@@ -84,13 +166,14 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> deleteCart(
-    CartItemModel cartItemModel,
-    BuildContext context
-  ,VoidCallback? onUpdate
+    OfferCartItemModel offerItem,
+    BuildContext context,
+    VoidCallback? onUpdate,
   ) async {
     emit(DeleteCartLoading());
+    // Mapping back to original item id for deletion
     final result = await cartRepository.removeFromCart(
-      RemoveFromCartParam(id: cartItemModel.id),
+      RemoveFromCartParam(id: offerItem.id),
     );
     result.fold(
       (l) {
@@ -98,10 +181,8 @@ class CartCubit extends Cubit<CartState> {
         emit(DeleteCartFailure());
       },
       (message) {
-        cartModel!.orderItems.remove(cartItemModel);
-        cartModel!.itemsTotal = cartModel!.itemsTotal - 1;
-        cartModel!.grandTotal = cartModel!.grandTotal - cartItemModel.total;
-        if(onUpdate != null) {
+        offerItems.remove(offerItem);
+        if (onUpdate != null) {
           onUpdate();
         }
         emit(DeleteCartLoaded());
@@ -150,9 +231,12 @@ class CartCubit extends Cubit<CartState> {
     return num.parse(couponModel!.discount.toDouble().toStringAsFixed(1));
   }
 
-  num calculateTotal(num subtotal, num deliveryCost,num taxAmount) {
+  num calculateTotal(num subtotal, num deliveryCost, num taxAmount) {
     return num.parse(
-      (subtotal - (calculateDiscountValue(subtotal) ?? 0) + deliveryCost + taxAmount)
+      (subtotal -
+              (calculateDiscountValue(subtotal) ?? 0) +
+              deliveryCost +
+              taxAmount)
           .toDouble()
           .toStringAsFixed(1),
     );

@@ -24,10 +24,12 @@ class Routes {
   static const String storiesView = '/storiesView';
   static const String verifyEmailView = '/verifyEmailView';
   static const String createAccount = '/createAccount';
-  static const String createServiceProviderAccount = '/createServiceProviderAccount';
-
-
+  static const String createServiceProviderAccount =
+      '/createServiceProviderAccount';
 
   static const String verifyPhone = '/verifyPhone';
-
+  static const String offerDetailsView = '/offerDetailsView';
+  static const String reservationsView = '/reservationsView';
+  static const String reportComplaintView = '/reportComplaintView';
+  static const String clinicLocationMapView = '/clinicLocationMapView';
 }

@@ -22,6 +22,11 @@ import 'package:brandy_user/features/store_details/data/arguments/store_details_
 import 'package:brandy_user/features/store_details/presentation/cubit/store_details_cubit.dart';
 import 'package:brandy_user/features/store_details/presentation/views/store_details_view.dart';
 import 'package:brandy_user/features/stories/presentation/views/stories_view.dart';
+import 'package:brandy_user/features/clinics/data/models/offer_model.dart';
+import 'package:brandy_user/features/clinics/presentation/views/offer_details_view.dart';
+import 'package:brandy_user/features/reservations/presentation/views/reservations_view.dart';
+import 'package:brandy_user/features/report/presentation/views/report_complaint_view.dart';
+import 'package:brandy_user/features/clinics/presentation/views/clinic_location_map_view.dart';
 import 'package:brandy_user/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -253,12 +258,20 @@ class AppRouter {
           builder: (_) => VerifyEmailView(argument: verifyEmailArguments),
         );
       case Routes.createAccount:
-        return _buildRoute(
-          builder: (_) => CreateAccount(),
-        );
+        return _buildRoute(builder: (_) => CreateAccount());
       case Routes.createServiceProviderAccount:
+        return _buildRoute(builder: (_) => CreateServiceProviderAccount());
+      case Routes.offerDetailsView:
+        final args = arguments as OfferModel;
+        return _buildRoute(builder: (_) => OfferDetailsView(offer: args));
+      case Routes.reservationsView:
+        return _buildRoute(builder: (_) => const ReservationsView());
+      case Routes.reportComplaintView:
+        return _buildRoute(builder: (_) => const ReportComplaintView());
+      case Routes.clinicLocationMapView:
+        final args = arguments as ClinicLocationMapArguments;
         return _buildRoute(
-          builder: (_) => CreateServiceProviderAccount(),
+          builder: (_) => ClinicLocationMapView(arguments: args),
         );
 
       default:
