@@ -39,6 +39,13 @@ class CustomOrderItemWidget extends StatelessWidget {
         children: [
           Row(
             children: [
+              CustomImageNetwork(
+                image: orderModel.orderItems.first.product.image ?? "",
+                widthImage: 73.w,
+                heightImage: 62.h,
+                radiusValue: 8.r,
+              ),
+              widthSpace(12.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,12 +84,6 @@ class CustomOrderItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              CustomImageNetwork(
-                image: orderModel.orderItems.first.product.image ?? "",
-                widthImage: 73.w,
-                heightImage: 62.h,
-                radiusValue: 8.r,
               ),
             ],
           ),

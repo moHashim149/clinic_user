@@ -91,7 +91,7 @@ abstract class AppAssets {
   static const String home = "$_iconsPath/home.svg";
   static const String cart = "$_iconsPath/cart.svg";
   static const String calender = "$_iconsPath/calender.svg";
-  static const String notification = "$_iconsPath/notification.svg";
+  static const String notification = "$_iconsPath/notification_header.svg";
   static const String more = "$_iconsPath/more.svg";
   static const String chat2 = "$_iconsPath/chat2.svg";
   static const String starHome = "$_iconsPath/star_home.svg";

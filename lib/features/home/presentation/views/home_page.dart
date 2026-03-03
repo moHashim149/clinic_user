@@ -94,10 +94,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBody(int index) {
-    if (index == 3) {
-      return const MoreView();
-    }
-    if (index != 0) {
+    if (index == 1) {
+      return CartView(cartArguments: CartArguments());
+    } else if (index == 2) {
+      return const ReservationsView();
+    } else if (index != 0) {
       return Center(child: Text("Page $index"));
     }
     return ListView(

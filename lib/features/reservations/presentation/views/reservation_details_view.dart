@@ -256,6 +256,24 @@ class ReservationDetailsView extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
+                          Container(
+                            width: 64.r,
+                            height: 64.r,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.r),
+                              color: const Color(0xFF5A665A),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "M",
+                                style: AppTextStyles.textStyle24.copyWith(
+                                  color: Colors.white30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          widthSpace(12.w),
                           Expanded(
                             child: Column(
                               children: [
@@ -347,24 +365,6 @@ class ReservationDetailsView extends StatelessWidget {
                               ],
                             ),
                           ),
-                          widthSpace(12.w),
-                          Container(
-                            width: 64.r,
-                            height: 64.r,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.r),
-                              color: const Color(0xFF5A665A),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "M",
-                                style: AppTextStyles.textStyle24.copyWith(
-                                  color: Colors.white30,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -391,29 +391,19 @@ class ReservationDetailsView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "${reservationDetails.total}",
-                                    style: AppTextStyles.textStyle16.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.blackColor,
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    child: Image.network(
+                                      reservationDetails.offerImage.isNotEmpty
+                                          ? reservationDetails.offerImage
+                                          : AppAssets.testImage,
+                                      width: 70.r,
+                                      height: 70.r,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                  widthSpace(4.w),
-                                  SvgPicture.asset(
-                                    AppAssets.currency,
-                                    width: 14.w,
-                                    height: 14.h,
-                                    colorFilter: const ColorFilter.mode(
-                                      AppColors.blackColor,
-                                      BlendMode.srcIn,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
+                                  widthSpace(12.w),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -437,16 +427,26 @@ class ReservationDetailsView extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  widthSpace(12.w),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    child: Image.network(
-                                      reservationDetails.offerImage.isNotEmpty
-                                          ? reservationDetails.offerImage
-                                          : AppAssets.testImage,
-                                      width: 70.r,
-                                      height: 70.r,
-                                      fit: BoxFit.cover,
+                                ],
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${reservationDetails.total}",
+                                    style: AppTextStyles.textStyle16.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.blackColor,
+                                    ),
+                                  ),
+                                  widthSpace(4.w),
+                                  SvgPicture.asset(
+                                    AppAssets.currency,
+                                    width: 14.w,
+                                    height: 14.h,
+                                    colorFilter: const ColorFilter.mode(
+                                      AppColors.blackColor,
+                                      BlendMode.srcIn,
                                     ),
                                   ),
                                 ],
