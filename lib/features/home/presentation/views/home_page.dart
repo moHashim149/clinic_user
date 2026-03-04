@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
     } else if (index == 2) {
       return const ReservationsView();
     } else if (index != 0) {
-      return Center(child: Text("Page $index"));
+      return MoreView();
     }
     return ListView(
       padding: EdgeInsets.zero,

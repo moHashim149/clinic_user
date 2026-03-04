@@ -5,9 +5,14 @@ import 'package:brandy_user/features/more/presentation/widgets/more_help_item.da
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MoreView extends StatelessWidget {
+class MoreView extends StatefulWidget {
   const MoreView({super.key});
 
+  @override
+  State<MoreView> createState() => _MoreViewState();
+}
+
+class _MoreViewState extends State<MoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
