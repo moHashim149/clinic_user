@@ -52,6 +52,7 @@ import '../../../features/bottom_nav/presentation/views/bottom_nav_view.dart';
 import '../../../features/cart/data/arguments/cart_arguments.dart';
 import '../../../features/chat/data/arguments/chat_arguments.dart';
 import '../../../features/edit_profile/presentation/views/edit_profile_view.dart';
+import '../../../features/home/presentation/widgets/home_widgets_imports.dart';
 import '../../../features/intro/select_language/presentation/cubit/select_language_cubit.dart';
 import '../../../features/intro/select_language/presentation/views/select_language_view.dart';
 import '../../../features/intro/splash/presentation/cubit/splash_cubit.dart';
@@ -258,13 +259,20 @@ class AppRouter {
         return _buildRoute(
           builder: (_) => VerifyEmailView(argument: verifyEmailArguments),
         );
+
       case Routes.createAccount:
         return _buildRoute(builder: (_) => CreateAccount());
+
       case Routes.createServiceProviderAccount:
         return _buildRoute(builder: (_) => CreateServiceProviderAccount());
+
+        case Routes.searchPage:
+        return _buildRoute(builder: (_) => SearchPage());
+
       case Routes.offerDetailsView:
         final args = arguments as OfferModel;
         return _buildRoute(builder: (_) => OfferDetailsView(offer: args));
+
       case Routes.reservationsView:
         return _buildRoute(builder: (_) => const ReservationsView());
       case Routes.reservationDetailsView:

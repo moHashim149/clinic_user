@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 
 import '../../../../core/util/routing/routes.dart';
 import '../widgets/onboarding_widgets/widgets_imports.dart';
-import 'log_in_view.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -93,10 +92,7 @@ class _OnboardingState extends State<Onboarding> {
                 OnboardingFooterButtonsWidget(
                   onPressNext: () => _onNextPressed(),
                   onPressSkip: () =>
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) =>  SignInView()),
-                      ),
+                      context.pushReplacementWithNamed(Routes.signInView),
                 ),
               ],
             ),

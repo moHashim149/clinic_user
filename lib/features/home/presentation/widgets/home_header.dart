@@ -45,11 +45,28 @@ class HomeHeader extends StatelessWidget {
           ),
           Row(
             children: [
-              _buildIconContainer(AppAssets.location),
+              _buildIconContainer(
+                AppAssets.location,
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  Routes.selectAddressView,
+                  arguments: SelectAddressArgument(
+                    addressModel: null,
+                    onUpdate: () {
+                    },
+                  ),
+                ),
+              ),
               SizedBox(width: 8.w),
-              _buildIconContainer(AppAssets.search),
+              _buildIconContainer(
+                AppAssets.search,
+                onTap: () => context.pushWithNamed(Routes.searchPage),
+              ),
               SizedBox(width: 8.w),
-              _buildIconContainer(AppAssets.notification),
+              _buildIconContainer(
+                AppAssets.notification,
+                onTap: () {},
+              ),
             ],
           ),
         ],
@@ -57,24 +74,27 @@ class HomeHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildIconContainer(String asset) {
-    return Container(
-      width: 44.w,
-      height: 44.h,
-      padding: EdgeInsets.all(10.r),
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(10.r),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.blackColor.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: SvgPicture.asset(
-        asset,
+  Widget _buildIconContainer(String asset, {required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 44.w,
+        height: 44.h,
+        padding: EdgeInsets.all(10.r),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.blackColor.withValues(alpha: 0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: SvgPicture.asset(
+          asset,
+        ),
       ),
     );
   }

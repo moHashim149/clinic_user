@@ -34,4 +34,5 @@ class Routes {
   static const String reservationDetailsView = '/reservationDetailsView';
   static const String reportComplaintView = '/reportComplaintView';
   static const String clinicLocationMapView = '/clinicLocationMapView';
+  static const String searchPage = '/searchPage';
 }

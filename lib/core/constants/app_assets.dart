@@ -32,6 +32,11 @@ abstract class AppAssets {
   static const String homeImgTest = "$_imagesPath/home_img_test.png";
   static const String offersImg = "$_imagesPath/offers_img.png";
   static const String loginReqImg = "$_imagesPath/login_req_img.png";
+  static const String notification = "$_iconsPath/notification.svg";
+  static const String filterIcon = "$_iconsPath/filter_icon.svg";
+  static const String sortVertical = "$_iconsPath/sort_vertical.svg";
+  static const String shareIcon = "$_iconsPath/share_icon.svg";
+  static const String goldenStar = "$_iconsPath/golden_star.svg";
 
   //bottom Nav Icons
   static const String women = "$_iconsPath/women.svg";
@@ -47,7 +52,7 @@ abstract class AppAssets {
   static const String unRatedStar = "$_iconsPath/unrated_star.svg";
   static const String close = "$_iconsPath/close.svg";
   static const String location = "$_iconsPath/location.svg";
-  static const String filter = "$_iconsPath/filter.svg";
+  // static const String filter = "$_iconsPath/filter_icon.svg";
   static const String heart = "$_iconsPath/heart.svg";
   static const String heartFilled = "$_iconsPath/heart_filled.svg";
   static const String trash = "$_iconsPath/trash.svg";
@@ -91,7 +96,6 @@ abstract class AppAssets {
   static const String home = "$_iconsPath/home.svg";
   static const String cart = "$_iconsPath/cart.svg";
   static const String calender = "$_iconsPath/calender.svg";
-  static const String notification = "$_iconsPath/notification_header.svg";
   static const String more = "$_iconsPath/more.svg";
   static const String chat2 = "$_iconsPath/chat2.svg";
   static const String starHome = "$_iconsPath/star_home.svg";
@@ -101,6 +105,7 @@ abstract class AppAssets {
   static const String faqIcon = "$_iconsPath/faq_icon.svg";
   static const String communicateIcon = "$_iconsPath/communicate_icon.svg";
   static const String ionChevronBack = "$_iconsPath/ion_chevron-back.svg";
+  static const String notificationIcon = "$_iconsPath/notification_icon.svg";
 
   // test images
   static const String testImage =
